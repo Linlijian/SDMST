@@ -1,0 +1,587 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AccessDeniedSignIn" xml:space="preserve">
+    <value>คุณไม่มีสิทธิเข้าใช้งานระบบ  กรุณาติดต่อผู้ดูแลระบบ คปภ.</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>เพิ่ม</value>
+  </data>
+  <data name="AddFile" xml:space="preserve">
+    <value>เพิ่มไฟล์</value>
+  </data>
+  <data name="AttachFileMaximumLimit" xml:space="preserve">
+    <value>จำนวนไฟล์แนบเกินกว่าที่ระบบกำหนด</value>
+  </data>
+  <data name="AttachFileMaximumSizeLimit" xml:space="preserve">
+    <value>ขนาดไฟล์แนบรวมเกินกว่าที่ระบบกำหนด</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>ย้อนกลับ</value>
+  </data>
+  <data name="CallReport" xml:space="preserve">
+    <value>เรียกดูรายงาน</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>ยกเลิก</value>
+  </data>
+  <data name="CancelCompleted" xml:space="preserve">
+    <value>ยกเลิกข้อมูลสำเร็จ</value>
+  </data>
+  <data name="CancelDraft" xml:space="preserve">
+    <value>ยกเลิกร่าง</value>
+  </data>
+  <data name="CancelNotComplete" xml:space="preserve">
+    <value>ยกเลิกข้อมูลไม่สำเร็จ</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>ปิดหน้าจอ</value>
+  </data>
+  <data name="CLOSE_BROWSER" xml:space="preserve">
+    <value>Would you like to log out and close browser?</value>
+  </data>
+  <data name="COM_CODE" xml:space="preserve">
+    <value>ชื่อบริษัท</value>
+  </data>
+  <data name="ConfigInsuranceCompany" xml:space="preserve">
+    <value>กำหนดบริษัท</value>
+  </data>
+  <data name="ConfigProgram" xml:space="preserve">
+    <value>กำหนดโปรแกรม</value>
+  </data>
+  <data name="ConfigUser" xml:space="preserve">
+    <value>กำหนดผู้ใช้งาน</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>ยืนยัน</value>
+  </data>
+  <data name="ConfirmCancel" xml:space="preserve">
+    <value>คุณต้องการยกเลิกหรือไม่?</value>
+  </data>
+  <data name="ConfirmClear" xml:space="preserve">
+    <value>คุณต้องการล้างหน้าจอหรือไม่?</value>
+  </data>
+  <data name="ConfirmClosePage" xml:space="preserve">
+    <value>คุณต้องปิดหน้านี้หรือไหม?</value>
+  </data>
+  <data name="ConfirmCompleted" xml:space="preserve">
+    <value>Confirm Completed</value>
+    <comment>This message for Confirm button Process is completed.</comment>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>คุณต้องการลบหรือไม่?</value>
+  </data>
+  <data name="ConfirmedConsideration" xml:space="preserve">
+    <value>ยืนยันการพิจารณา</value>
+  </data>
+  <data name="ConfirmMessage" xml:space="preserve">
+    <value>คุณต้องการ_confirmText_หรือไหม?</value>
+  </data>
+  <data name="ConfirmSending" xml:space="preserve">
+    <value>ยืนยันนำส่ง</value>
+  </data>
+  <data name="CONFIRM_CANCEL_DRAFT" xml:space="preserve">
+    <value>คุณต้องการยกเลิกข้อมูลร่างหรือไม่?</value>
+  </data>
+  <data name="ContactUs" xml:space="preserve">
+    <value>ติดต่อเรา</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>คัดลอก</value>
+  </data>
+  <data name="CopyRight" xml:space="preserve">
+    <value>©️2018 AUTOALLIANCE (Thailand). All Right reserved.</value>
+  </data>
+  <data name="CRET_BY" xml:space="preserve">
+    <value>รหัสผู้สร้างข้อมูล</value>
+  </data>
+  <data name="CRET_BY_NAME_TH" xml:space="preserve">
+    <value>ผู้สร้างข้อมูล</value>
+  </data>
+  <data name="CRET_DATE" xml:space="preserve">
+    <value>วันที่สร้างข้อมูล</value>
+  </data>
+  <data name="DataNotFound" xml:space="preserve">
+    <value>ไม่มีข้อมูล</value>
+  </data>
+  <data name="DATA_CANCELLATION" xml:space="preserve">
+    <value>ยกเลิกข้อมูล</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>ลบ</value>
+  </data>
+  <data name="DeleteCompleted" xml:space="preserve">
+    <value>ลบข้อมูลสำเร็จ</value>
+  </data>
+  <data name="DeleteFile" xml:space="preserve">
+    <value>ลบไฟล์</value>
+  </data>
+  <data name="DeleteNotComplete" xml:space="preserve">
+    <value>ลบข้อมูลไม่สำเร็จ</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>ดาวน์โหลด</value>
+  </data>
+  <data name="DownloadCompleted" xml:space="preserve">
+    <value>Download Completed</value>
+  </data>
+  <data name="DownloadTemplate" xml:space="preserve">
+    <value>ดาวน์โหลดรูปแบบนำเข้า</value>
+  </data>
+  <data name="Download_zip_file" xml:space="preserve">
+    <value>ดาวน์โหลดซิปไฟล์</value>
+  </data>
+  <data name="DoYouWantGoToHome" xml:space="preserve">
+    <value>คุณต้องการกลับไปหน้าเริ่มต้นหรือไม่?</value>
+  </data>
+  <data name="DuplcateData" xml:space="preserve">
+    <value>บันทึกข้อมูลซ้ำกัน</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>แก้ไข</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>อังกฤษ</value>
+  </data>
+  <data name="EXCEL_UPLOAD" xml:space="preserve">
+    <value>Load Data</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>ออก</value>
+  </data>
+  <data name="ExportExcel" xml:space="preserve">
+    <value>Export Excel</value>
+  </data>
+  <data name="FAQ" xml:space="preserve">
+    <value>คำถามที่พบบ่อย</value>
+  </data>
+  <data name="FileAlreadyExists" xml:space="preserve">
+    <value>พบไฟล์ซ้ำ กรุณาตรวจสอบไฟล์ที่ระบุ</value>
+  </data>
+  <data name="FileDateModified" xml:space="preserve">
+    <value>วัน/เวลา เอกสาร</value>
+  </data>
+  <data name="FileMaximumSizeLimit" xml:space="preserve">
+    <value>ขนาดไฟล์แนบรวมเกินกว่าที่ระบบกำหนด</value>
+  </data>
+  <data name="FileName" xml:space="preserve">
+    <value>ชื่อไฟล์</value>
+  </data>
+  <data name="FileNotExistsSystemConfig" xml:space="preserve">
+    <value>พบไฟล์ที่ไม่ได้กำหนดในระบบ กรุณาตรวจสอบไฟล์ที่ระบุ</value>
+  </data>
+  <data name="FileNotFound" xml:space="preserve">
+    <value>ไม่พบไฟล์ข้อมูล</value>
+  </data>
+  <data name="FileSize" xml:space="preserve">
+    <value>ขนาดไฟล์</value>
+  </data>
+  <data name="FileType" xml:space="preserve">
+    <value>รูปแบบไฟล์</value>
+  </data>
+  <data name="FileUploadDate" xml:space="preserve">
+    <value>วัน/เวลาที่ Upload</value>
+  </data>
+  <data name="FileWaitingUpload" xml:space="preserve">
+    <value>รอ Upload</value>
+  </data>
+  <data name="FILE_DOWNLOAD_NOTFOUND" xml:space="preserve">
+    <value>ไม่พบไฟล์ข้อมูล</value>
+  </data>
+  <data name="Finished" xml:space="preserve">
+    <value>ยืนยันส่งข้อมูล</value>
+  </data>
+  <data name="First" xml:space="preserve">
+    <value>หน้าแรก</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>ลืมรหัสผ่าน</value>
+  </data>
+  <data name="gridEmptyTable" xml:space="preserve">
+    <value>---- ไม่พบข้อมูล ----</value>
+  </data>
+  <data name="gridInfo" xml:space="preserve">
+    <value>แสดง _START_ ถึง _END_ จาก _TOTAL_ รายการ</value>
+  </data>
+  <data name="gridInfoEmpty" xml:space="preserve">
+    <value>แสดง 0 ถึง 0 จาก 0 รายการ</value>
+  </data>
+  <data name="gridInfoFiltered" xml:space="preserve">
+    <value>(กรองทั้งหมดจาก _MAX_ รายการ)</value>
+  </data>
+  <data name="gridLengthMenu" xml:space="preserve">
+    <value>แสดง _MENU_</value>
+  </data>
+  <data name="gridLoadingRecords" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+  <data name="gridPaginateFirst" xml:space="preserve">
+    <value>หน้าแรก</value>
+  </data>
+  <data name="gridPaginateLast" xml:space="preserve">
+    <value>หน้าสุดท้าย</value>
+  </data>
+  <data name="gridPaginateNext" xml:space="preserve">
+    <value>ถัดไป</value>
+  </data>
+  <data name="gridPaginatePrevious" xml:space="preserve">
+    <value>ก่อนหน้า</value>
+  </data>
+  <data name="gridProcessing" xml:space="preserve">
+    <value>กำลังประมวลผล...</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>สวัสดี</value>
+  </data>
+  <data name="HelpDesk" xml:space="preserve">
+    <value>พบปัญหาการใช้งาน กรุณาติดต่อ Help Desk โทร.</value>
+  </data>
+  <data name="HISTORY" xml:space="preserve">
+    <value>ประวัติ</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>รายละเอียด</value>
+  </data>
+  <data name="InputPlaceholderRequired" xml:space="preserve">
+    <value>[กรุณากรอกข้อมูล]</value>
+  </data>
+  <data name="InsuranceCompanyDetail" xml:space="preserve">
+    <value>ข้อมูลบริษัทประกันภัย</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>ภาษา</value>
+  </data>
+  <data name="Last" xml:space="preserve">
+    <value>หน้าสุดท้าย</value>
+  </data>
+  <data name="LoadFile" xml:space="preserve">
+    <value>Load File</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>เข้าสู่ระบบ</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>ออกจากระบบ</value>
+  </data>
+  <data name="Menu" xml:space="preserve">
+    <value>น้าหลัก/เมนู</value>
+  </data>
+  <data name="MNT_BY" xml:space="preserve">
+    <value>รหัสผู้แก้ไขข้อมูลล่าสุด</value>
+  </data>
+  <data name="MNT_BY_NAME_TH" xml:space="preserve">
+    <value>ผู้แก้ไขข้อมูลล่าสุด</value>
+  </data>
+  <data name="MNT_DATE" xml:space="preserve">
+    <value>วันที่แก้ไขข้อมูลล่าสุด</value>
+  </data>
+  <data name="More" xml:space="preserve">
+    <value>อ่านต่อ</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>ถัดไป</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>ไม่ใช่</value>
+  </data>
+  <data name="NOT_USING" xml:space="preserve">
+    <value>ไม่ใช้งาน</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>ตกลง</value>
+  </data>
+  <data name="PleaseSaveData" xml:space="preserve">
+    <value>โปรดบันทึกข้อมูล</value>
+  </data>
+  <data name="PleaseSelectData" xml:space="preserve">
+    <value>กรุณาระบุข้อมูล</value>
+  </data>
+  <data name="PleaseSelectReportGroup" xml:space="preserve">
+    <value>กรุณาระบุกลุ่มรายงาน</value>
+  </data>
+  <data name="PleaseSpecify" xml:space="preserve">
+    <value>โปรดระบุ</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>ก่อนหน้า</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>พิมพ์รายงาน</value>
+  </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>นโยบายความเป็นส่วนตัว</value>
+  </data>
+  <data name="ProcessComplete" xml:space="preserve">
+    <value>Process Complete</value>
+  </data>
+  <data name="Processing" xml:space="preserve">
+    <value>Processing</value>
+  </data>
+  <data name="ProcessNotComplete" xml:space="preserve">
+    <value>Process Not Complete</value>
+  </data>
+  <data name="PROCESS_COMPLETE" xml:space="preserve">
+    <value>Complete</value>
+  </data>
+  <data name="PROCESS_INCOMPLETE" xml:space="preserve">
+    <value>Incomplete</value>
+  </data>
+  <data name="PROCESS_PROCESSING" xml:space="preserve">
+    <value>Processing</value>
+  </data>
+  <data name="PROCESS_WAITING" xml:space="preserve">
+    <value>Waiting</value>
+  </data>
+  <data name="PROCESS_WARNING" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>สมัครสมาชิก</value>
+  </data>
+  <data name="Report" xml:space="preserve">
+    <value>รายงาน</value>
+  </data>
+  <data name="ReportGroupDetail" xml:space="preserve">
+    <value>รายละเอียดกลุ่มรายงาน</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>ล้างหน้าจอ</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>บันทึก</value>
+  </data>
+  <data name="SaveAndConfirm" xml:space="preserve">
+    <value>บันทึกและยืนยันนำส่ง</value>
+  </data>
+  <data name="SaveCompleted" xml:space="preserve">
+    <value>บันทึกข้อมูลสำเร็จ</value>
+  </data>
+  <data name="SaveContinue" xml:space="preserve">
+    <value>บันทึกและทำต่อ</value>
+  </data>
+  <data name="SaveDraft" xml:space="preserve">
+    <value>บันทึกหน้านี้</value>
+  </data>
+  <data name="SaveNew" xml:space="preserve">
+    <value>บันทึกแล้วเริ่มใหม่</value>
+  </data>
+  <data name="SaveNext" xml:space="preserve">
+    <value>บันทึกและทำต่อ</value>
+  </data>
+  <data name="SaveNotComplete" xml:space="preserve">
+    <value>บันทึกข้อมูลไม่สำเร็จ</value>
+  </data>
+  <data name="SaveReceivedAsset" xml:space="preserve">
+    <value>บันทึกรับหลักทรัพย์</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>ค้นหา</value>
+  </data>
+  <data name="SelectDefaultRequired" xml:space="preserve">
+    <value>[กรุณาเลือก]</value>
+  </data>
+  <data name="SelectDefaultSearch" xml:space="preserve">
+    <value>[ทั้งหมด]</value>
+  </data>
+  <data name="Step" xml:space="preserve">
+    <value>ขั้นตอนที่</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>ดำเนินการ</value>
+  </data>
+  <data name="SupportFileType" xml:space="preserve">
+    <value>รองรับไฟล์ {tplFileType} เท่านั้น</value>
+  </data>
+  <data name="System" xml:space="preserve">
+    <value>ระบบ</value>
+  </data>
+  <data name="TermsofService" xml:space="preserve">
+    <value>เงื่อนไขและข้อกำหนดการใช้บริการทางอินเทอร์เน็ตของ ออโต้อัลลายแอนซ์ (ประเทศไทย) จำกัด</value>
+  </data>
+  <data name="TermsofServiceF" xml:space="preserve">
+    <value>เงื่อนไขและข้อกำหนดการใช้บริการ</value>
+  </data>
+  <data name="Thai" xml:space="preserve">
+    <value>ไทย</value>
+  </data>
+  <data name="TitleItemInfo" xml:space="preserve">
+    <value>ข้อมูลรายการ</value>
+  </data>
+  <data name="TitleOperateData" xml:space="preserve">
+    <value>ข้อมูลประกอบการดำเนินการ</value>
+  </data>
+  <data name="TitleSendEMail" xml:space="preserve">
+    <value>ส่งเมลแจ้ง สำนักงาน คปภ.</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>อัพโหลด</value>
+  </data>
+  <data name="UploadCompleted" xml:space="preserve">
+    <value>Upload Completed</value>
+    <comment>This message for Load File button upload is completed.</comment>
+  </data>
+  <data name="UPLOAD_ERROR" xml:space="preserve">
+    <value>Upload excel file incompleted. Please check excel file.</value>
+  </data>
+  <data name="UPLOAD_INSTRUCTION" xml:space="preserve">
+    <value>เงื่อนไขการอัปโหลด</value>
+  </data>
+  <data name="UserInfo" xml:space="preserve">
+    <value>ข้อมูลผู้ใช้งาน</value>
+  </data>
+  <data name="USING" xml:space="preserve">
+    <value>ใช้งาน</value>
+  </data>
+  <data name="UsingCompleted" xml:space="preserve">
+    <value>ใช้งานข้อมูลสำเร็จ</value>
+  </data>
+  <data name="UsingNotComplete" xml:space="preserve">
+    <value>ใช้งานข้อมูลไม่สำเร็จ</value>
+  </data>
+  <data name="ValComplete" xml:space="preserve">
+    <value>Complete</value>
+  </data>
+  <data name="ValDisplayData" xml:space="preserve">
+    <value>Display Data</value>
+  </data>
+  <data name="ValError" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="ValFileName" xml:space="preserve">
+    <value>File Name</value>
+  </data>
+  <data name="ValidateError" xml:space="preserve">
+    <value>ไม่ผ่านการตรวจสอบข้อมูล</value>
+  </data>
+  <data name="ValRecordAll" xml:space="preserve">
+    <value>Record All</value>
+  </data>
+  <data name="Verify" xml:space="preserve">
+    <value>พิจารณา</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>ใช่</value>
+  </data>
+  <data name="APP_CODE" xml:space="preserve">
+    <value>รหัสแอพพลิเคชั่น</value>
+  </data>
+</root>

@@ -1,0 +1,69 @@
+﻿@using FluentBootstrap
+@using WEBAPP.Helper
+@using DataAccess.MIS
+@using UtilityLib
+
+@model MISS02P001Model
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMaster.cshtml";
+}
+
+
+@using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
+{
+    @form.ValidationSummary(true).AddCss(Css.Hidden)
+    @Html.AntiForgeryToken()
+    using (var rowInfo = Html.Bootstrap().GridRow().Begin())
+    {
+        using (rowInfo.GridColumn(12).SetXs(12).Begin())
+        {
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                @*using (row1.GridColumn(6).Begin())
+                {
+                    @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), IsSearch: true)
+                }*@
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.YEAR).SetHelp("Format : YYYY Example: (2014)").SetMaxLength(4)
+                }
+            }
+        }
+    }
+}
+@using (var row = Html.Bootstrap().GridRow().SetId("rowGridSearch").SetVisibility(Visibility.Hidden).Begin())
+{
+    using (row.GridColumn(12).Begin())
+    {
+        @Html.Bootstrap().Table().SetId("GridSearch").SetStyle(TableStyle.TableStripedBorderedHover)
+    }
+}
+
+@section scripts{
+    @Html.GridScript("Search",
+        new GridConfig
+        {
+            GetConfig = new DefaultConfig(Url.Action("Search")),
+            DeleteConfig = new DefaultConfig(Url.Action("DeleteSearch")),
+            DefaultBinding = Model.IsDefaultSearch,
+            ScrollX = false,
+            WidthType = ColumnsWidthType.Percentage
+        },
+        Html.GridColumnCommand(Html.GridCommand(StandardButtonName.Edit, Translation.CenterLang.Center.Edit, Url.Action(StandardButtonName.Edit), FaIcons.FaPencil, TextColor.orange2, new VSMParameter("YEAR"), new VSMParameter("COM_CODE"))),
+        Html.GridColumnCommand(Html.GridCommand("Infomation", "Infomation", Url.Action(StandardButtonName.Info), FaIcons.FaInfo, TextColor.grey, new VSMParameter("YEAR"), new VSMParameter("COM_CODE"))),
+        new GridColumn("YEAR").SetNotVisible().SetKey(),
+        new GridColumn("COM_CODE").SetNotVisible().SetKey(),
+       // new GridColumn("COM_CODE", Translation.CenterLang.Center.APP_CODE, 10),
+        new GridColumn("YEAR", Translation.MIS.MISS02P001.YEAR, 10),
+        new GridColumn("ALL_SATURDAY_W", Translation.MIS.MISS02P001.ALL_SATURDAY_W, 10),
+        new GridColumn("ALL_HOLIDAY", Translation.MIS.MISS02P001.ALL_HOLIDAY, 10),
+        new GridColumn("ALL_SPP", Translation.MIS.MISS02P001.ALL_SPP, 10),
+        new GridColumn("ALL_DEPLOYMENT_IT", Translation.MIS.MISS02P001.ALL_DEPLOYMENT_IT, 10),
+        new GridColumn("ALL_DEPLOYMENT_DATE", Translation.MIS.MISS02P001.ALL_DEPLOYMENT_DATE, 10)
+
+        )
+
+
+}

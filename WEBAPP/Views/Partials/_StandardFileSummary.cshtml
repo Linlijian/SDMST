@@ -1,0 +1,15 @@
+﻿@using FluentBootstrap
+@using WEBAPP.Helper
+@using DataAccess
+@model FileModel
+
+@Html.GetVSMWidgetsBegin(Translation.Ux.File.Panel_Grid, collapsed: true, name: Model.Name)
+
+@using (var row = Html.Bootstrap().GridRow().Begin())
+{
+    using (row.GridColumn(12).Begin())
+    {
+        @Html.Bootstrap().Table().SetId("Grid" + Model.Name).SetStyle(TableStyle.TableStripedBorderedHover).AddAttribute("data-binded","false")
+    }
+}
+@Html.GetVSMWidgetsEnd()

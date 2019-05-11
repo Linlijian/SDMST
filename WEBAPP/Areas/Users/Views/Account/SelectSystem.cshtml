@@ -1,0 +1,58 @@
+﻿@model IEnumerable<DataAccess.Users.ModuleModel>
+
+@{
+    ViewBag.Title = "SelectApp";
+    Layout = "~/Views/Shared/_LayoutChildPage.cshtml";
+}
+
+@{
+    var i = 1;
+    foreach (var item in Model)
+    {
+        if (i == 1)
+        {
+            @Html.Raw("<div class=\"row\">")
+        }
+        <div class="col-md-2 text-center">
+            <a href="@Url.Action("SelectedSystem", new {item.NAME })" class="selectapp">
+                @{
+                    var iconColor = "";
+                    if (!string.IsNullOrEmpty(item.IMG_COLOR))
+                    {
+                        iconColor = $"style=color:{item.IMG_COLOR};";
+                    }
+                }
+                @if (!string.IsNullOrEmpty(item.IMG) && item.IMG.StartsWith("fa"))
+                {
+                    <i class="ace-icon fa @item.IMG fa-5x" @iconColor></i>
+                }
+                else
+                {
+                    <i class="ace-icon fa fa-adjust fa-5x" @iconColor></i>
+                }
+                <p>@item.NAME</p>
+            </a>
+        </div>
+        if (i == 6 || i == Model.Count())
+        {
+            i = 1;
+            @Html.Raw("</div>")
+        }
+        else
+        {
+            i++;
+        }
+    }
+
+}
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("a.selectapp").click(function () {
+                ifSlowShowLoading();
+            });
+
+        });
+    </script>
+}

@@ -1,0 +1,178 @@
+﻿@using UtilityLib
+@using WEBAPP.Helper
+<div id="navbar" class="navbar navbar-fixed-top navbar-default">
+    <script type="text/javascript">
+        try { ace.settings.check('navbar', 'fixed') } catch (e) { }
+    </script>
+    <div class="navbar-container" id="navbar-container">
+        <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+            <span class="sr-only">Toggle sidebar</span>
+
+            <span class="icon-bar"></span>
+
+            <span class="icon-bar"></span>
+
+            <span class="icon-bar"></span>
+        </button>
+
+        @{
+            var urlHeader = Url.Content(FormsAuthentication.DefaultUrl);
+            if (SessionHelper.SYS_IsMultipleGroup)
+            {
+                urlHeader = Url.Action("SelectModule", "Account", new { Area = "Users" });
+            }
+            else
+            {
+                var menu = SessionHelper.SYS_MenuModel;
+                if (menu != null)
+                {
+                    var home = menu.Where(m => m.SYS_CODE.AsString().ToUpper() == "HOME").FirstOrDefault();
+                    if (home != null && AppExtensions.ExistsAction(home.PRG_ACTION, home.PRG_CONTROLLER, home.PRG_AREA))
+                    {
+                        urlHeader = Url.Action(home.PRG_ACTION, home.PRG_CONTROLLER, new { Area = home.PRG_AREA, SYS_SYS_CODE = home.SYS_CODE, SYS_PRG_CODE = home.PRG_CODE });
+                    }
+                }
+            }
+        }
+        <a href="@urlHeader" class="navbar-header pull-left">
+            <img src="@Url.Content("~/Uploads/Image/logo/rsz_unnamed.png")" class="img-responsive pull-left" style="margin-top:2px;" />
+            <div class="navbar-brand">
+                <small>
+                    @*<i class="fa fa-leaf"></i>*@
+                    @if (SessionHelper.SYS_IsMultipleGroup)
+                    {
+                        @SessionHelper.SYS_SYS_GROUP_NAME
+                    }
+                    else
+                    {
+                        @SessionHelper.SYS_COM_NAME
+                    }
+                </small>
+            </div>
+        </a>
+
+        <div  class="navbar-buttons navbar-header pull-right" role="navigation">
+            <ul class="nav ace-nav">
+                @*TODO GET From Server*@
+                @*<li>
+                <a href="@Url.Action("Index","SEC_Contact",new { Area = "SEC" })">
+                    <i class="ace-icon fa fa-volume-control-phone"></i>
+                    @Translation.CenterLang.Center.ContactUs
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index","GEN_GEND00400",new { Area = "GEN", curAction = SessionHelper.SYS_CurrentController })">
+                    <i class="ace-icon fa fa-question-circle"></i>
+                    @Translation.CenterLang.Center.FAQ
+                </a>
+            </li>*@
+                @*@Html.Partial("_LayoutNotification")*@
+
+                <li class="light-blue" id="ntf">
+                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                        <span class="user-info">
+                            <i id="item-icon" class="ace-icon fa fa-bell bigger-120">
+                                <span style="background-color:red" id="count-ntf">@SessionHelper.CountNoti</span>
+                            </i>
+                        </span>
+                    </a>
+                    <ul id="item-list" class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                        <li>
+                            <a id="userTH" href="#" tabindex="-1">
+                                แจ้งเตือน
+                            </a>
+                        </li>
+                        @Html.Partial("_LayoutNotification")
+                    </ul>
+                </li>
+
+                <li class="transparent">
+                    <a class="db-server">@SessionHelper.SYS_ServerDBName</a>
+                </li>
+                <li>
+                    <a id="datetime" name="datetime"></a>
+                </li>
+
+                <li class="light-blue">
+                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                        <img class="nav-user-photo" src="@Url.Content("~/Content/template/ace/assets/avatars/profile-icon.png")" alt="Jason's Photo" />
+                        <span class="user-info">
+                            <small>@Translation.CenterLang.Center.Hello,</small>
+                            @SessionHelper.SYS_USER_FNAME_TH
+                        </span>
+
+                        <i class="ace-icon fa fa-caret-down"></i>
+                    </a>
+
+                    <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+
+                        <li>
+                            <a href="@Url.Action("Edit", "SECS02P002", new { Area = "SEC", USER_ID = SessionHelper.SYS_USER_ID })">
+                                <i class="ace-icon fa fa-user"></i>
+                                @Translation.CenterLang.Center.UserInfo
+                            </a>
+                        </li>
+                        @*<li class="divider"></li>
+                    <li class="dropdown-hover dropup">
+                        <a href="#" tabindex="-1" class="clearfix">
+                            <span class="pull-left">@Translation.CenterLang.Center.Language</span>
+                            <i class="ace-icon fa fa-caret-left pull-right"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            @if (SessionHelper.SYS_CurrentCulture == "th-TH")
+                            {
+                                <li>
+                                    <a id="userTH" href="@Url.Action("LangUi", "Account", new {Area = "Users"})?lang=en-US" tabindex="-1">
+                                        <i class="ace-icon fa fa-flag"></i>
+                                        @Translation.CenterLang.Center.English
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a id="userEN" href="@Url.Action("LangUi", "Account", new {Area = "Users"})?lang=th-TH" tabindex="-1">
+                                        <i class="ace-icon fa fa-flag"></i>
+                                        @Translation.CenterLang.Center.Thai
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </li>*@
+                        @*@if (SessionHelper.SYS_AppModel.Count > 1)
+                    {
+                        <li class="divider"></li>
+                        <li class="dropdown-hover dropup">
+                            <a href="#" tabindex="-1" class="clearfix">
+                                <span class="pull-left">@Translation.CenterLang.Center.System</span>
+                                <i class="ace-icon fa fa-caret-left pull-right"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                @foreach (var item in SessionHelper.SYS_AppModel)
+                                {
+                                    if (item.COM_CODE != SessionHelper.SYS_COM_CODE)
+                                    {
+                                        <li>
+                                            <a id="userTH" href="@Url.Action("SelectedApp","Account", new {Area = "Users", COM_CODE = item.COM_CODE })" tabindex="-1">
+                                                <i class="ace-icon fa fa-flag"></i>
+                                                @item.COM_NAME
+                                            </a>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </li>
+                    }*@
+                        <li class="divider"></li>
+                        <li>
+                            <a href="@Url.Action("SignOut", "Account", new { Area = "Users" } )" id="lnkSignOut">
+                                <i class="ace-icon fa fa-power-off"></i>
+                                @Translation.CenterLang.Center.Logout
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+</div>
+    </div><!-- /.navbar-container -->
+</div>

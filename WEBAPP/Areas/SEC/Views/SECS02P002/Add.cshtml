@@ -1,0 +1,208 @@
+﻿@using FluentBootstrap
+@using WEBAPP.Helper
+@using DataAccess.SEC
+@using UtilityLib
+
+@model SECS02P002Model
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_LayoutChildPage.cshtml";
+}
+
+@using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
+{
+    @Html.AntiForgeryToken()
+    using (var row = Html.Bootstrap().GridRow().Begin())
+    {
+        using (row.GridColumn(12).SetXs(12).Begin())
+        {
+            using (var r = Html.Bootstrap().GridRow().Begin())
+            {
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.USER_ID, isRequired: true)
+                }
+            }
+           
+            <fieldset>
+                <legend></legend>
+                @using (var r = Html.Bootstrap().GridRow().Begin())
+                {
+                    using (r.GridColumn(6).Begin())
+                    {
+                        @form.InputFor(m => m.USER_FNAME_TH, isRequired: true)
+                    }
+                    using (r.GridColumn(6).Begin())
+                    {
+                        @form.InputFor(m => m.USER_LNAME_TH)
+                    }
+                }
+
+                @using (var r = Html.Bootstrap().GridRow().Begin())
+                {
+                    using (r.GridColumn(6).Begin())
+                    {
+                        @form.InputFor(m => m.USER_FNAME_EN, isRequired: true)
+                    }
+                    using (r.GridColumn(6).Begin())
+                    {
+                        @form.InputFor(m => m.USER_LNAME_EN)
+                    }
+                }
+
+                @using (var r = Html.Bootstrap().GridRow().Begin())
+                {
+                    using (r.GridColumn(6).Begin())
+                    {
+                        @*@form.SelectFor(t => t.TITLE_ID, Model.TITLE_ID_MODEL.ToSelectList("Value", "Text", Model.TITLE_ID), isRequired: true)*@
+                        @form.SelectFor(t => t.TITLE_NAME_TH, Model.TITLE_ID_MODEL.ToSelectList("Value", "Text", Model.TITLE_ID), isRequired: true)
+                    }
+                    using (r.GridColumn(6).Begin())
+                    {
+                        @form.SelectFor(t => t.USG_ID, Model.USG_ID_MODEL.ToSelectList("Value", "Text", Model.USG_ID), isRequired: true)
+                    }
+                }
+
+                @using (var r = Html.Bootstrap().GridRow().Begin())
+                {
+                    using (r.GridColumn(6).Begin())
+                    {
+                        @form.InputFor(t => t.TELEPHONE)
+                    }
+                    using (r.GridColumn(6).Begin())
+                    {
+                        @form.InputFor(t => t.EMAIL)
+                    }
+                }
+
+                @using (var r = Html.Bootstrap().GridRow().Begin())
+                {
+                    using (r.GridColumn(6).Begin())
+                    {
+                        @form.SelectFor(t => t.USER_STATUS, Model.USER_STATUS_MODEL.ToSelectList("Value", "Text", Model.USER_STATUS), isRequired: true)
+                    }
+                }
+
+                @using (var r = Html.Bootstrap().GridRow().Begin())
+                {
+                    using (r.GridColumn(6).Begin())
+                    {
+                        @form.CheckBoxFor(t => t.IS_DISABLED).SetControlLabel("Permission").AddContent(Translation.SEC.SECS02P002.IS_DISABLED_ADD)
+                    }
+                    using (r.GridColumn(6).Begin())
+                    {
+                       @form.HiddenFor(t => t.IS_ADMIN)
+                      //  @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true)
+                    }
+                }
+
+            </fieldset>
+        }
+        using (var row1 = Html.Bootstrap().GridRow().SetId("ModuleOwnerDetail").Begin())
+        {
+            using (row1.GridColumn(12).Begin())
+            {
+                @Html.GetVSMDetailFor(m => m.Details)
+                // @Html.HiddenFor(m => m.COM_CODE, new { data_indexparameter = 0 })
+            }
+        }
+    }
+}
+
+@section modals{
+    @Html.GetVSMModalDetailBeginFor(m => m.Details)
+
+    @using (var formPopup = Html.Bootstrap().Form().SetId("formDetails").SetHorizontal().Begin())
+    {
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        using (var rowInfo = Html.Bootstrap().GridRow().Begin())
+        {
+            using (rowInfo.GridColumn(6).Begin())
+            {
+                @formPopup.InputFor(t => t.USER_ID, isRequired: true).SetReadonly()
+            }
+            using (rowInfo.GridColumn(6).Begin())
+            {
+                @formPopup.SelectFor(t => t.COM_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true)
+            }
+        }
+        @*using (var rowInfo = Html.Bootstrap().GridRow().Begin())
+        {
+            using (rowInfo.GridColumn(6).Begin())
+            {
+                @formPopup.SelectFor(t => t.COM_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true)
+            }
+            using (rowInfo.GridColumn(6).Begin())
+            {
+                @formPopup.InputFor(t => t.MODULE, isRequired: true)
+            }
+        }*@
+    }
+    @Html.GetVSMModalDetailEnd()
+}
+
+@section Scripts {
+    @Html.GetVSMDetailScriptFor(
+            t => t.Details,
+            new VSMDetailConfig
+            {
+                DefaultConfig = new DefaultConfig(Url.Action("BindDetailAdd")),
+                IsRequired = true,
+                ScrollX = false,
+                OnBeforeAdd = "OnBeforeAddDetail",
+                WidthType = ColumnsWidthType.Pixel
+            },
+
+            new GridColumn("COM_CODE").SetNotVisible().SetKey(),
+            new GridColumn("USER_ID").SetNotVisible().SetKey(),
+            //new GridColumn("MODULE").SetNotVisible().SetKey(),
+
+            new GridColumn("COM_CODE", Translation.CenterLang.Center.APP_CODE, 20),
+            //new GridColumn("MODULE", Translation.SEC.SECS01P001.MODULE, 20),
+            new GridColumn("USER_ID", Translation.SEC.SECS01P001.USER_ID, 20)
+        )
+
+
+    <script>
+        function OnBeforeAddDetail(e) {
+            $("#formDetails #USER_ID").val($("#form1 #USER_ID").val());
+        }
+
+        $("#btnAddDetails").hide()
+        
+        //$("#formDetails").change(function () { $("#form1 #USER_ID").prop("readonly", true); })
+        $("#form1 #USER_ID").change(function () { $("#btnAddDetails").show() })
+
+        $("#form1 #USG_ID").change(function (){
+            var data = $("#form1 #USER_ID").val()
+            var formData = $("#form1").serializeFormData();
+            $.ajax({
+                url: '@Url.Action("CheckAdmin")',
+                type: 'post',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response != null && response != isNullOrEmpty && response.data.IS_ADMIN != null) {
+                        $('#IS_ADMIN').val(response.data.IS_ADMIN)
+                        if (response.data.IS_ADMIN == 'S' || response.data.IS_ADMIN == 'A') {
+                            $("#ModuleOwnerDetail").addClass('@Css.Hidden');
+                        } else {
+                            $("#ModuleOwnerDetail").removeClass('@Css.Hidden');
+                            if (data == isNullOrEmpty || data == "") {
+                                $("#btnAddDetails").hide()
+                            } else {
+                                $("#btnAddDetails").show()
+                                $("#form1 #USER_ID").prop("readonly", true);
+                            }
+                        }
+                    }
+                },
+                error: OnAjaxError
+            });
+        })
+
+       
+    </script>
+}

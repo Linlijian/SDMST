@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="DTS_SDDB">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=OxlOlO;Initial Catalog=SDDB</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>eb8a434c-efed-49ac-a65f-6ca246a4bc77</DataSourceID>
+</RptDataSource>

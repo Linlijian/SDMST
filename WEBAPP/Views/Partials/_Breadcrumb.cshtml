@@ -1,0 +1,101 @@
+﻿@using UtilityLib
+@using WEBAPP.Helper
+@{
+    var homeUrl = Url.Content(FormsAuthentication.DefaultUrl);
+
+    if ((Html.ViewContext.RouteData.Values["action"].AsString() == "Register" ||
+        Html.ViewContext.RouteData.Values["action"].AsString() == "ForgotPassword") &&
+        Html.ViewContext.RouteData.Values["controller"].AsString() == "Account")
+    {
+        homeUrl = Url.Action("SignIn", "Account", new { Area = "Users" });
+    }
+
+    if (Html.ViewContext.RouteData.Values["action"].AsString() != "SelectApp" &&
+        Html.ViewContext.RouteData.Values["controller"].AsString() != "Account" &&
+        Html.ViewContext.RouteData.DataTokens["area"].AsString() != "Users")
+    {
+        var breadcrumb = TempData.ContainsKey(Breadcrumb.TempDataKey)
+? (Breadcrumb)TempData[Breadcrumb.TempDataKey]
+: new Breadcrumb();
+
+        if (!string.IsNullOrEmpty(breadcrumb.ProgramName) && !string.IsNullOrEmpty(breadcrumb.SystemName))
+        {
+            ViewBag.PRG_NAME = breadcrumb.ProgramName;
+            ViewBag.SYS_NAME = breadcrumb.SystemName;
+        }
+    }
+
+
+    var ReferURL = homeUrl;
+    if (ViewBag.UrlToClosePage != "" && ViewBag.UrlToClosePage != null)
+    {
+        ReferURL = ViewBag.UrlToClosePage;
+    }
+    else if (TempData["UrlReferrer"] != null)
+    {
+        var urlReferrer = (Uri)TempData["UrlReferrer"];
+        if (!urlReferrer.Query.IsNullOrEmpty() && !urlReferrer.Query.Contains("page"))
+        {
+            ReferURL = Url.Content(urlReferrer.AbsolutePath);
+            if (!urlReferrer.Query.IsNullOrEmpty())
+            {
+                ReferURL += urlReferrer.Query + "&page=1";
+            }
+        }
+        else
+        {
+            ReferURL = Url.Content(urlReferrer.AbsolutePath);
+            if (!urlReferrer.Query.IsNullOrEmpty())
+            {
+                ReferURL += urlReferrer.Query;
+            }
+        }
+    }
+    else
+    {
+        var menu = SessionHelper.SYS_MenuModel;
+        if (menu != null)
+        {
+            var home = menu.Where(m => m.SYS_CODE.AsString().ToUpper() == "HOME").FirstOrDefault();
+            if (home != null && AppExtensions.ExistsAction(home.PRG_ACTION, home.PRG_CONTROLLER, home.PRG_AREA))
+            {
+                homeUrl = Url.Action(home.PRG_ACTION, home.PRG_CONTROLLER, new { Area = home.PRG_AREA, SYS_SYS_CODE = home.SYS_CODE, SYS_PRG_CODE = home.PRG_CODE });
+            }
+        }
+    }
+}
+
+
+<div>
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a @if (!homeUrl.IsNullOrEmpty()) { <text> href="@homeUrl" </text>     }>@Translation.CenterLang.Center.Home</a>
+        </li>
+        @if (ViewBag.SYS_NAME != null)
+        {
+            <li>
+                <a href="#">@ViewBag.SYS_NAME</a>
+            </li>
+        }
+
+        @if (!Html.ViewContext.RouteData.Values["action"].IsNullOrEmpty())
+        {
+            if (ViewBag.PRG_NAME != null)
+            {
+                <li>
+                    <a @if (Html.ViewContext.RouteData.Values["action"].AsString() != "Index") { <text> href="@ReferURL" </text>         }> @ViewBag.PRG_NAME</a>
+                </li>
+            }
+            <li class="active">
+                @Html.ViewContext.RouteData.Values["action"]
+            </li>
+        }
+        else if (ViewBag.PRG_NAME != null)
+        {
+            <li class="active">
+                @ViewBag.PRG_NAME
+            </li>
+        }
+    </ul><!-- /.breadcrumb -->
+</div>

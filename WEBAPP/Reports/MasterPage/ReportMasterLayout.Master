@@ -1,0 +1,269 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="ReportMasterLayout.Master.cs" Inherits="WEBAPP.Reports.MasterPage.ReportMasterLayout" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+
+    <%: System.Web.Optimization.Styles.Render("~/bundlesContent/css") %>
+    <%: System.Web.Optimization.Scripts.Render("~/bundles/modernizr") %>
+
+    <!-- ace styles -->
+    <%: System.Web.Optimization.Styles.Render("~/bundlesContent/template") %>
+    <!--[if lte IE 9]>
+    <%: System.Web.Optimization.Styles.Render("~/bundlesContent/templateIE9") %>
+        <![endif]-->
+    <!-- ace settings handler -->
+    <%: System.Web.Optimization.Scripts.Render("~/bundles/templateSetting") %>
+
+    <!--[if lte IE 8]>
+    <%: System.Web.Optimization.Scripts.Render("~/bundles/IE8") %>
+    <![endif]-->
+    <%: System.Web.Optimization.Styles.Render("~/bundlesContent/plugin") %>
+    <%: System.Web.Optimization.Styles.Render("~/bundlesContent/DataTables") %>
+    <%: System.Web.Optimization.Styles.Render("~/bundlesContent/Custom") %>
+
+    <style>
+        #content {
+            max-height: 100%;
+            overflow-y: scroll;
+            margin-top: 40px !important;
+        }
+
+        .header_fixed {
+            width: 100%;
+            color: #fff;
+            height: 40px;
+            background: #6fb3e0;
+            display: inline-block;
+        }
+
+        footer {
+            width: 100%;
+            height: 40px;
+            background: #6fb3e0;
+            position: fixed;
+            bottom: 0;
+        }
+    </style>
+
+    <!--[if !IE]> -->
+    <%: System.Web.Optimization.Scripts.Render("~/bundles/jquery") %>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <%: System.Web.Optimization.Scripts.Render("~/bundles/jqueryIE") %>
+    <![endif]-->
+
+    <%: System.Web.Optimization.Scripts.Render("~/bundles/waiting") %>
+
+    <script src="<%=ResolveUrl("~/Scripts/plugin/jquery-browser/jquery.browser.min.js")%>"></script>
+    <script src="<%=ResolveUrl("~/Scripts/CustomReportViewer.js")%>"></script>
+
+    <%: System.Web.Optimization.Scripts.Render("~/bundles/myProject") %>
+    <%: System.Web.Optimization.Scripts.Render("~/bundles/bootstrap") %>
+
+    <script type="text/javascript">
+        
+    </script>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="no-skin" style="background-color: #ffffff;">
+    <div id="navbar" class="navbar navbar-fixed-top navbar-default">
+        <script type="text/javascript">
+            try { ace.settings.check('navbar', 'fixed') } catch (e) { }
+        </script>
+        <div class="navbar-container" id="navbar-container">
+            <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+                <span class="sr-only">Toggle sidebar</span>
+
+                <span class="icon-bar"></span>
+
+                <span class="icon-bar"></span>
+
+                <span class="icon-bar"></span>
+            </button>
+
+            <a href="/Users/Account/SelectApp" class="navbar-header pull-left">
+                <img src="<%= (ResolveUrl("~") == "/" ? "" : ResolveUrl("~")) + "/Uploads/Image/logo/logo2.png" %>" class="img-responsive pull-left" style="margin-top: 2px;">
+                <%--<img src="../../../Uploads/Image/logo/logo2.png" class="img-responsive pull-left" style="margin-top: 2px;">--%>
+                <div class="navbar-brand">
+                    <small></small>
+                </div>
+            </a>
+
+            <div class="navbar-buttons navbar-header pull-right" role="navigation">
+                <ul class="nav ace-nav">
+
+                    <li>
+                        <a href="/Security/SEC_Contact">
+                            <i class="ace-icon fa fa-volume-control-phone"></i>
+                            <%: Translation.CenterLang.Center.ContactUs %>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/GEN/GEN_GEND00400">
+                            <i class="ace-icon fa fa-question-circle"></i>
+                            <%: Translation.CenterLang.Center.FAQ %>
+                        </a>
+                    </li>
+                    <li>
+                        <a id="datetime" name="datetime"></a>
+                    </li>
+                    <li class="light-blue">
+                        <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                            <img class="nav-user-photo" src="<%= (ResolveUrl("~") == "/" ? "" : ResolveUrl("~")) + "/Content/template/ace/assets/avatars/profile-icon.png" %>" alt="">
+                            <%--<img class="nav-user-photo" src="../../../Content/template/ace/assets/avatars/profile-icon.png" alt="">--%>
+                            <span class="user-info">
+                                <small><%: Translation.CenterLang.Center.Hollo %>,</small>
+                                <%: WEBAPP.Helper.SessionHelper.SYS_USER_FNAME_TH %>
+                            </span>
+
+                            <i class="ace-icon fa fa-caret-down"></i>
+                        </a>
+
+                        <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                            <li>
+                                <a href="/Users">
+                                    <i class="ace-icon fa fa-user"></i>
+                                    <%: Translation.CenterLang.Center.UserInfo %>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li class="dropdown-hover dropup">
+                                <a href="#" tabindex="-1" class="clearfix">
+                                    <span class="pull-left"><%: Translation.CenterLang.Center.Language %></span>
+                                    <i class="ace-icon fa fa-caret-left pull-right"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li>
+                                        <a id="userTH" name="userTH" runat="server">
+                                            <i class="ace-icon fa fa-flag"></i>
+                                            <p id="Lang" runat="server"></p>
+                                        </a>
+                                        <%--<a id="userTH" href="/Users/Account/LangUi?lang=en-US" tabindex="-1">
+                                            <i class="ace-icon fa fa-flag"></i>
+                                            <%: Translation.CenterLang.Center.English %>
+                                        </a>--%>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="divider"></li>
+                            <%--<li class="dropdown-hover dropup">
+                                <a href="#" tabindex="-1" class="clearfix">
+                                    <span class="pull-left"><%: Translation.CenterLang.Center.System %></span>
+                                    <i class="ace-icon fa fa-caret-left pull-right"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li>
+                                        <a id="userTH" href="/Users/Account/SelectedApp?COM_CODE=RFID" tabindex="-1">
+                                            <i class="ace-icon fa fa-flag"></i>
+                                            ระบบประกันภัยต่อ
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a id="userTH" href="/Users/Account/SelectedApp?COM_CODE=REMS" tabindex="-1">
+                                            <i class="ace-icon fa fa-flag"></i>
+                                            ระบบขอวางขอคืน
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>--%>
+
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/Users/Account/SignOut" id="lnkSignOut">
+                                    <i class="ace-icon fa fa-power-off"></i>
+                                    <%: Translation.CenterLang.Center.Logout %>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-container -->
+    </div>
+    <div class="main-container">
+        <div class="main-content-inner">
+            <div class="breadcrumbs breadcrumbs-fixed">
+                <div class="nav-search" id="nav-search">
+                    <a href="#" id="btnClosePage" class="btn btn-minier btn-danger btn-round">
+                        <i class="ace-icon fa fa-times bigger-120"></i>
+                        <%: Translation.CenterLang.Center.Close %>
+                    </a>
+                </div>
+            </div>
+            <div class="page-content">
+                <div id="notification" style="display: none;">
+                </div>
+                <form id="form1" runat="server">
+                    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+                    <div>
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+            <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+        </a>
+    </div>
+
+    <%: System.Web.Optimization.Scripts.Render("~/bundles/myProject") %>
+    <%--<%: System.Web.Optimization.Scripts.Render("~/bundles/bootstrap") %>--%>
+
+    <%: System.Web.Optimization.Scripts.Render("~/bundles/plugin") %>
+    <!-- ace scripts -->
+    <%--<%: System.Web.Optimization.Scripts.Render("~/bundles/template") %>--%>
+    <!-- page specific plugin scrip
+    ts -->
+    <%: System.Web.Optimization.Scripts.Render("~/bundles/jqueryval") %>
+    <%: System.Web.Optimization.Scripts.Render("~/bundles/DataTables") %>
+
+    <input type="hidden" id="hdSysRootPath" value="<%= ResolveUrl("~") %>" />
+    <iframe id="frmPrint" name="IframeName" width="500"
+        height="200" runat="server" style="display: none;"></iframe>
+
+    <asp:ContentPlaceHolder ID="foot" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#btnClosePage").click(function () {
+                window.close();
+            });
+        });
+
+        $(function () {
+            function checkTime(i) {
+                return (i < 10) ? "0" + i : i;
+            }
+
+            function startTime() {
+                var today = new Date(),
+                    h = checkTime(today.getHours()),
+                    m = checkTime(today.getMinutes()),
+                    s = checkTime(today.getSeconds());
+                var day = today.getDay();
+                var month = today.getMonth();
+                var year = today.getFullYear();
+                var format = "DD/MM/YYYY HH:mm:ss";
+                var dtM = moment(today);
+                var dateFormat = dtM.format(format);
+
+                document.getElementById('datetime').innerHTML = dateFormat;
+                t = setTimeout(function () {
+                    startTime()
+                }, 500);
+            }
+            startTime();
+        });
+    </script>
+</body>
+</html>

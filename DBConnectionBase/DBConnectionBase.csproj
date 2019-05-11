@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7C6DB22E-221F-4BF6-BA18-43A5354E805D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DBConnectionBase</RootNamespace>
+    <AssemblyName>DBConnectionBase</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.12.2.1100\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseClass\BaseDA.cs" />
+    <Compile Include="BaseClass\BaseDTO.cs" />
+    <Compile Include="BaseClass\ChatModel.cs" />
+    <Compile Include="BaseClass\FileModel.cs" />
+    <Compile Include="BaseClass\GridOrderModel.cs" />
+    <Compile Include="BaseClass\StandardGridServerModel.cs" />
+    <Compile Include="BaseClass\GridColumnModel.cs" />
+    <Compile Include="BaseClass\StandardModel.cs" />
+    <Compile Include="BaseClass\TransactionLogModel.cs" />
+    <Compile Include="BaseClass\TreeModel.cs" />
+    <Compile Include="CommonHelper\DADataHelper.cs" />
+    <Compile Include="CommonHelper\DBConnnectionConfig.cs" />
+    <Compile Include="CommonHelper\EnumHelper.cs" />
+    <Compile Include="CommonHelper\ExecuteResult.cs" />
+    <Compile Include="CommonHelper\OracleDBManger.cs" />
+    <Compile Include="CommonHelper\Parameter.cs" />
+    <Compile Include="CommonHelper\SqlDBManger.cs" />
+    <Compile Include="DDLCenter\DDLCenterDA.cs" />
+    <Compile Include="DDLCenter\DDLCenterDTO.cs" />
+    <Compile Include="DDLCenter\DDLCenterKey.cs">
+      <DependentUpon>DDLCenterKey.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="DDLCenter\DDLCenterModel.cs" />
+    <Compile Include="DDLCenter\DDLCenterParamModel.cs" />
+    <Compile Include="DDLCenter\FIXOptionID.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FIXOptionID.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Excel\EXC001\EXC001DA.cs" />
+    <Compile Include="Excel\EXC001\EXC001DTO.cs" />
+    <Compile Include="ModelManger.Context.cs">
+      <DependentUpon>ModelManger.Context.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ModelManger.cs">
+      <DependentUpon>ModelManger.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ModelManger.Designer.cs">
+      <DependentUpon>ModelManger.edmx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Ux\Autocomplete\AutocompleteColumnModel.cs" />
+    <Compile Include="Ux\Autocomplete\AutocompleteDA.cs" />
+    <Compile Include="Ux\Autocomplete\AutocompleteDTO.cs" />
+    <Compile Include="Ux\Autocomplete\AutocompleteSearchModel.cs" />
+    <Compile Include="Ux\Autocomplete\AutocompleteParameterModel.cs" />
+    <Compile Include="VSMS_COMPANY.cs">
+      <DependentUpon>ModelManger.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VSMS_CONFIG_FTP.cs">
+      <DependentUpon>ModelManger.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VSMS_CONFIG_GENERAL.cs">
+      <DependentUpon>ModelManger.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VSMS_CONFIG_SYS.cs">
+      <DependentUpon>ModelManger.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VSMS_CTRLLOG.cs">
+      <DependentUpon>ModelManger.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VSMS_EXCEL.cs">
+      <DependentUpon>ModelManger.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VSMS_EXCEL_DETAIL.cs">
+      <DependentUpon>ModelManger.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VSMS_ISSUE.cs">
+      <DependentUpon>ModelManger.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VSMS_MODULE.cs">
+      <DependentUpon>ModelManger.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VSMS_NOTIFICATION.cs">
+      <DependentUpon>ModelManger.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VSMS_PRGASYS.cs">
+      <DependentUpon>ModelManger.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VSMS_PROGRAM.cs">
+      <DependentUpon>ModelManger.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VSMS_SYSTEM.cs">
+      <DependentUpon>ModelManger.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VSMS_SYS_PGC.cs">
+      <DependentUpon>ModelManger.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VSMS_TITLE.cs">
+      <DependentUpon>ModelManger.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VSMS_USER.cs">
+      <DependentUpon>ModelManger.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VSMS_USERCOM.cs">
+      <DependentUpon>ModelManger.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VSMS_USRGROUP.cs">
+      <DependentUpon>ModelManger.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VSMS_USRGRPPRIV.cs">
+      <DependentUpon>ModelManger.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Translation\Translation.csproj">
+      <Project>{d707ae3d-62d8-44f9-9072-be01a0c05da9}</Project>
+      <Name>Translation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UtilityLib\UtilityLib.csproj">
+      <Project>{053ee5bc-b34e-4dd0-8e5b-ac22d4e41102}</Project>
+      <Name>UtilityLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DDLCenter\DDLCenterKey.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DDLCenterKey.cs</LastGenOutput>
+    </Content>
+    <Content Include="DDLCenter\FIXOptionID.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FIXOptionID.cs</LastGenOutput>
+    </Content>
+    <Content Include="ModelManger.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelManger.edmx</DependentUpon>
+      <LastGenOutput>ModelManger.Context.cs</LastGenOutput>
+      <CustomToolNamespace>DataAccess</CustomToolNamespace>
+    </Content>
+    <Content Include="ModelManger.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelManger.edmx</DependentUpon>
+      <LastGenOutput>ModelManger.cs</LastGenOutput>
+      <CustomToolNamespace>DataAccess</CustomToolNamespace>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="ModelManger.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelManger.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>DataAccess</CustomToolNamespace>
+    </EntityDeploy>
+    <None Include="ModelManger.edmx.diagram">
+      <DependentUpon>ModelManger.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,179 @@
+﻿@using System.Activities.Expressions
+@using WEBAPP.Helper
+@using UtilityLib
+
+@{
+    var HeaderConfig = TempData.ContainsKey(WizardHelper.WizardHeaderConfig.TempDataKey)
+                ? (WizardHelper.WizardHeaderConfig)TempData[WizardHelper.WizardHeaderConfig.TempDataKey]
+                : new WizardHelper.WizardHeaderConfig();
+}
+@if (HeaderConfig != null && HeaderConfig.WizardHeader != null && HeaderConfig.WizardHeader.Count > 0)
+{
+    <text>
+        <div class="row center-block wizard-headerfixed">
+            <div class="col-xs-12">
+                <ul class="nav nav-tabs nav-justified" id="myTabs">
+                    @{
+                        var MaxStep = HeaderConfig.WizardHeader.Count();
+                        var currentHeader = HeaderConfig.CurrentWizard[0].AsInt();
+                        var lastHeader = HeaderConfig.LastWizard[0].AsInt();
+                        var index = 1;
+                        foreach (var Header in HeaderConfig.WizardHeader)
+                        {
+                            var HeaderClass = WizardHelper.WizardHeaderMode.disabled;
+                            var HeaderUrl = "";
+                            if (Header.Skip)
+                            {
+                                HeaderClass = WizardHelper.WizardHeaderMode.complete_dis;
+                            }
+                            else if (currentHeader != MaxStep && currentHeader != lastHeader && index == lastHeader)
+                            {
+                                HeaderClass = WizardHelper.WizardHeaderMode.current;
+                                HeaderUrl = string.IsNullOrEmpty(Header.Url) ? "#" : Header.Url;
+                            }
+                            else if (index == currentHeader && index < lastHeader && index != MaxStep)
+                            {
+                                HeaderClass = WizardHelper.WizardHeaderMode.completeactive;
+                            }
+                            else if (((index < currentHeader && index < lastHeader) ||
+                                (index > currentHeader && index < lastHeader)) && index != MaxStep)
+                            {
+                                HeaderClass = WizardHelper.WizardHeaderMode.complete;
+                                HeaderUrl = string.IsNullOrEmpty(Header.Url) ? "#" : Header.Url;
+                            }
+                            else if (index == currentHeader && index == lastHeader && index != MaxStep)
+                            {
+                                HeaderClass = WizardHelper.WizardHeaderMode.active;
+                            }
+                            else if (index == currentHeader && index == MaxStep)
+                            {
+                                HeaderClass = WizardHelper.WizardHeaderMode.activeend;
+                            }
+                            var h4Text = Translation.CenterLang.Center.Step + index;
+                            var hText = string.Empty;
+                            if (!Header.TextStep.IsNullOrEmpty())
+                            {
+                                h4Text = Header.TextStep;
+                            }
+                            //else if (!Header.Text.IsNullOrEmpty() && Header.TextStep.IsNullOrEmpty())
+                            //{
+                            //    h4Text = Header.Text;
+                            //}
+                            else
+                            {
+                                hText = Header.Text;
+                            }
+                            <li class="@HeaderClass">
+                                <a @if (!HeaderUrl.IsNullOrEmpty()) { <text> href="@HeaderUrl" </text> }>
+                                    <div class="wizard-icon pull-left">
+                                        @if (!hText.IsNullOrEmpty())
+                                        {
+                                            <i class="ace-icon fa @Header.IconCssClass bigger-150"></i>
+                                        }
+                                        else
+                                        {
+                                            <div style="height:8px;"></div>
+                                            <i class="ace-icon fa @Header.IconCssClass bigger-150"></i>
+                                            <div style="height:8px;"></div>
+                                        }
+                                    </div>
+                                    <div>
+                                        @if (!hText.IsNullOrEmpty())
+                                        {
+                                            <h4 class="list-group-item-heading">@h4Text</h4>
+                                            <p class="list-group-item-text">@hText</p>
+                                        }
+                                        else
+                                        {
+                                            <div style="height:8px;"></div>
+                                            <h4 class="list-group-item-heading">@h4Text</h4>
+                                            <div style="height:8px;"></div>
+                                        }
+                                    </div>
+                                </a>
+                            </li>
+                            index++;
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+        @if (HeaderConfig.WizardHeader[currentHeader - 1].SubWizardHeader != null && HeaderConfig.WizardHeader[currentHeader - 1].SubWizardHeader.Count > 0)
+        {
+            var currentSubHeader = HeaderConfig.CurrentWizard[1].AsInt();
+            var lastSubHeader = 0;
+            var Subindex = 1;
+            if (lastHeader == currentHeader)
+            {
+                if (HeaderConfig.WizardStatus == "C")
+                {
+                    lastSubHeader = HeaderConfig.WizardHeader[currentHeader - 1].SubWizardHeader.Count + 1;
+                }
+                else
+                {
+                    lastSubHeader = HeaderConfig.LastWizard[1].AsInt();
+                }
+            }
+            else if (lastHeader > currentHeader)
+            {
+                lastSubHeader = HeaderConfig.WizardHeader[currentHeader - 1].SubWizardHeader.Count + 1;
+            }
+            <div class="row center-block subwizard-headerfixed">
+                <div class="col-xs-12">
+                    <ul class="steps">
+                        @foreach (var subHeader in HeaderConfig.WizardHeader[HeaderConfig.CurrentWizard[0].AsInt() - 1].SubWizardHeader)
+                        {
+                            var subHeaderClass = WizardHelper.WizardHeaderMode.disabled;
+                            var subHeaderUrl = "";
+                            if (!subHeader.FixHeaderClass.IsNullOrEmpty())
+                            {
+                                subHeaderClass = subHeader.FixHeaderClass;
+                                subHeaderUrl = string.IsNullOrEmpty(subHeader.Url) ? "#" : subHeader.Url;
+                            }
+                            else if ((Subindex == currentSubHeader && Subindex < lastSubHeader) && !subHeader.Skip)
+                            {
+                                subHeaderClass = WizardHelper.WizardHeaderMode.completeactive;
+                            }
+                            else if (((Subindex < currentSubHeader && Subindex < lastSubHeader) ||
+                                (Subindex > currentSubHeader && Subindex < lastSubHeader)) && !subHeader.Skip)
+                            {
+                                subHeaderClass = WizardHelper.WizardHeaderMode.complete;
+                                subHeaderUrl = string.IsNullOrEmpty(subHeader.Url) ? "#" : subHeader.Url;
+                            }
+                            else if ((Subindex == currentSubHeader && lastSubHeader == currentSubHeader) && !subHeader.Skip)
+                            {
+                                subHeaderClass = WizardHelper.WizardHeaderMode.active;
+                            }
+                            else if (((Subindex == lastSubHeader && currentSubHeader < lastSubHeader)) && !subHeader.Skip)
+                            {
+                                subHeaderClass = WizardHelper.WizardHeaderMode.active;
+                                subHeaderUrl = string.IsNullOrEmpty(subHeader.Url) ? "#" : subHeader.Url;
+                            }
+                            <li class="@subHeaderClass">
+                                @if (!string.IsNullOrEmpty(subHeaderUrl))
+                                {
+                                    <a href="@subHeaderUrl">
+                                        <span class="step @if (subHeader.Skip)
+                                    {<text>skip</text> }">@Subindex</span>
+                                    <span class="title">@subHeader.Text</span>
+                                </a>
+                            }
+                            else
+                            {
+                                <span class="step @if (subHeader.Skip)
+                                    {<text>skip</text> }">@Subindex</span>
+                                    <span class="title">@subHeader.Text</span>
+                                }
+                            </li>
+
+                            Subindex++;
+                        }
+                    </ul>
+                </div>
+            </div>
+        }
+    </text>
+}
+@{
+    Html.RenderPartial("_StandardWizardButton");
+}

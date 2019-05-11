@@ -1,0 +1,153 @@
+﻿@using Microsoft.AspNet.Identity
+@model WEBAPP.Areas.Users.Models.LoginViewModel
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right ">
+            <li>
+                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+    }
+}
+else
+{
+    <center>
+        <br><br><br><br><br><br><br><br><br><br>
+        @RenderBody() @*//this content on .cshtml*@
+        <ul class="nav navbar-nav navbar-right">
+            @using (Html.BeginForm("SignIn", "Account", null, FormMethod.Get,
+                                                  new { enctype = "multipart/form-data" }))
+            {
+                <div class="loginbox">
+                    <img src="https://image.flaticon.com/icons/svg/622/622848.svg" class="avatar">
+                    <br><br><br><br>
+                    <label>User Name</label>
+                    <br><br>
+                    
+                    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+                    <br><br><br>
+                    <label>Password</label>
+                    <br><br>
+                    
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                    <br><br><br>
+                    
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Submit" class="btn btn-default" />
+                        </div>
+                    </div>
+                    <br>
+                    @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+                    @*@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })*@
+                </div>
+            }
+
+        </ul>
+    </center>
+}
+
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        /*background: url(https://images.pexels.com/photos/242236/pexels-photo-242236.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);*/	
+        background: #eee !important;	
+        background-size: cover;
+        background-position: center;
+        
+
+    }
+
+    .loginbox{
+        /*width: 430px;
+        height: 460px;
+        background: #000;
+        color: #fff;
+        top: 50%;*/
+        
+        max-width: 480px;
+        min-height: 500px;
+        margin: 30px auto;
+        background-color: rgba(10,10,10,.68);
+    }
+
+    .avatar{
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        position: absolute;
+        top: 190px;
+        left: calc(51% - 50px);
+    }
+
+    h1{
+        margin: 0;
+        padding: 0 0 0px;
+        text-align: center;
+        font-size: 30px;
+    }
+    /* Full-width input fields */
+    .loginbox input[type=text], input[type=password] {
+        /*width: 70%;
+        height: 40px;
+        border: none;
+        border-bottom: 1px solid #fff;
+        border-radius: 2px;
+        background: transparent;
+        outline: none;
+
+        color: #000000;
+        font-family: 'Exo', sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        padding: 4px;*/
+
+        border: none;
+        border-bottom: 1px solid #fff;
+        background: transparent;
+        outline: none;
+        width: 420px;
+        height: 40px;
+        color: #fff;
+        font-size: 16px;
+    }
+
+    input[type=submit] {
+        background-color: #56baed;
+        border: none;
+        color: white;
+        padding: 15px 80px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        /*text-transform: uppercase;*/
+        font-size: 13px;
+        -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+        box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+        -webkit-border-radius: 5px 5px 5px 5px;
+        border-radius: 20px;
+        margin: 5px 20px 40px 20px;
+        -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -ms-transition: all 0.3s ease-in-out;
+        -o-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .loginbox input[type="submit"]:hover {
+        cursor: pointer;
+        background: #ffc;
+        color: #000;
+    }
+
+    .loginbox label {
+        color: #fff;
+    }
+</style>

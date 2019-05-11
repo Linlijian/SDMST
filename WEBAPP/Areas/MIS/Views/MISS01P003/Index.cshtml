@@ -1,0 +1,266 @@
+﻿@using FluentBootstrap
+@using WEBAPP.Helper
+@using DataAccess.MIS
+@using UtilityLib
+
+@model MISS01P003Model
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMaster.cshtml";
+}
+
+@using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
+{
+    @form.ValidationSummary(true).AddCss(Css.Hidden)
+    @Html.AntiForgeryToken()
+    using (var rowInfo = Html.Bootstrap().GridRow().Begin())
+    {
+        using (rowInfo.GridColumn(12).SetXs(12).Begin())
+        {
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), IsSearch: true)
+                }
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.SelectFor(t => t.STATUS, Model.STATUS_MODEL.ToSelectList("Value", "Text", Model.STATUS), IsSearch: true)
+                }
+            }
+        }
+    }
+}
+@using (var row = Html.Bootstrap().GridRow().SetId("rowGridSearch").SetVisibility(Visibility.Hidden).Begin())
+{
+    using (row.GridColumn(12).Begin())
+    {
+        @Html.Bootstrap().Table().SetId("GridSearch").SetStyle(TableStyle.TableStripedBorderedHover)
+    }
+}
+
+
+@section scripts{
+    @Html.GridScript("Search",
+        new GridConfig
+        {
+            GetConfig = new DefaultConfig(Url.Action("Search")),
+            DefaultBinding = true,
+            ScrollX = false,
+            WidthType = ColumnsWidthType.Percentage
+        },
+        new GridColumn("ISE_KEY").SetNotVisible().SetKey(),
+        new GridColumn("ASSIGN_STATUS", Translation.MIS.MISS01P003.CONFIRM_FIXED, 1, align: ColumnsTextAlign.Center, render: "RENDER_DONE"),
+        new GridColumn("COM_NAME_E", Translation.CenterLang.Center.APP_CODE, 10).SetKey(),
+        new GridColumn("ISE_NO", Translation.MIS.MISS01P003.ISE_NO, 10, ColumnsTextAlign.Right).SetKey(),
+        new GridColumn("RESPONSE_BY", Translation.MIS.MISS01P003.RESPONSE_BY, 10).SetKey(),
+        new GridColumn("ISE_DATE_OPENING", Translation.MIS.MISS01P003.ISE_DATE_OPENING, 10, ColumnsType.DateTime),
+        new GridColumn("ASSIGN_STATUS", Translation.MIS.MISS01P003.ACCEPT_REJECT, 4, align: ColumnsTextAlign.Center, render: "RENDER_CONFIRM")
+
+        )
+
+    <script>
+        var RENDER_DONE = function (data, type, full, meta) {
+            var tag = '';
+            if (data == 'D') {
+                tag += '<a href="javascript:void(0)" id="btnDONE" name="btnDONE" >';
+                tag += '<i class="ace-icon fa @FaIcons.FaCheckCircle align-top bigger-200 blue"></i>';
+                tag += '</a>';
+            }
+
+            return tag;
+        };
+
+        $(document).ready(function () {
+            $("#GridSearch tbody").on("click", "a[name='btnDONE']", function (e) {
+                var idx = GridSearch.row($(this).parent()).index();
+                var data = GridSearch.row(idx).data();
+
+                $.confirm({
+                    title: null,
+                    content: "Are you sure to continue?",
+                    columnClass: 'medium',
+                    buttons: {
+                        confirm: {
+                            text: $("#hdSysOK").val(),
+                            btnClass: "btn-primary",
+                            action: function () {
+                                waitingDialog.show();
+
+                                $.ajax({
+                                    url: '@Url.Action("Done")',
+                                    type: 'post',
+                                    data: data,
+                                    success: function (result) {
+                                        if (result.data.FALG == 'T') {
+                                            waitingDialog.hide();
+                                            GridSearch.ajax.reload();
+                                            alertSucs();
+                                        }
+                                        else {
+                                            alertErr();
+                                            GridSearch.ajax.reload();
+                                        }
+                                    },
+                                    error: OnAjaxError
+                                });
+                            }
+                        },
+                        cancel: {
+                            text: $("#hdSysCancel").val(),
+                            btnClass: "btn-primary"
+                        }
+                    }
+                });
+            });
+        })
+
+        var RENDER_CONFIRM = function (data, type, full, meta) {
+            var tag = '';
+            if (data == 'W') {
+                tag += '<a href="javascript:void(0)" id="btnAGREED" name="btnAGREED" >';
+                tag += '<i class="ace-icon fa @FaIcons.FaCheck align-top bigger-200 blue"></i>';
+                tag += '</a>';
+                //tag += ' || '
+                tag += '<a href="javascript:void(0)" id="btnCANCEL" name="btnCANCEL" >';
+                tag += '<i class="ace-icon fa @FaIcons.FaClose align-top bigger-200 red"></i>';
+                tag += '</a>';
+            }
+            else if (data == 'D') {
+                tag += 'Doing';
+            }
+            else if (data == 'E') {
+                tag += 'Done';
+            }
+            else if (data == 'T') {
+               tag += 'Testing';
+            }
+            else if (data == 'C') {
+               tag += 'Cancel';
+            }
+            return tag;
+        };
+
+        function alertErr() {
+            $("#notification").hide()
+            var content = '<div class="alert alert-' + 'danger' + ' alert-dismissable alert-' + 'danger' + 'new"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button><h2>';
+            content += '<i class="ace-icon fa fa-exclamation-triangle bigger-130"></i> ';
+            content += 'พัง' + '</h2>';
+            content += '</div>';
+
+            $("#notification").html(content).fadeTo(2000, 500);
+        }
+        function alertSucs() {
+            $("#notification").hide()
+            var content = '<div class="alert alert-' + 'success' + ' alert-dismissable alert-' + 'success' + 'new"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button><h2>';
+            content += '<i class="ace-icon fa fa-exclamation-triangle bigger-130"></i> ';
+            content += 'ผ่าน ๆ' + '</h2>';
+            content += '</div>';
+
+            $("#notification").html(content).fadeTo(2000, 500);
+        }
+
+        $(document).ready(function () {
+            $("#GridSearch tbody").on("click", "a[name='btnAGREED']", function (e) {
+                var idx = GridSearch.row($(this).parent()).index();
+                var data = GridSearch.row(idx).data();
+
+                $.confirm({
+                    title: null,
+                    content: "Are you sure to continue?",
+                    columnClass: 'medium',
+                    buttons: {
+                        confirm: {
+                            text: $("#hdSysOK").val(),
+                            btnClass: "btn-primary",
+                            action: function () {
+                                waitingDialog.show();
+
+                                $.ajax({
+                                    url: '@Url.Action("Agree")',
+                                    type: 'post',
+                                    data: data,
+                                    success: function (result) {
+                                        if (result.data.FALG == 'T') {
+                                            waitingDialog.hide();
+                                            GridSearch.ajax.reload();
+                                            alertSucs();
+                                        }
+                                        else {
+                                            alertErr();
+                                            GridSearch.ajax.reload();
+                                        }
+                                    },
+                                    error: OnAjaxError
+                                });
+                            }
+                        },
+                        cancel: {
+                            text: $("#hdSysCancel").val(),
+                            btnClass: "btn-primary"
+                        }
+                    }
+                });
+            });
+        })
+
+        var RENDER_CANCEL = function (data, type, full, meta) {
+            var tag = '';
+
+            if (data == 'W') {
+                tag += '<a href="javascript:void(0)" id="btnCANCEL" name="btnCANCEL" >';
+                tag += '<i class="ace-icon fa @FaIcons.FaCogs align-top bigger-130 blue"></i>';
+                tag += '</a>';
+            } else {
+                tag+='XXX'
+            }
+
+            return tag;
+        };
+
+        $(document).ready(function () {
+            $("#GridSearch tbody").on("click", "a[name='btnCANCEL']", function (e) {
+                var idx = GridSearch.row($(this).parent()).index();
+                var data = GridSearch.row(idx).data();
+
+                $.confirm({
+                    title: null,
+                    content: "Are you sure to continue?",
+                    columnClass: 'medium',
+                    buttons: {
+                        confirm: {
+                            text: $("#hdSysOK").val(),
+                            btnClass: "btn-primary",
+                            action: function () {
+                                waitingDialog.show();
+
+                                $.ajax({
+                                    url: '@Url.Action("Cancel")',
+                                    type: 'post',
+                                    data: data,
+                                    success: function (result) {
+                                        if (result.data.FALG == 'T') {
+                                            waitingDialog.hide();
+                                            GridSearch.ajax.reload();
+                                            alertSucs();
+                                        }
+                                        else {
+                                            alertErr();
+                                            GridSearch.ajax.reload();
+                                        }
+                                    },
+                                    error: OnAjaxError
+                                });
+                            }
+                        },
+                        cancel: {
+                            text: $("#hdSysCancel").val(),
+                            btnClass: "btn-primary"
+                        }
+                    }
+                });
+            });
+        })
+    </script>
+}

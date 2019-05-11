@@ -1,0 +1,30 @@
+﻿@using FluentBootstrap
+@using WEBAPP.Helper
+@using UtilityLib
+
+@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    Layout = null;
+}
+
+@using (var form = Html.Bootstrap().Form().SetHorizontal().Begin())
+{
+    using (var rowMain = Html.Bootstrap().GridRow().Begin())
+    {
+        using (rowMain.GridColumn(12).AddStyle("text-align", "center").SetXs(12).Begin())
+        {
+            @Html.Bootstrap().Image(Url.Content("~/Uploads/Image/404-opt.png"), "Placeholder Image")
+        }
+        
+        using (rowMain.GridColumn(12).AddStyle("font-size", "1em").AddStyle("color", "red").SetXs(12).Begin())
+        {
+            <div>@Html.Label("Error From : ", new { style = "color:#000000" }) @ViewBag.errorcontroller</div>
+        }
+
+        using (rowMain.GridColumn(12).AddStyle("font-size", "1em").AddStyle("color", "red").SetXs(12).Begin())
+        {
+            <div>@Html.Label("Message : ", new { style = "color:#000000" }) @ViewBag.errorcessage</div>
+        }
+    }
+}

@@ -1,0 +1,29 @@
+﻿@using FluentBootstrap
+@using WEBAPP.Helper
+@using DataAccess.MIS
+@using UtilityLib
+
+@model MISS01P003Model
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutMaster.cshtml";
+}
+
+@using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
+{
+    @form.ValidationSummary(true).AddCss(Css.Hidden)
+    @Html.AntiForgeryToken()
+    using (var rowInfo = Html.Bootstrap().GridRow().Begin())
+    {
+        using (rowInfo.GridColumn(12).SetXs(12).Begin())
+        {
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).SetMdOffset(2).Begin())
+                {
+                    //@form.InputFor(m => m.YEAR, isRequired: true).SetHelp("Format : YYYY Example: (2014)").SetMaxLength(4)
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,52 @@
+﻿@using FluentBootstrap
+@using WEBAPP.Helper
+@using DataAccess
+@model StandardModel
+
+@Html.GetVSMWidgetsBegin(Translation.CenterLang.Center.TitleItemInfo, collapsed: true)
+@using (var row = Html.Bootstrap().GridRow().Begin())
+{
+    using (row.GridColumn(2).Begin())
+    {
+        using (Html.Bootstrap().FormGroup(m => m.ACTIVE).AddCss("required").SetHorizontal(false).Begin())
+        {
+            @Html.Bootstrap().SelectFor(t => t.ACTIVE, Model.ACTIVE_MODEL.ToSelectList("Value", "Text", Model.ACTIVE), true).SetControlLabel(null).IsDisabled(Model.IsReadOnly)
+        }
+    }
+    using (row.GridColumn(2).Begin())
+    {
+        using (Html.Bootstrap().FormGroup(m => m.STATUS).AddCss("required").SetHorizontal(false).Begin())
+        {
+            @Html.Bootstrap().SelectFor(t => t.STATUS, Model.STATUS_MODEL.ToSelectList("Value", "Text", Model.STATUS), true).SetControlLabel(null).IsDisabled(Model.IsReadOnly)
+        }
+    }
+    using (row.GridColumn(2).Begin())
+    {
+        using (Html.Bootstrap().FormGroup(m => m.CREATE_USER_NAME_TH).AddCss("required").SetHorizontal(false).Begin())
+        {
+            @Html.Bootstrap().InputFor(t => t.CREATE_USER_NAME_TH, isRequired: true).SetReadonly().SetControlLabel(null)
+        }
+    }
+    using (row.GridColumn(2).Begin())
+    {
+        using (Html.Bootstrap().FormGroup(m => m.CREATE_DT).AddCss("required").SetHorizontal(false).Begin())
+        {
+            @Html.Bootstrap().DatepickerFor(t => t.CREATE_DT, isRequired: true).SetReadonly().SetControlLabel(null)
+        }
+    }
+    using (row.GridColumn(2).Begin())
+    {
+        using (Html.Bootstrap().FormGroup(m => m.UPDATE_USER_NAME_TH).AddCss("required").SetHorizontal(false).Begin())
+        {
+            @Html.Bootstrap().InputFor(t => t.UPDATE_USER_NAME_TH, isRequired: true).SetReadonly().SetControlLabel(null)
+        }
+    }
+    using (row.GridColumn(2).Begin())
+    {
+        using (Html.Bootstrap().FormGroup(m => m.UPDATE_DT).AddCss("required").SetHorizontal(false).Begin())
+        {
+            @Html.Bootstrap().DatepickerFor(t => t.UPDATE_DT, isRequired: true).SetReadonly().SetControlLabel(null)
+        }
+    }
+}
+@Html.GetVSMWidgetsEnd()

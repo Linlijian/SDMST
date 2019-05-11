@@ -1,0 +1,126 @@
+﻿@using FluentBootstrap
+@using WEBAPP.Helper
+@using DataAccess.MIS
+@using UtilityLib
+
+@model MISS01P001Model
+
+@{
+    ViewBag.Title = Translation.MIS.MISS01P001.STEP_1;
+    Layout = "~/Views/Shared/_LayoutChildPageWizard.cshtml";
+}
+
+@using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
+{
+    @form.ValidationSummary(true).AddCss(Css.Hidden)
+    @Html.AntiForgeryToken()
+    using (var rowInfo = Html.Bootstrap().GridRow().Begin())
+    {
+        using (rowInfo.GridColumn(12).SetXs(12).Begin())
+        {
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), IsSearch: true)
+                }
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.InputNumberFor(a => a.NO)
+                }
+            }
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.SelectFor(t => t.STATUS, Model.STATUS_MODEL.ToSelectList("Value", "Text", Model.STATUS), IsSearch: true)
+                }
+                using (row1.GridColumn(6).Begin())
+                {
+                   @form.SelectFor(t => t.RESPONSE_BY, Model.RESPONSE_BY_MODEL.ToSelectList("Value", "Text", Model.RESPONSE_BY), IsSearch: true)
+                }
+            }
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                     @form.SelectFor(t => t.DEFECT, Model.DEFECT_MODEL.ToSelectList("Value", "Text", Model.DEFECT), IsSearch: true)
+                }
+                using (row1.GridColumn(6).Begin())
+                {
+                     @form.SelectFor(t => t.PRIORITY, Model.PRIORITY_MODEL.ToSelectList("Value", "Text", Model.PRIORITY), IsSearch: true)
+                }
+            }
+        }
+    }
+}
+@using (var row = Html.Bootstrap().GridRow().SetId("rowGridSearch").SetVisibility(Visibility.Hidden).Begin())
+{
+    using (row.GridColumn(12).Begin())
+    {
+        @Html.Bootstrap().Table().SetId("GridSearch").SetStyle(TableStyle.TableStripedBorderedHover)
+    }
+}
+
+@section scripts{
+    @Html.GridScript("Search",
+        new GridConfig
+        {
+            GetConfig = new DefaultConfig(Url.Action("Search")),
+            //DeleteConfig = new DefaultConfig(Url.Action("DeleteSearch")),
+            DefaultBinding = Model.IsDefaultSearch,
+            ScrollX = false,
+            WidthType = ColumnsWidthType.Percentage
+        },
+        Html.GridColumnCommand(Html.GridCommand(StandardButtonName.Edit, Translation.CenterLang.Center.Edit, Url.Action(StandardButtonName.Edit), FaIcons.FaPencil, TextColor.orange2, "(data.STATUS != 'C')", new VSMParameter("NO"), new VSMParameter("COM_CODE"))),
+        Html.GridColumnCommand(Html.GridCommand("Infomation", "Infomation", Url.Action(StandardButtonName.Info), FaIcons.FaInfo, TextColor.grey, new VSMParameter("NO"), new VSMParameter("COM_CODE"))),
+        new GridColumn("NO").SetNotVisible().SetKey(),
+        new GridColumn("COM_CODE").SetNotVisible().SetKey(),
+        new GridColumn("COM_CODE", Translation.CenterLang.Center.APP_CODE, 10).SetKey(),
+        new GridColumn("NO", Translation.MIS.MISS01P001.NO, 10),
+        new GridColumn("ISSUE_DATE", Translation.MIS.MISS01P001.ISSUE_DATE, 10,ColumnsType.DateTime),
+        new GridColumn("RESPONSE_BY", Translation.MIS.MISS01P001.RESPONSE_BY, 10),
+        new GridColumn("DEFECT", Translation.MIS.MISS01P001.DEFECT, 10),
+        new GridColumn("PRIORITY", Translation.MIS.MISS01P001.PRIORITY, 10),
+        new GridColumn("STATUS", Translation.MIS.MISS01P001.STATUS, 10, render: "renderPROD_TYPE")
+
+        )
+
+    <script>
+        $(document).ready(function () {
+            $("#APP_CODE").change(function (e) {
+                $("#RESPONSE_BY").BindSelect({
+                    Url: '@Url.Action("BindResponseBy")',
+                    Parameters: [{
+                        type: 'ControlId',//ControlId,FixValue
+                        name: 'APP_CODE',
+                        value: 'APP_CODE'
+                    }]
+                });
+            });
+        })
+
+        var renderPROD_TYPE = function (data, type, full, meta) {
+            var tag = '';
+            if (data == 'O') {
+                tag = 'Opening';
+            }
+            else if (data == 'P') {
+                tag = 'On Process';
+            }
+            else if (data == 'F') {
+                tag = 'Follow Up';
+            }
+            else if (data == 'C') {
+                tag = 'Cancel';
+            }
+            else if (data == 'G') {
+                tag = 'Go live';
+            }
+            else if (data == 'S') {
+                tag = 'Close';
+            }
+            return tag;
+        };
+    </script>
+}

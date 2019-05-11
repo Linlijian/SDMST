@@ -1,0 +1,278 @@
+﻿@using UtilityLib
+@using WEBAPP.Helper
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="description" content="" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/bundlesContent/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <!-- ace styles -->
+    @Styles.Render("~/bundlesContent/template")
+    <!--[if lte IE 9]>
+    @Styles.Render("~/bundlesContent/templateIE9")
+        <![endif]-->
+    <!-- ace settings handler -->
+    @Scripts.Render("~/bundles/templateSetting")
+
+    <!--[if lte IE 8]>
+        @Scripts.Render("~/bundles/IE8")
+    <![endif]-->
+    @Styles.Render("~/bundlesContent/plugin")
+    @Styles.Render("~/bundlesContent/DataTables")
+    @Styles.Render("~/bundlesContent/WizardWithoutHD")
+    @Styles.Render("~/bundlesContent/Custom")
+
+    <!-- page specific plugin styles -->
+    @RenderSection("stylesheet", required: false)
+    <style>
+        #content {
+            max-height: 100%;
+            overflow-y: scroll;
+            /*padding: 0px 10% !important;*/
+            margin-top: 40px !important;
+        }
+        /*calc(100% - 120px);*/
+        /*html, body {
+                height: 100%;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }*/
+
+        .header_fixed {
+            width: 100%;
+            color: #fff;
+            height: 40px;
+            background: #6fb3e0;
+            display: inline-block;
+        }
+
+        footer {
+            width: 100%;
+            height: 40px;
+            background: #6fb3e0;
+            position: fixed;
+            bottom: 0;
+        }
+    </style>
+
+    <!--[if !IE]> -->
+    @Scripts.Render("~/bundles/jquery")
+    <!-- <![endif]-->
+    <!--[if IE]>
+    @Scripts.Render("~/bundles/jqueryIE")
+    <![endif]-->
+    @Scripts.Render("~/bundles/waiting")
+
+    <script type="text/javascript">
+        $(function () {
+            waitingDialog.show("", {
+                headerText: false,
+                backdrop: false,
+                hideConten: true
+            });
+        });
+    </script>
+</head>
+<body class="no-skin">
+    <div class="main-container">
+        <div class="main-content-inner">
+            <div class="breadcrumbs breadcrumbs-fixed">
+                @{
+                    Html.RenderPartial("_Breadcrumb");
+                }
+                <div class="nav-search" id="nav-search">
+                    <span class="label label-info arrowed-in-right arrowed">
+                        <i class="ace-icon fa fa-desktop bigger-120"></i>
+                        @ViewBag.PRG_CODE
+                    </span>
+                    <a href="javascript:void(0)" id="btnClosePage" class="btn btn-minier btn-danger btn-round">
+                        <i class="ace-icon fa fa-times bigger-120"></i>
+                        @Translation.CenterLang.Center.Close
+                    </a>
+                </div>
+            </div>
+            @{
+                Html.RenderPartial("_ButtonHeaderWizard");
+            }
+            <div class="page-content">
+                @*<div class="tab-content tab-content-fixed">*@
+                <div id="notification" style="display: none;">
+                </div>
+                @RenderSection("modals", required: false)
+                @RenderBody()
+                @*</div>*@
+            </div>
+        </div>
+
+        <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+            <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+        </a>
+        @{
+            System.Web.Configuration.CustomErrorsSection customErrorsSection = System.Configuration.ConfigurationManager.GetSection("system.web/customErrors") as System.Web.Configuration.CustomErrorsSection;
+        }
+        @Html.Hidden("hdSysPageError", customErrorsSection.DefaultRedirect != null ? Url.Content(customErrorsSection.DefaultRedirect) : null)
+        
+        @{
+            Html.RenderPartial("_LayoutHidden");
+        }
+    </div>
+
+    @Scripts.Render("~/bundles/myProject")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @Scripts.Render("~/bundles/plugin")
+    <!-- ace scripts -->
+    @Scripts.Render("~/bundles/template")
+    <!-- page specific plugin scrip
+    ts -->
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/DataTables")
+    @Scripts.Render("~/bundles/myCustom")
+
+    <script type="text/javascript">
+        function RedirectToErrorOniframe(exception, errorcode) {
+            @if (customErrorsSection.DefaultRedirect!=null)
+            {<text>
+            window.location.href = '@Url.Content(customErrorsSection.DefaultRedirect)' + '?exception=' + exception + '&errorcode=' + errorcode;
+            </text>}
+        }
+
+        $(function () {
+            $(".autocomplete-input").JAutocomplete({
+                url: '@Url.Action("Index", "Autocomplete", new {Area = "Ux"})'
+            });
+        });
+
+        $(document).ready(function () {
+            $('#btnClosePage').vsmConfirm({
+                title: null,
+                columnClass: 'medium',
+                buttons: {
+                    confirm: {
+                        text: "@Translation.CenterLang.Center.OK",
+                        btnClass: "btn-primary",
+                        action: function () {
+                            @{
+                                var ReferURL = Url.Content(FormsAuthentication.DefaultUrl);
+
+                                if (ViewBag.UrlToClosePage != "" && ViewBag.UrlToClosePage != null)
+                                {
+                                    ReferURL = ViewBag.UrlToClosePage;
+                                }
+                                else if (TempData["UrlReferrer"] != null)
+                                {
+                                    var urlReferrer = (Uri)TempData["UrlReferrer"];
+                                    if (!urlReferrer.Query.IsNullOrEmpty() && !urlReferrer.Query.Contains("page"))
+                                    {
+                                        ReferURL = Url.Content(urlReferrer.AbsolutePath);
+                                        if (!urlReferrer.Query.IsNullOrEmpty())
+                                        {
+                                            ReferURL += urlReferrer.Query + "&page=1";
+                                        }
+                                    }
+                                    else
+                                    {
+                                        ReferURL = Url.Content(urlReferrer.AbsolutePath);
+                                        if (!urlReferrer.Query.IsNullOrEmpty())
+                                        {
+                                            ReferURL += urlReferrer.Query;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    var menu = SessionHelper.SYS_MenuModel;
+                                    if (menu != null)
+                                    {
+                                        var home = menu.Where(m => m.SYS_CODE.AsString().ToUpper() == "HOME").FirstOrDefault();
+                                        if (home != null && AppExtensions.ExistsAction(home.PRG_ACTION, home.PRG_CONTROLLER, home.PRG_AREA))
+                                        {
+                                            ReferURL = Url.Action(home.PRG_ACTION, home.PRG_CONTROLLER, new { Area = home.PRG_AREA, SYS_SYS_CODE = home.SYS_CODE, SYS_PRG_CODE = home.PRG_CODE });
+                                        }
+                                    }
+                                }
+
+                            }
+                            ifSlowShowLoading();
+                            window.location.href = '@Html.Raw(ReferURL)';
+                        }
+                    },
+                    cancel: {
+                        text: "@Translation.CenterLang.Center.Cancel",
+                        btnClass: "btn-primary",
+                        action: function () {
+
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    @RenderSection("plugin", required: false)
+        @RenderSection("scripts", required: false)
+        <script>
+        $(document).ready(function () {
+            setTimeout(function () {
+                waitingDialog.hide();
+            }, 500);
+        });
+
+        $(document).ready(function () {
+            //remove 0
+            if ($('#count-ntf').text() == '0')
+                $('#count-ntf').text('')
+
+            //remove count notification
+            $('#ntf').click(function () {
+                $('#count-ntf').text('')
+                //call ajax for change flag = F
+                $.ajax({
+                    url: '@Url.Action("RemoveCountNTF", "Account", new { Area = "Users"})',
+                    type: 'post',
+                    success: null,
+                    error: OnAjaxError
+                });
+            });
+
+            //after click notification detail
+            $('#a').click(function () {
+                //call ajax for change active = T
+                //change css after click notification detail
+            });
+
+            //call ajax every 5s
+            var interval = setInterval(function () {
+                $.ajax({
+                    url: '@Url.Action("FatchNotification", "Account", new { Area = "Users"})',
+                    type: 'post',
+                    success: function (resultTimer) {
+                        waitingDialog.hide();
+                        //remove 0
+                        if ($('#count-ntf').text() == '0') {
+                            $('#count-ntf').text('')
+                        }
+                        if (resultTimer.data.NO != 0 || resultTimer.data.NO != "0") {
+                            //set count-ntf
+                            $("#count-ntf").text(resultTimer.data.NO);
+                            //reload item-list
+                            $('#item-list').load('@Url.Action("ReloadNotification", "Account", new { Area = "Users"})');
+                        }
+                    },
+                    error: function (request, status, error) {
+                    }
+                });
+            }, 3000);
+
+        });
+        </script>
+</body>
+</html>

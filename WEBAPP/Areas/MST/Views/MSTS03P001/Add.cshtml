@@ -1,0 +1,109 @@
+﻿@using FluentBootstrap
+@using WEBAPP.Helper
+@using DataAccess.MST
+@using UtilityLib
+
+@model MSTS03P001Model
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_LayoutChildPage.cshtml";
+}
+
+@using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
+{
+    @Html.AntiForgeryToken()
+    using (Html.Bootstrap().Div().SetId("HEADER").SetVisibility(Visibility.Hidden).Begin())
+    {
+        @Html.GetVSMWidgetsBegin(Translation.MST.MSTS03P001.PRIORITY_CRITERIA)
+        using (Html.Bootstrap().Div().SetId("PRIORITY").SetVisibility(Visibility.Hidden).Begin())
+        {
+            using (var row = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row.GridColumn(12).SetXs(12).Begin())
+                {
+                    using (var r = Html.Bootstrap().GridRow().Begin())
+                    {
+                        using (r.GridColumn(6).Begin())
+                        {
+                            @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true, addValidateMessage: true)
+                        }
+                        using (r.GridColumn(6).Begin())
+                        {
+                            @form.InputFor(m => m.PRIORITY_NAME, isRequired: true).SetMaxLength(50).SetIndexParameter(0)
+                        }
+                    }
+                    using (var r = Html.Bootstrap().GridRow().Begin())
+                    {
+                        using (r.GridColumn(6).Begin())
+                        {
+                            @form.InputNumberFor(m => m.RES_TIME, addValidateMessage: true, isRequired: true).SetPlaceholder("00")
+                        }
+                        using (r.GridColumn(6).Begin())
+                        {
+                            @form.SelectFor(t => t.RES_TYPE, Model.RES_TYPE_MODEL.ToSelectList("Value", "Text", Model.RES_TYPE), isRequired: true)
+                        }
+                    }
+                    using (var r = Html.Bootstrap().GridRow().Begin())
+                    {
+                        using (r.GridColumn(6).Begin())
+                        {
+                            @form.InputNumberFor(m => m.T_RES_TIME, addValidateMessage: true, isRequired: true).SetPlaceholder("00")
+                        }
+                        using (r.GridColumn(6).Begin())
+                        {
+                            @form.SelectFor(t => t.T_RES_TYPE, Model.T_RES_TYPE_MODEL.ToSelectList("Value", "Text", Model.T_RES_TYPE), isRequired: true)
+                        }
+                    }
+                    using (var r = Html.Bootstrap().GridRow().Begin())
+                    {
+                        using (r.GridColumn(6).Begin())
+                        {
+                           // @form.CheckBoxFor(m => m.IS_FREE)
+                            //@form.CheckBox("check", "Check me out")
+                        }
+                    }
+                    using (var r = Html.Bootstrap().GridRow().Begin())
+                    {
+                        using (r.GridColumn(6).Begin())
+                        {
+                            @form.TextAreaFor(m => m.REMASK, 4).SetMaxLength(400)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @Html.GetVSMWidgetsEnd()
+}
+
+
+<script type="text/javascript">
+    $("#form1 #HEADER").removeClass('@Css.Hidden');
+    $("#HEADER #PRIORITY").removeClass('@Css.Hidden');
+
+    $(document).ready(function () {
+        $("#RES_TYPE").change(function () {
+            var a = $('#RES_TYPE').val()
+            RESET()
+            if (a == 'D') {
+                $("#T_RES_TYPE option[value='H']").hide();
+            } else if (a == 'B') {
+                $("#T_RES_TYPE option[value='H']").hide();
+                $("#T_RES_TYPE option[value='D']").hide();
+            } else if (a == 'W') {
+                $("#T_RES_TYPE option[value='H']").hide();
+                $("#T_RES_TYPE option[value='D']").hide();
+                $("#T_RES_TYPE option[value='B']").hide();
+            }
+        })
+
+        function RESET() {
+            $("#T_RES_TYPE option:selected").prop("selected", false)
+            $("#T_RES_TYPE option[value='H']").show();
+            $("#T_RES_TYPE option[value='D']").show();
+            $("#T_RES_TYPE option[value='B']").show();
+            $("#T_RES_TYPE option[value='W']").show();
+        }
+    })
+</script>

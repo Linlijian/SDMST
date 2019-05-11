@@ -1,0 +1,90 @@
+﻿@using FluentBootstrap
+@using WEBAPP.Helper
+@using DataAccess.SEC
+@using UtilityLib
+
+@model SECS01P003Model
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_LayoutChildPage.cshtml";
+}
+
+@using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
+{
+    @Html.AntiForgeryToken()
+    using (var row = Html.Bootstrap().GridRow().Begin())
+    {
+        using (row.GridColumn(12).SetXs(12).Begin())
+        {
+            using (var r = Html.Bootstrap().GridRow().Begin())
+            {
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.PRG_CODE, isRequired: true)
+                }
+
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.SelectFor(t => t.PRG_TYPE, Model.PRG_TYPE_MODEL.ToSelectList("Value", "Text", Model.PRG_TYPE), isRequired: true)
+                }
+            }
+
+            using (var r = Html.Bootstrap().GridRow().Begin())
+            {
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.TextAreaFor(m => m.PRG_NAME_TH, 3, isRequired: true)
+                }
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.TextAreaFor(m => m.PRG_NAME_EN, 3, isRequired: true)
+                }
+            }
+
+            using (var r = Html.Bootstrap().GridRow().Begin())
+            {
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.PRG_AREA, isRequired: true).SetMaxLength(50)
+                }
+
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.PRG_CONTROLLER, isRequired: true).SetMaxLength(50)
+                }
+            }
+
+            using (var r = Html.Bootstrap().GridRow().Begin())
+            {
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.PRG_ACTION, isRequired: true).SetMaxLength(50)
+                }
+
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.PRG_PARAMETER, isRequired: true).SetMaxLength(500)
+                }
+            }
+
+            using (var r = Html.Bootstrap().GridRow().Begin())
+            {
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.SelectFor(t => t.PRG_STATUS, Model.PRG_STATUS_MODEL.ToSelectList("Value", "Text", Model.PRG_STATUS), isRequired: true)
+                }
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.InputFileuploadFor(m => m.PRG_IMG, allowExt: "jpg,png")
+                }
+            }
+        }
+    }
+}
+@section modals{
+
+}
+@section Scripts {
+
+}

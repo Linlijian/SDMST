@@ -1,0 +1,229 @@
+﻿@using FluentBootstrap
+@using WEBAPP.Helper
+@using DataAccess.SEC
+@using UtilityLib
+
+@model SECS01P001Model
+
+@{
+    ViewBag.Title = "ConfMod";
+    Layout = "~/Views/Shared/_LayoutMaster.cshtml";
+}
+@using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
+{
+    @form.ValidationSummary(true).AddCss(Css.Hidden)
+    @Html.AntiForgeryToken()
+    using (var rowInfo = Html.Bootstrap().GridRow().Begin())
+    {
+        using (rowInfo.GridColumn(12).SetXs(12).Begin())
+        {
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).SetMdOffset(2).Begin())
+                {
+                    @form.InputFor(t => t.COM_CODE).SetReadonly()
+                }
+            }
+        }
+        using (var row1 = Html.Bootstrap().GridRow().Begin())
+        {
+            using (row1.GridColumn(12).Begin())
+            {
+                @Html.GetVSMDetailFor(m => m.Details, isRequired: true)
+            }
+        }
+    }
+}
+
+
+@section modals{
+    @Html.GetVSMModalDetailBeginFor(m => m.Details)
+
+    @using (var formPopup = Html.Bootstrap().Form().SetId("formDetails").SetHorizontal().Begin())
+    {
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        using (var rowInfo = Html.Bootstrap().GridRow().Begin())
+        {
+            using (rowInfo.GridColumn(6).SetXs(6).Begin())
+            {
+                @formPopup.InputFor(t => t.COM_CODE).SetReadonly()
+            }
+            using (rowInfo.GridColumn(6).Begin())
+            {
+                @formPopup.TextAreaFor(t => t.MODULE, 2)
+            }
+        }   
+    }
+    @Html.GetVSMModalDetailEnd()
+}
+
+@section Scripts {
+    @Html.GetVSMDetailScriptFor(
+            t => t.Details,
+            new VSMDetailConfig
+            {
+                DefaultConfig = new DefaultConfig(Url.Action("Bind_Detail")),
+                IsRequired = true,
+                Searching = true,
+                ScrollX = false,
+                OnBeforeAdd = "OnBeforeAddDetail",
+                WidthType = ColumnsWidthType.Pixel
+            },
+
+            new GridColumn("COM_CODE").SetNotVisible().SetKey(),
+            //new GridColumn("USER_ID").SetNotVisible().SetKey(),
+            new GridColumn("MODULE").SetNotVisible().SetKey(),
+
+            new GridColumn("COM_CODE", Translation.CenterLang.Center.APP_CODE, 20),
+            new GridColumn("MODULE", Translation.SEC.SECS01P001.MODULE, 20)
+            //new GridColumn("USER_ID", Translation.SEC.SECS01P001.USER_ID, 20)
+        )
+
+    <script>
+
+        function OnBeforeAddDetail(e) {
+            $("#formDetails #COM_CODE").val($("#form1 #COM_CODE").val());
+        }
+
+        $("#btnDeleteDetails").prop('id', 'DeleteDetail');
+        $("#DeleteDetail").show()
+
+        $("#DeleteDetail").confirm({
+            title: null,
+            content: "<br/>Are you sure to continue?",
+            columnClass: 'medium',
+            buttons: {
+                confirm: {
+                    text: 'OK',
+                    btnClass: "btn-primary",
+                    action: DeleteDetail
+                },
+                cancel: {
+                    text: 'Cancel',
+                    btnClass: "btn-primary"
+                }
+            }
+        })
+
+        function DeleteDetail() {
+            var data = GridDetails.rows({ selected: true }).data();
+            if (data != undefined && data != null && data.length > 0) {
+                var nData = { data: [] };
+                $.each(data, function (i, item) {
+                    nData.data.push({
+                        COM_CODE: item.COM_CODE,
+                        USER_ID: item.USER_ID,
+                        MODULE: item.MODULE
+                    });
+                });
+                $.ajax({
+                    url: "@Url.Action("DeleteDetails")",
+                    type: "post",
+                    data: nData,
+                    success: function (result) {
+                        if (result != null && result != undefined) {
+                            if (result.data.IsResult) {
+                                GridDetails.rows({ selected: true }).remove().draw();
+                                OnAjaxSuccess
+                                $("#notification").hide()
+                            }
+                            else
+                            {
+                                alertErr()
+                            }
+
+                        }
+                        OnAjaxSuccess
+                    },
+                    error: OnAjaxError
+                });
+            }
+            else {
+                var result = {
+                    Mode: 'Delete',
+                    Status: false,
+                    Message: 'Please Specify Data',
+                    Style: 'danger'
+                };
+                OnAjaxSuccess(result);
+            }
+
+           // bindGridDetails({ page: 1 });
+        }
+
+        function alertErr() {
+            $("#notification").hide()
+            var content = '<div class="alert alert-' + 'danger' + ' alert-dismissable alert-' + 'danger' + 'new"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button><h2>';
+            content += '<i class="ace-icon fa fa-exclamation-triangle bigger-130"></i> ';
+            content += 'พัง' + '</h2>';
+            content += '</div>';
+
+            $("#notification").html(content).fadeTo(2000, 500);
+        }
+        function alertSucs() {
+            $("#notification").hide()
+            var content = '<div class="alert alert-' + 'success' + ' alert-dismissable alert-' + 'success' + 'new"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button><h2>';
+            content += '<i class="ace-icon fa fa-exclamation-triangle bigger-130"></i> ';
+            content += 'ผ่าน ๆ' + '</h2>';
+            content += '</div>';
+
+            $("#notification").html(content).fadeTo(2000, 500);
+        }
+
+        @*$("#DeleteDetail").on("click", function (button) {
+            var data = GridDetails.rows({ selected: true }).data();
+            if (data != undefined && data != null && data.length > 0) {
+                var nData = { data: []};
+                $.each(data, function (i, item) {
+                    nData.data.push({
+                        COM_CODE: item.COM_CODE,
+                        USER_ID: item.USER_ID,
+                        MODULE: item.MODULE
+                    });
+                });
+
+                $.confirm({
+                    title: null,
+                    content: "Are you sure to continue?",
+                    columnClass: 'medium',
+                    buttons: {
+                        confirm: {
+                            text: $("#hdSysOK").val(),
+                            btnClass: "btn-primary",
+                            action: function () {
+                                waitingDialog.show();
+
+                                $.ajax({
+                                    url: "@Url.Action("DeleteDetails")",
+                                    type: "post",
+                                    data: nData,
+                                    success:function(){
+                                        OnAjaxSuccess,
+                                        bindGridDetails({ page: 1 });
+                                    },
+                                    error: OnAjaxError
+                                });
+                            }
+                        },
+                        cancel: {
+                            text: $("#hdSysCancel").val(),
+                            btnClass: "btn-primary"
+                        }
+                    }
+                });
+            }
+            else {
+                var result = {
+                    Mode: 'Delete',
+                    Status: false,
+                    Message: 'Please Specify Data',
+                    Style: 'danger'
+                };
+                OnAjaxSuccess(result);
+            }
+
+            bindGridDetails({ page: 1 });
+        })*@
+    </script>
+}
+

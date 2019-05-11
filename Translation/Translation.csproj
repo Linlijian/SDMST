@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D707AE3D-62D8-44F9-9072-BE01A0C05DA9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Translation</RootNamespace>
+    <AssemblyName>Translation</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Admin\Dashboard.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Dashboard.resx</DependentUpon>
+    </Compile>
+    <Compile Include="CenterLang\Center.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Center.resx</DependentUpon>
+    </Compile>
+    <Compile Include="CenterLang\Validate.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Validate.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Default.resx</DependentUpon>
+    </Compile>
+    <Compile Include="MIS\MISS01P001.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MISS01P001.resx</DependentUpon>
+    </Compile>
+    <Compile Include="MIS\MISS01P002.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MISS01P002.resx</DependentUpon>
+    </Compile>
+    <Compile Include="MIS\MISS01P003.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MISS01P003.resx</DependentUpon>
+    </Compile>
+    <Compile Include="MIS\MISS02P001.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MISS02P001.resx</DependentUpon>
+    </Compile>
+    <Compile Include="MST\MSTS01P001.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MSTS01P001.resx</DependentUpon>
+    </Compile>
+    <Compile Include="MST\MSTS02P001.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MSTS02P001.resx</DependentUpon>
+    </Compile>
+    <Compile Include="MST\MSTS03P001.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MSTS03P001.resx</DependentUpon>
+    </Compile>
+    <Compile Include="MST\MSTS03P002.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MSTS03P002.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ProgramInfo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProgramInfo.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SEC\SECS01P001.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SECS01P001.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SEC\SECS01P002.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SECS01P002.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SEC\SECS01P003.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SECS01P003.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SEC\SECS01P004.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SECS01P004.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SEC\SECS01P005.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SECS01P005.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SEC\SECS02P001.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SECS02P001.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SEC\SECS02P002.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SECS02P002.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SEC\SECS02P003.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SECS02P003.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Ux\File.Designer.cs">
+      <DependentUpon>File.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Dashboard.en-US.resx" />
+    <EmbeddedResource Include="Admin\Dashboard.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Dashboard.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterLang\Center.en-US.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterLang\Center.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Center.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterLang\Validate.en-US.resx" />
+    <EmbeddedResource Include="CenterLang\Validate.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Validate.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Default.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Default.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MIS\MISS01P001.en-US.resx" />
+    <EmbeddedResource Include="MIS\MISS01P001.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MISS01P001.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MIS\MISS01P002.en-US.resx" />
+    <EmbeddedResource Include="MIS\MISS01P002.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MISS01P002.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MIS\MISS01P003.en-US.resx" />
+    <EmbeddedResource Include="MIS\MISS01P003.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MISS01P003.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MIS\MISS02P001.en-US.resx" />
+    <EmbeddedResource Include="MIS\MISS02P001.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MISS02P001.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MST\MSTS01P001.en-US.resx" />
+    <EmbeddedResource Include="MST\MSTS01P001.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MSTS01P001.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MST\MSTS02P001.en-US.resx" />
+    <EmbeddedResource Include="MST\MSTS02P001.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MSTS02P001.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MST\MSTS03P001.en-US.resx" />
+    <EmbeddedResource Include="MST\MSTS03P001.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MSTS03P001.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MST\MSTS03P002.en-US.resx" />
+    <EmbeddedResource Include="MST\MSTS03P002.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MSTS03P002.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProgramInfo.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProgramInfo.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SEC\SECS01P001.en-US.resx" />
+    <EmbeddedResource Include="SEC\SECS01P001.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SECS01P001.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SEC\SECS01P002.en-US.resx" />
+    <EmbeddedResource Include="SEC\SECS01P002.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SECS01P002.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SEC\SECS01P003.en-US.resx" />
+    <EmbeddedResource Include="SEC\SECS01P003.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SECS01P003.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SEC\SECS01P004.en-US.resx" />
+    <EmbeddedResource Include="SEC\SECS01P004.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SECS01P004.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SEC\SECS01P005.en-US.resx" />
+    <EmbeddedResource Include="SEC\SECS01P005.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SECS01P005.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SEC\SECS02P001.en-US.resx" />
+    <EmbeddedResource Include="SEC\SECS02P001.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SECS02P001.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SEC\SECS02P002.en-US.resx" />
+    <EmbeddedResource Include="SEC\SECS02P002.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SECS02P002.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SEC\SECS02P003.en-US.resx" />
+    <EmbeddedResource Include="SEC\SECS02P003.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SECS02P003.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ux\File.en.US.resx" />
+    <EmbeddedResource Include="Ux\File.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>File.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

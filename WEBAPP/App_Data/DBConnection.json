@@ -1,0 +1,30 @@
+﻿[
+  {
+    "Comment": "Connection",
+    "Name": "Connection",
+    "ConnectionString": "Data Source=OxlOlO;Persist Security Info=True;User ID=sa;Password=P@ssw0rd;Initial Catalog=SDDB"
+    //"ConnectionString": "Data Source=10.8.7.206;Persist Security Info=True;User ID=sa;Password=P@ssw0rd;Initial Catalog=AAT_SEC"
+  },
+  {
+    "Comment": "Connection 2",
+    "Name": "Connection2",
+    "ConnectionString": "Data Source=10.80.1.231;Persist Security Info=True;User ID=sa;Password=P@ssw0rd;Initial Catalog=CFZDB"
+    //"ConnectionString": "Data Source=10.8.7.206;Persist Security Info=True;User ID=sa;Password=P@ssw0rd;Initial Catalog=AAT_SEC"
+  },
+  {
+    "Comment": "Connection 2",
+    "Name": "Connection3",
+    "ConnectionString": "Data Source=10.80.1.231;Persist Security Info=True;User ID=sa;Password=P@ssw0rd;Initial Catalog=GBDBR2"
+    //"ConnectionString": "Data Source=10.8.7.206;Persist Security Info=True;User ID=sa;Password=P@ssw0rd;Initial Catalog=GBDBR2"
+  },
+  {
+    "Comment": "Connection Of Entities",
+    "Name": "AATEntities",
+    "ConnectionString": "metadata=res://*/ModelManger.csdl|res://*/ModelManger.ssdl|res://*/ModelManger.msl;provider=System.Data.SqlClient;provider connection string=\"{tpConnectionString};MultipleActiveResultSets=True;App=EntityFramework\""
+  },
+  {
+    "Comment": "Server DB Name",
+    "Name": "WIN-GD24EEJ5ODK",
+    "ConnectionString": "WIN-GD24EEJ5ODK_DEV"
+  }
+]

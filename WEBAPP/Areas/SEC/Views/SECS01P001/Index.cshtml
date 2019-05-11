@@ -1,0 +1,85 @@
+﻿@using FluentBootstrap
+@using WEBAPP.Helper
+@using DataAccess.SEC
+@using UtilityLib
+
+@model SECS01P001Model
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMaster.cshtml";
+}
+@using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
+{
+    @form.ValidationSummary(true).AddCss(Css.Hidden)
+    @Html.AntiForgeryToken()
+    using (var rowInfo = Html.Bootstrap().GridRow().Begin())
+    {
+        using (rowInfo.GridColumn(12).SetXs(12).Begin())
+        {
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.InputFor(t => t.COM_CODE)
+                }
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.InputFor(t => t.COM_BRANCH)
+                }
+            }
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.InputFor(t => t.COM_NAME_E)
+                }
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.InputFor(t => t.COM_FAC_NAME_E)
+                }
+            }
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.InputFor(t => t.COM_BRANCH_E)
+                }
+            }
+
+
+        }
+    }
+}
+
+
+
+@using (var row = Html.Bootstrap().GridRow().SetId("rowGridSearch").SetVisibility(Visibility.Hidden).Begin())
+{
+    using (row.GridColumn(12).Begin())
+    {
+        @Html.Bootstrap().Table().SetId("GridSearch").SetStyle(TableStyle.TableStripedBorderedHover)
+    }
+}
+
+@section scripts{
+    @Html.GridScript("Search",
+        new GridConfig
+        {
+            GetConfig = new DefaultConfig(Url.Action("Search")),
+            DeleteConfig = new DefaultConfig(Url.Action("DeleteSearch")),
+            DefaultBinding = Model.IsDefaultSearch,
+            ScrollX = false,
+            WidthType = ColumnsWidthType.Percentage
+        },
+        Html.GridColumnCommand(Html.GridCommand(StandardButtonName.Edit, Translation.CenterLang.Center.Edit, Url.Action(StandardButtonName.Edit), FaIcons.FaPencil, TextColor.orange2, new VSMParameter("COM_CODE"), new VSMParameter("COM_BRANCH")),
+        Html.GridCommand("ConfMod", Translation.SEC.SECS01P001.COGF_MODULE, Url.Action("ConfMod"), FaIcons.FaIndent, TextColor.green, new VSMParameter("COM_CODE"))),
+        new GridColumn("COM_CODE").SetNotVisible().SetKey(),
+        new GridColumn("COM_BRANCH").SetNotVisible().SetKey(),
+        new GridColumn("COM_NAME_T", Translation.SEC.SECS01P001.COM_NAME_T, 50),
+        new GridColumn("COM_NAME_E", Translation.SEC.SECS01P001.COM_NAME_E, 50),
+        new GridColumn("COM_BRANCH_E", Translation.SEC.SECS01P001.COM_BRANCH_E, 50)
+
+        )
+
+}

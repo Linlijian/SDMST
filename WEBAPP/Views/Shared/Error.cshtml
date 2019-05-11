@@ -1,0 +1,57 @@
+﻿@using FluentBootstrap
+@using WEBAPP.Helper
+@using UtilityLib
+
+@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+    Layout = null;
+}
+
+@{ 
+    var exception = Request["exception"];
+    var errorcode = Request["errorcode"];
+}
+
+@exception
+@*@using (var form = Html.Bootstrap().Form().SetHorizontal().Begin())
+    {
+        using (var rowInfo = Html.Bootstrap().GridRow().Begin())
+        {
+            using (rowInfo.GridColumn(12).SetXs(12).Begin())
+            {
+                @Model.Exception
+            }
+        }
+    }*@
+@using (var form = Html.Bootstrap().Form().SetHorizontal().Begin())
+{
+    using (var rowMain = Html.Bootstrap().GridRow().Begin())
+    {
+        using (rowMain.GridColumn(12).AddStyle("text-align", "center").SetXs(12).Begin())
+        {
+            @Html.Bootstrap().Image(Url.Content("~/Uploads/Image/404-opt.png"), "Placeholder Image")
+        }
+
+
+        using (rowMain.GridColumn(12).AddStyle("font-size", "1em").AddStyle("color", "red").SetXs(12).Begin())
+        {
+            <div>@Html.Label("ControllerName : ", new { style = "color:#000000" }) @Model.ControllerName</div>
+        }
+
+        using (rowMain.GridColumn(12).AddStyle("font-size", "1em").AddStyle("color", "red").SetXs(12).Begin())
+        {
+            <div>@Html.Label("ActionName : ", new { style = "color:#000000" }) @Model.ActionName</div>
+        }
+
+        using (rowMain.GridColumn(12).AddStyle("font-size", "1em").AddStyle("color", "white").SetXs(12).Begin())
+        {
+            <div>@Html.Label("Exception : ", new { style = "color:#FFFFFF" }) @Model.Exception</div>
+        }
+    }
+}
+@*<h1 class="text-danger">Error.</h1>
+    <h2 class="text-danger">An error occurred while processing your request.</h2>*@
+
+    

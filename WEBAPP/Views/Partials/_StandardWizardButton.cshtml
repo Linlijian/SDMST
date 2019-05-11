@@ -1,0 +1,243 @@
+﻿@using System.Activities.Expressions
+@using WEBAPP.Helper
+@using UtilityLib
+@{
+    var standardButton = TempData.ContainsKey(StandardButton.TempDataKey)
+        ? (List<StandardButton>)TempData[StandardButton.TempDataKey]
+        : new List<StandardButton>();
+
+    if (standardButton.Any())
+    {
+        var curentMenu = SessionHelper.SYS_CurrentPrgConfig;
+        <div class="wizardbuttontoobars wizardbuttontoobars-fixed">
+            @foreach (var button in standardButton)
+            {
+                if (button.Type == StandButtonType.Button || button.Type == StandButtonType.ButtonNewWindows)
+                {
+                    if (button.Name == StandardButtonName.Add)
+                    {
+                        if (curentMenu.IsROLE_ADD)
+                        {
+                            <a href="@button.Url"
+                               id="@button.Name"
+                               name="@button.Name"
+                               value="@button.Name"
+                               class="btn btn-xs btn-white no-visited btn-info btn-round @button.CssClass"
+                               data-stdbtntype="@button.Type.GetDescription()"
+                                @if (!button.ToolTipText.IsNullOrEmpty())
+                                { <text>data-toggle="tooltip" data-placement="bottom" data-original-title="@button.ToolTipText"</text> }
+                                @if (button.Type == StandButtonType.ButtonNewWindows) { <text> target="_blank" </text>                }>
+                                @if (button.IconCssClass != null && button.IconPosition == StandardIconPosition.BeforeText)
+                                {
+                                    <i class="ace-icon fa @button.IconCssClass @if (!button.IconColor.IsNullOrEmpty()) {<text>@button.IconColor </text> }align-top bigger-125"></i>
+                                }
+                                @button.Text
+                                @if (button.IconCssClass != null && button.IconPosition == StandardIconPosition.AfterText)
+                                {
+                                    <i class="ace-icon fa @button.IconCssClass @if (!button.IconColor.IsNullOrEmpty()) {<text>@button.IconColor </text> }align-top bigger-125"></i>
+                                }
+                            </a>
+                        }
+                    }
+                    else
+                    {
+                        <a href="@button.Url"
+                           id="@button.Name"
+                           name="@button.Name"
+                           value="@button.Name"
+                           class="btn btn-xs btn-white no-visited btn-info btn-round @button.CssClass"
+                           data-stdbtntype="@button.Type.GetDescription()"
+                            @if (!button.ToolTipText.IsNullOrEmpty())
+                            { <text>data-toggle="tooltip" data-placement="bottom" data-original-title="@button.ToolTipText"</text> }
+                            @if (button.Type == StandButtonType.ButtonNewWindows) { <text> target="_blank" </text>                 }>
+                            @if (button.IconCssClass != null && button.IconPosition == StandardIconPosition.BeforeText)
+                            {
+                                <i class="ace-icon fa @button.IconCssClass @if (!button.IconColor.IsNullOrEmpty()) {<text>@button.IconColor </text> }align-top bigger-125"></i>
+                            }
+                            @button.Text
+                            @if (button.IconCssClass != null && button.IconPosition == StandardIconPosition.AfterText)
+                            {
+                                <i class="ace-icon fa @button.IconCssClass @if (!button.IconColor.IsNullOrEmpty()) {<text>@button.IconColor </text> }align-top bigger-125"></i>
+                            }
+                        </a>
+                    }
+                }
+                else if (button.Type == StandButtonType.ButtonAjax || button.Type == StandButtonType.Submit)
+                {
+                    if (button.Name == StandardButtonName.Search)
+                    {
+                        if (curentMenu.IsROLE_SEARCH)
+                        {
+                            <a href="javascript:void(0)"
+                               id="@button.Name"
+                               name="@button.Name"
+                               data-url="@button.Url"
+                               value="@button.Name"
+                               class="btn btn-xs btn-white no-clicked btn-info btn-round @button.CssClass"
+                               data-formname="@button.FormName"
+                               data-stdbtntype="@button.Type.GetDescription()"
+                               data-isvalidate="@button.IsValidate"
+                               data-requiredcer="@button.RequiredCer"
+                               data-overridesubmit="@button.OverrideSubmit"
+                                @if (!button.ToolTipText.IsNullOrEmpty())
+                                { <text>data-toggle="tooltip" data-placement="bottom" data-original-title="@button.ToolTipText"</text> }
+                                >
+                                @if (button.IconCssClass != null && button.IconPosition == StandardIconPosition.BeforeText)
+                                {
+                                    <i class="ace-icon fa @button.IconCssClass @if (!button.IconColor.IsNullOrEmpty()) {<text>@button.IconColor </text> }align-top bigger-125"></i>
+                                }
+                                @button.Text
+                                @if (button.IconCssClass != null && button.IconPosition == StandardIconPosition.AfterText)
+                                {
+                                    <i class="ace-icon fa @button.IconCssClass @if (!button.IconColor.IsNullOrEmpty()) {<text>@button.IconColor </text> }align-top bigger-125"></i>
+                                }
+                            </a>
+                        }
+                    }
+                    else if (button.Type == StandButtonType.Submit)
+                    {
+                        <a href="javascript:void(0)"
+                           id="@button.Name"
+                           name="@button.Name"
+                           data-url="@button.Url"
+                           value="@button.Name"
+                           class="btn btn-xs btn-white btn-info btn-round std-btn-submit"
+                           data-formname="@button.FormName"
+                           data-stdbtntype="@button.Type.GetDescription()"
+                           data-isvalidate="@button.IsValidate"
+                           data-requiredcer="@button.RequiredCer"
+                           data-overridesubmit="@button.OverrideSubmit"
+                            @if (!button.ToolTipText.IsNullOrEmpty())
+                            { <text>data-toggle="tooltip" data-placement="bottom" data-original-title="@button.ToolTipText"</text> }
+                            >
+                            @if (button.IconCssClass != null && button.IconPosition == StandardIconPosition.BeforeText)
+                            {
+                                <i class="ace-icon fa @button.IconCssClass @if (!button.IconColor.IsNullOrEmpty()) {<text>@button.IconColor </text> }align-top bigger-125"></i>
+                            }
+                            @button.Text
+                            @if (button.IconCssClass != null && button.IconPosition == StandardIconPosition.AfterText)
+                            {
+                                <i class="ace-icon fa @button.IconCssClass @if (!button.IconColor.IsNullOrEmpty()) {<text>@button.IconColor </text> }align-top bigger-125"></i>
+                            }
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="javascript:void(0)"
+                           id="@button.Name"
+                           name="@button.Name"
+                           data-url="@button.Url"
+                           value="@button.Name"
+                           class="btn btn-xs btn-white btn-info btn-round @button.CssClass"
+                           data-formname="@button.FormName"
+                           data-stdbtntype="@button.Type.GetDescription()"
+                           data-isvalidate="@button.IsValidate"
+                           data-requiredcer="@button.RequiredCer"
+                           data-overridesubmit="@button.OverrideSubmit"
+                            @if (!button.ToolTipText.IsNullOrEmpty())
+                            { <text>data-toggle="tooltip" data-placement="bottom" data-original-title="@button.ToolTipText"</text> }
+                            >
+                            @if (button.IconCssClass != null && button.IconPosition == StandardIconPosition.BeforeText)
+                            {
+                                <i class="ace-icon fa @button.IconCssClass @if (!button.IconColor.IsNullOrEmpty()) {<text>@button.IconColor </text> }align-top bigger-125"></i>
+                            }
+                            @button.Text
+                            @if (button.IconCssClass != null && button.IconPosition == StandardIconPosition.AfterText)
+                            {
+                                <i class="ace-icon fa @button.IconCssClass @if (!button.IconColor.IsNullOrEmpty()) {<text>@button.IconColor </text> }align-top bigger-125"></i>
+                            }
+                        </a>
+                    }
+
+                }
+                else
+                {
+                    if (button.Name == StandardButtonName.Clear)
+                    {
+                        <a href="javascript:void(0)"
+                           id="@button.Name"
+                           name="@button.Name"
+                           data-url="@button.Url"
+                           value="@button.Name"
+                           class="btn btn-xs btn-white btn-info btn-round @button.CssClass"
+                           data-stdbtntype="@button.Type.GetDescription()"
+                            @if (!button.ToolTipText.IsNullOrEmpty())
+                            { <text>data-toggle="tooltip" data-placement="bottom" data-original-title="@button.ToolTipText"</text> }
+                            >
+                            @if (button.IconCssClass != null && button.IconPosition == StandardIconPosition.BeforeText)
+                            {
+                                <i class="ace-icon fa @button.IconCssClass @if (!button.IconColor.IsNullOrEmpty()) {<text>@button.IconColor </text> }align-top bigger-125"></i>
+                            }
+                            @button.Text
+                            @if (button.IconCssClass != null && button.IconPosition == StandardIconPosition.AfterText)
+                            {
+                                <i class="ace-icon fa @button.IconCssClass @if (!button.IconColor.IsNullOrEmpty()) {<text>@button.IconColor </text> }align-top bigger-125"></i>
+                            }
+                        </a>
+                    }
+                    else if (button.Name == StandardButtonName.DeleteSearch)
+                    {
+                        if (curentMenu.IsROLE_DEL)
+                        {
+                            <a href="javascript:void(0)"
+                               id="@button.Name"
+                               name="@button.Name"
+                               data-url="@button.Url"
+                               value="@button.Name"
+                               class="btn btn-xs btn-white btn-info btn-round @button.CssClass"
+                               data-formname="@button.FormName"
+                               data-stdbtntype="@button.Type.GetDescription()"
+                               data-isvalidate="@button.IsValidate"
+                               data-requiredcer="@button.RequiredCer"
+                               data-overridesubmit="@button.OverrideSubmit"
+                                @if (!button.ToolTipText.IsNullOrEmpty())
+                                { <text>data-toggle="tooltip" data-placement="bottom" data-original-title="@button.ToolTipText"</text> }
+                                >
+                                @if (button.IconCssClass != null && button.IconPosition == StandardIconPosition.BeforeText)
+                                {
+                                    <i class="ace-icon fa @button.IconCssClass @if (!button.IconColor.IsNullOrEmpty()) {<text>@button.IconColor </text> }align-top bigger-125"></i>
+                                }
+                                @button.Text
+                                @if (button.IconCssClass != null && button.IconPosition == StandardIconPosition.AfterText)
+                                {
+                                    <i class="ace-icon fa @button.IconCssClass @if (!button.IconColor.IsNullOrEmpty()) {<text>@button.IconColor </text> }align-top bigger-125"></i>
+                                }
+                            </a>
+                        }
+                    }
+                    else
+                    {
+                        <a href="javascript:void(0)"
+                           id="@button.Name"
+                           name="@button.Name"
+                           data-url="@button.Url"
+                           value="@button.Name"
+                           class="btn btn-xs btn-white btn-info btn-round std-btn-confirm @button.CssClass"
+                           data-formname="@button.FormName"
+                           data-stdbtntype="@button.Type.GetDescription()"
+                           data-isvalidate="@button.IsValidate"
+                           data-requiredcer="@button.RequiredCer"
+                           data-overridesubmit="@button.OverrideSubmit"
+                            @if (!button.ToolTipText.IsNullOrEmpty())
+                            { <text>data-toggle="tooltip" data-placement="bottom" data-original-title="@button.ToolTipText"</text> }
+                            >
+                            @if (button.IconCssClass != null && button.IconPosition == StandardIconPosition.BeforeText)
+                            {
+                                <i class="ace-icon fa @button.IconCssClass @if (!button.IconColor.IsNullOrEmpty())
+                                {<text>@button.IconColor </text> }align-top bigger-125"></i>
+                            }
+                            @button.Text
+                            @if (button.IconCssClass != null && button.IconPosition == StandardIconPosition.AfterText)
+                            {
+                                <i class="ace-icon fa @button.IconCssClass @if (!button.IconColor.IsNullOrEmpty())
+                                {<text>@button.IconColor </text> }align-top bigger-125"></i>
+                            }
+                        </a>
+                    }
+                }
+            }
+        </div>
+    }
+
+}
+

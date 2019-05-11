@@ -1,0 +1,206 @@
+﻿@using FluentBootstrap
+@using WEBAPP.Helper
+@using DataAccess.MIS
+@using UtilityLib
+
+@model MISS01P002Model
+
+@{
+    ViewBag.Title = Translation.MIS.MISS01P002.INDEX;
+    Layout = "~/Views/Shared/_LayoutChildPageWizardCircle.cshtml";
+}
+
+@using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
+{
+    @form.ValidationSummary(true).AddCss(Css.Hidden)
+    @Html.AntiForgeryToken()
+    using (var rowInfo = Html.Bootstrap().GridRow().Begin())
+    {
+        using (rowInfo.GridColumn(12).SetXs(12).Begin())
+        {
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE),IsSearch: true)
+                }
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.SelectFor(t => t.ASSIGN_USER, Model.ASSIGN_USER_MODEL.ToSelectList("Value", "Text", Model.ASSIGN_USER), IsSearch: true).SetControlLabel(Translation.MIS.MISS01P002.OWNER)
+                }
+            }
+            @*using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.InputFor(a => a.RESPONSE_BY).SetControlLabel(Translation.MIS.MISS01P002.OWNER)
+                }
+            }*@
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.DatepickerFor(a => a.ISSUE_DATE_F)
+                }
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.DatepickerFor(a => a.ISSUE_DATE_T)
+                }
+            }
+        }
+    }
+}
+
+@Html.GetVSMWidgetsBegin(Translation.MIS.MISS01P002.FIXED_RESULT)
+@using (var row = Html.Bootstrap().GridRow().SetId("rowGridSearch").SetVisibility(Visibility.Hidden).Begin())
+{
+    using (row.GridColumn(12).Begin())
+    {
+        @Html.Bootstrap().Table().SetId("GridSearch").SetStyle(TableStyle.TableStripedBorderedHover)
+    }
+}
+@Html.GetVSMWidgetsEnd()
+
+
+@section scripts{
+    @Html.GridScript("Search",
+        new GridConfig
+        {
+            GetConfig = new DefaultConfig(Url.Action("SearchOpening")),
+            //DeleteConfig = new DefaultConfig(Url.Action("DeleteSearch")),
+            DefaultBinding = true,
+            ScrollX = false,
+            WidthType = ColumnsWidthType.Percentage
+        },
+        new GridColumn("NO").SetNotVisible().SetKey(),
+
+        Html.GridColumnCommand(Html.GridCommand(StandardButtonName.Edit, Translation.MIS.MISS01P002.ASSIGN, Url.Action("Assignment"), FaIcons.FaPencil, TextColor.orange2, "(data.ASSIGN_USER == 'X')", new VSMParameter("NO"), new VSMParameter("COM_CODE"))),
+       // Html.GridColumnCommand(Html.GridCommand(Translation.MIS.MISS01P002.CANCEL, Translation.MIS.MISS01P002.CANCEL, Url.Action("Cancel"), FaIcons.FaClose, TextColor.red, new VSMParameter("NO"), new VSMParameter("COM_CODE"))),
+        new GridColumn(null, Translation.MIS.MISS01P002.CANCEL, 2, align: ColumnsTextAlign.Center, render: "RENDER_CANCEL"),
+        new GridColumn("COM_CODE", Translation.CenterLang.Center.APP_CODE, 4),
+        new GridColumn("NO", Translation.MIS.MISS01P002.NO, 4,ColumnsTextAlign.Right),
+        new GridColumn("ISSUE_DATE", Translation.MIS.MISS01P002.ISSUE_DATE, 10, ColumnsType.DateTime),
+        new GridColumn("TARGET_DATE", Translation.MIS.MISS01P002.TARGET_DATE, 10, ColumnsType.DateTime),
+        new GridColumn("RESPONSE_BY", Translation.MIS.MISS01P002.OWNER, 10),
+        new GridColumn("ASSIGN_USER", Translation.MIS.MISS01P002.ASSIGN_USER, 10, render: "RENDER_ASSIGNMENT")
+
+        )
+    <script>
+        /********************************************RENDER_CANCEL*********************************************/
+        var RENDER_CANCEL = function (data, type, full, meta, status) {
+            var tag = '';
+
+            if (!isNullOrEmpty(data)) {
+                var tag = '';
+
+                tag += '<a href="javascript:void(0)" id="btnCANCEL" name="btnCANCEL" >';
+                tag += '<i class="ace-icon fa @FaIcons.FaClose align-top bigger-160 red"></i>';
+                tag += '</a>';
+            }
+            return tag;
+        };
+
+        $(document).ready(function () {
+            $("#GridSearch tbody").on("click", "a[name='btnCANCEL']", function (e) {
+                var idx = GridSearch.row($(this).parent()).index();
+                var data = GridSearch.row(idx).data();
+                data.FLAG = 'O'
+
+                $.confirm({
+                    title: null,
+                    content: "Are you sure to continue?",
+                    columnClass: 'medium',
+                    buttons: {
+                        confirm: {
+                            text: $("#hdSysOK").val(),
+                            btnClass: "btn-primary",
+                            action: function () {
+                                waitingDialog.show();
+
+                                $.ajax({
+                                    url: '@Url.Action("Cancel")',
+                                    type: 'post',
+                                    data: data,
+                                    success: function (result) {
+                                        if (result.data.FLAG == 'Y') {
+                                            waitingDialog.hide();
+                                            GridSearch.ajax.reload();
+                                            alertSucs();
+                                        }
+                                        else {
+                                            alertErr(result.data.FLAG);
+                                            GridSearch.ajax.reload();
+                                        }
+                                    },
+                                    error: OnAjaxError
+                                });
+                            }
+                        },
+                        cancel: {
+                            text: $("#hdSysCancel").val(),
+                            btnClass: "btn-primary"
+                        }
+                    }
+                });
+            });
+        })
+        /************************************************END**************************************************/
+        /***********************************************ALERT*************************************************/
+        function alertSucs() {
+            $("#notification").hide()
+            var content = '<div class="alert alert-' + 'success' + ' alert-dismissable alert-' + 'success' + 'new"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button><h2>';
+            content += '<i class="ace-icon fa fa-exclamation-triangle bigger-130"></i> ';
+            content += 'ผ่าน ๆ' + '</h2>';
+            content += '</div>';
+
+            $("#notification").html(content).fadeTo(2000, 500);
+        }
+        function alertErr(data) {
+            $("#notification").hide()
+            var content = '<div class="alert alert-' + 'danger' + ' alert-dismissable alert-' + 'danger' + 'new"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button><h2>';
+            content += '<i class="ace-icon fa fa-exclamation-triangle bigger-130"></i> ';
+            content += data + '</h2>';
+            content += '</div>';
+
+            $("#notification").html(content).fadeTo(2000, 500);
+        }
+        /************************************************END**************************************************/
+
+        $(document).ready(function () {
+            $("#APP_CODE").change(function (e) {
+                $("#ASSIGN_USER").BindSelect({
+                    Url: '@Url.Action("BindOwner")',
+                    Parameters: [{
+                        type: 'ControlId',//ControlId,FixValue
+                        name: 'APP_CODE',
+                        value: 'APP_CODE'
+                    }]
+                });
+            });
+            $("#Search").click(function (e) {
+                bindGridWait({ page: 1 });
+            })
+        })
+
+        var RENDER_ASSIGNMENT = function (data, type, full, meta, status, condition) {
+            var tag = '';
+
+            if (!isNullOrEmpty(data)) {
+                var tag = '';
+
+                if (data == 'W') {
+                    tag += '<i class="ace-icon fa @FaIcons.FaSpinner fa-spin align-top bigger-130 blue"></i>';
+                    tag += ' Waiting';
+                }
+                else if (data == 'X') {
+                    tag += '<i class="ace-icon fa @FaIcons.FaTimesCircle align-top bigger-130 red"></i>'
+                    tag += ' No Assignment';
+                }
+            }
+
+            return tag;
+        };
+    </script>
+
+
+}

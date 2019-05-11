@@ -1,0 +1,313 @@
+﻿@using WEBAPP.Helper
+@model DataAccess.SEC.SECS02P001Model
+
+@{
+    ViewBag.Title = "ConfPrg";
+    Layout = "~/Views/Shared/_LayoutChildPage.cshtml";
+}
+
+@using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
+{
+    @Html.AntiForgeryToken()
+    using (var row = Html.Bootstrap().GridRow().Begin())
+    {
+        using (row.GridColumn(12).SetXs(12).Begin())
+        {
+            @Html.GetVSMWidgetsBegin(Translation.SEC.SECS02P001.TitleUsgDetail)
+
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.USG_CODE, isRequired: true).SetReadonly()
+                }
+            }
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.USG_NAME_TH, isRequired: true).SetReadonly()
+                }
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.USG_NAME_EN, isRequired: true).SetReadonly()
+                }
+            }
+
+            @Html.GetVSMWidgetsEnd()
+
+            @Html.GetVSMWidgetsBegin(Translation.SEC.SECS02P001.TitleSetPermissionToUsg)
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.SelectFor(m => m.SYS_CODE, Model.SYS_CODE_MODEL.ToSelectList("Value", "Text", Model.SYS_CODE), isRequired: true)
+                }
+            }
+
+            using (var row1 = Html.Bootstrap().GridRow().SetId("rowGridPRIV_MODEL").Begin())
+            {
+                using (row1.GridColumn(12).Begin())
+                {
+                    @Html.Bootstrap().Table().SetId("GridPRIV_MODEL").SetType(TableType.Detail).SetStyle(TableStyle.TableStripedBorderedHover)
+                }
+            }
+            @Html.GetVSMWidgetsEnd()
+        }
+    }
+}
+
+@section Scripts {
+    @{
+        var DisabledCtrl = "";
+        var DisabledAll = "";
+        if (SessionHelper.SYS_USG_LEVEL != "S")
+        {
+            if (SessionHelper.SYS_USG_LEVEL == "A" || SessionHelper.SYS_USG_LEVEL == "I")
+            {
+                DisabledCtrl = "disabled = (full.PRG_TYPE == 'I' || full.PRG_TYPE == 'S')? ' disabled':'';";
+                DisabledAll = "disabled = (d.PRG_TYPE == 'I' || d.PRG_TYPE == 'S');";
+            }
+            else
+            {
+                DisabledCtrl = "disabled = ' disabled';";
+                DisabledCtrl = "disabled = true;";
+            }
+        }
+    }
+    <script type="text/javascript">
+        var RenderROLE_SEARCH = function (data, type, full, meta) {
+            var tag = '';
+            var checked = data == 'T' ? "checked" : "";
+            var disabled = '';
+            @Html.Raw(DisabledCtrl)
+            var tag = "<input type=\"checkbox\" class=\"ace ace-switch ace-switch-5\" " + checked + disabled + " /><span class=\"lbl middle lblSearch\"></span>";
+            return tag;
+        };
+
+        var RenderROLE_ADD = function (data, type, full, meta) {
+            var tag = '';
+            var checked = data == 'T' ? "checked" : "";
+            var disabled = '';
+            @Html.Raw(DisabledCtrl)
+            var tag = "<input type=\"checkbox\" class=\"ace ace-switch ace-switch-5\" " + checked + disabled + " /><span class=\"lbl middle\"></span>";
+            return tag;
+        };
+
+        var RenderROLE_EDIT = function (data, type, full, meta) {
+            var tag = '';
+            var checked = data == 'T' ? "checked" : "";
+            var disabled = '';
+            @Html.Raw(DisabledCtrl)
+            var tag = "<input type=\"checkbox\" class=\"ace ace-switch ace-switch-5\" " + checked + disabled + " /><span class=\"lbl middle\"></span>";
+            return tag;
+        };
+
+        var RenderROLE_DEL = function (data, type, full, meta) {
+            var tag = '';
+            var checked = data == 'T' ? "checked" : "";
+            var disabled = '';
+            @Html.Raw(DisabledCtrl)
+            var tag = "<input type=\"checkbox\" class=\"ace ace-switch ace-switch-5\" " + checked + disabled + " /><span class=\"lbl middle\"></span>";
+            return tag;
+        };
+
+        var RenderROLE_PRINT = function (data, type, full, meta) {
+            var tag = '';
+            var checked = data == 'T' ? "checked" : "";
+            var disabled = '';
+            @Html.Raw(DisabledCtrl)
+            var tag = "<input type=\"checkbox\" class=\"ace ace-switch ace-switch-5\" " + checked + disabled + " /><span class=\"lbl middle\"></span>";
+            return tag;
+        };
+
+        var RenderOnAfterBinding = function () {
+            $("#chkSearchAll").change(function () {
+                var checked = this.checked;
+                var val = checked ? 'T' : 'F';
+                GridPRIV_MODEL.rows().every(function (rowIdx, tableLoop, rowLoop) {
+                    var d = this.data();
+                    var disabled = false;
+                    @Html.Raw(DisabledAll)
+                    if (!disabled) {
+                        d.ROLE_SEARCH = val;
+                        this.invalidate();
+                    }
+                });
+                GridPRIV_MODEL.draw();
+            });
+
+            $("#chkAddAll").change(function () {
+                var checked = this.checked;
+                var val = checked ? 'T' : 'F';
+                GridPRIV_MODEL.rows().every(function (rowIdx, tableLoop, rowLoop) {
+                    var d = this.data();
+                    var disabled = false;
+                    @Html.Raw(DisabledAll)
+                    if (!disabled) {
+                        d.ROLE_ADD = val;
+                        this.invalidate();
+                    }
+                });
+                GridPRIV_MODEL.draw();
+            });
+
+            $("#chkEditAll").change(function () {
+                var checked = this.checked;
+                var val = checked ? 'T' : 'F';
+                GridPRIV_MODEL.rows().every(function (rowIdx, tableLoop, rowLoop) {
+                    var d = this.data();
+                    var disabled = false;
+                    @Html.Raw(DisabledAll)
+                    if (!disabled) {
+                        d.ROLE_EDIT = val;
+                        this.invalidate();
+                    }
+                });
+                GridPRIV_MODEL.draw();
+            });
+
+            $("#chkDeleteAll").change(function () {
+                var checked = this.checked;
+                var val = checked ? 'T' : 'F';
+                GridPRIV_MODEL.rows().every(function (rowIdx, tableLoop, rowLoop) {
+                    var d = this.data();
+                    var disabled = false;
+                    @Html.Raw(DisabledAll)
+                    if (!disabled) {
+                        d.ROLE_DEL = val;
+                        this.invalidate();
+                    }
+                });
+                GridPRIV_MODEL.draw();
+            });
+
+            $("#chkPrintAll").change(function () {
+                var checked = this.checked;
+                var val = checked ? 'T' : 'F';
+                GridPRIV_MODEL.rows().every(function (rowIdx, tableLoop, rowLoop) {
+                    var d = this.data();
+                    var disabled = false;
+                    @Html.Raw(DisabledAll)
+                    if (!disabled) {
+                        d.ROLE_PRINT = val;
+                        this.invalidate();
+                    }
+                });
+                GridPRIV_MODEL.draw();
+            });
+
+            $('#GridPRIV_MODEL').on('init.dt', function () {
+
+                for (var i = 2; i < 7; i++) {
+
+                    var checkedAll = false;
+
+                    var dCol = GridPRIV_MODEL.column(i).data();
+                    if ($.inArray('F', dCol) == -1) {
+                        checkedAll = true;
+                    }
+
+                    if (i == 2 && dCol.length > 0) {
+                        $("#chkSearchAll").prop("checked", checkedAll);
+                    }
+                    else if (i == 3 && dCol.length > 0) {
+                        $("#chkAddAll").prop("checked", checkedAll);
+                    }
+                    else if (i == 4 && dCol.length > 0) {
+                        $("#chkEditAll").prop("checked", checkedAll);
+                    }
+                    else if (i == 5 && dCol.length > 0) {
+                        $("#chkDeleteAll").prop("checked", checkedAll);
+                    }
+                    else if (i == 6 && dCol.length > 0) {
+                        $("#chkPrintAll").prop("checked", checkedAll);
+                    }
+                }
+            });
+
+            $("#GridPRIV_MODEL tbody").on("change", "input[type='checkbox']", function (e) {
+                var cell = GridPRIV_MODEL.cell($(this).parent());
+                if (cell.length > 0) {
+                    var checked = this.checked;
+                    var colInx = cell.index().column;
+                    if (colInx == 2 && !checked) {
+                        var row = GridPRIV_MODEL.row($(this).closest('tr'));
+                        var rowIdx = row.index();
+                        var data = row.data();
+                        data.ROLE_SEARCH = 'F';
+                        data.ROLE_ADD = 'F';
+                        data.ROLE_EDIT = 'F';
+                        data.ROLE_DEL = 'F';
+                        data.ROLE_PRINT = 'F';
+                        GridPRIV_MODEL.row(rowIdx).data(data).draw();
+                    }
+                    else {
+                        var data = cell.data();
+                        data = checked ? 'T' : 'F';
+                        cell.data(data).draw();
+                    }
+
+                    var checkedAll = false;
+                    if (checked) {
+                        var dCol = GridPRIV_MODEL.column(colInx).data();
+                        if ($.inArray('F', dCol) == -1) {
+                            checkedAll = true;
+                        }
+                    }
+
+                    if (colInx == 2) {
+                        $("#chkSearchAll").prop("checked", checkedAll);
+                        if (!checked) {
+                            $("#chkAddAll").prop("checked", checkedAll);
+                            $("#chkEditAll").prop("checked", checkedAll);
+                            $("#chkDeleteAll").prop("checked", checkedAll);
+                            $("#chkPrintAll").prop("checked", checkedAll);
+                        }
+                    }
+                    else if (colInx == 3) {
+                        $("#chkAddAll").prop("checked", checkedAll);
+                    }
+                    else if (colInx == 4) {
+                        $("#chkEditAll").prop("checked", checkedAll);
+                    }
+                    else if (colInx == 5) {
+                        $("#chkDeleteAll").prop("checked", checkedAll);
+                    }
+                    else if (colInx == 6) {
+                        $("#chkPrintAll").prop("checked", checkedAll);
+                    }
+                }
+            });
+        }
+    </script>
+
+    @Html.GridScript("PRIV_MODEL",
+        new GridConfig
+        {
+            GetConfig = new DefaultConfig(Url.Action("SYS_CODE_OnChange")),
+            DisableDefaultSorting = true,
+            DefaultBinding = true,
+            ScrollX = false,
+            OnAfterBinding = "RenderOnAfterBinding",
+            Paging = false,
+            WidthType = ColumnsWidthType.Percentage
+        },
+        new GridColumn("PRG_CODE", Translation.SEC.SECS02P001.PRG_CODE, 10).SetKey(),
+        new GridColumn("PRG_NAME", Translation.SEC.SECS02P001.PRG_NAME, 40),
+        new GridColumn("ROLE_SEARCH", "<input id=\\\"chkSearchAll\\\" type=\\\"checkbox\\\" class=\\\"ace ace-switch ace-switch-5\\\" /><span class=\\\"lbl middle\\\"></span>Search", 10, align: ColumnsTextAlign.Center, render: "RenderROLE_SEARCH").SetOrderable(false),
+        new GridColumn("ROLE_ADD", "<input id=\\\"chkAddAll\\\" type=\\\"checkbox\\\" class=\\\"ace ace-switch ace-switch-5\\\" /><span class=\\\"lbl middle\\\"></span>Add", 10, align: ColumnsTextAlign.Center, render: "RenderROLE_ADD").SetOrderable(false),
+        new GridColumn("ROLE_EDIT", "<input id=\\\"chkEditAll\\\" type=\\\"checkbox\\\" class=\\\"ace ace-switch ace-switch-5\\\" /><span class=\\\"lbl middle\\\"></span>Edit", 10, align: ColumnsTextAlign.Center, render: "RenderROLE_EDIT").SetOrderable(false),
+        new GridColumn("ROLE_DEL", "<input id=\\\"chkDeleteAll\\\" type=\\\"checkbox\\\" class=\\\"ace ace-switch ace-switch-5\\\" /><span class=\\\"lbl middle\\\"></span>Delete", 10, align: ColumnsTextAlign.Center, render: "RenderROLE_DEL").SetOrderable(false),
+        new GridColumn("ROLE_PRINT", "<input id=\\\"chkPrintAll\\\" type=\\\"checkbox\\\" class=\\\"ace ace-switch ace-switch-5\\\" /><span class=\\\"lbl middle\\\"></span>View", 10, align: ColumnsTextAlign.Center, render: "RenderROLE_PRINT").SetOrderable(false)
+    )
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#SYS_CODE").change(function (e) {
+                bindGridPRIV_MODEL({ SYS_CODE: this.value });
+            });
+        });
+    </script>
+}

@@ -1,0 +1,182 @@
+﻿@using FluentBootstrap
+@using WEBAPP.Helper
+@using DataAccess.MIS
+@using UtilityLib
+
+@model MISS01P002Model
+
+@{
+    ViewBag.Title = "Assignment";
+    Layout = "~/Views/Shared/_LayoutMaster.cshtml";
+}
+
+@using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
+{
+    @form.ValidationSummary(true).AddCss(Css.Hidden)
+    @Html.AntiForgeryToken()
+    using (var rowInfo = Html.Bootstrap().GridRow().Begin())
+    {
+        using (rowInfo.GridColumn(12).SetXs(12).Begin())
+        {
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.NO).SetReadonly()
+                    @form.HiddenFor(m => m.COM_CODE)
+                }
+            }
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.RESPONSE_BY).SetReadonly()
+                }
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.SelectFor(t => t.ASSIGN_USER, Model.ASSIGN_USER_MODEL.ToSelectList("Value", "Text", Model.ASSIGN_USER), isRequired: true)
+                }
+            }
+
+            @Html.GetVSMWidgetsBegin(Translation.MIS.MISS01P002.FIXED_RESULT)
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(4).Begin())
+                {
+                    @Html.GetVSMInfoBoxFor(t => t.Total, "#0000ff")
+                }
+
+                using (row1.GridColumn(4).Begin())
+                {
+                    @Html.GetVSMInfoBoxFor(t => t.Complete, "#009900")
+                }
+
+                using (row1.GridColumn(4).Begin())
+                {
+                    @Html.GetVSMInfoBoxFor(t => t.Incomplete, "#ff8000")
+                }
+            }
+        }
+    }
+}
+@using (var row = Html.Bootstrap().GridRow().SetId("rowGridSearch").SetVisibility(Visibility.Hidden).Begin())
+{
+    using (row.GridColumn(12).Begin())
+    {
+        @Html.Bootstrap().Table().SetId("GridSearch").SetStyle(TableStyle.TableStripedBorderedHover)
+    }
+}
+@Html.GetVSMWidgetsEnd()
+
+@section scripts{
+    @Html.GridScript("Search",
+        new GridConfig
+        {
+            GetConfig = new DefaultConfig(Url.Action("SearchFixed")),
+            DefaultBinding = Model.IsDefaultSearch,
+            ScrollX = false,
+            WidthType = ColumnsWidthType.Percentage
+        },
+        new GridColumn("ISE_NO", Translation.MIS.MISS01P002.NO, 4, ColumnsTextAlign.Right),
+        new GridColumn("ISE_DATE_OPENING", Translation.MIS.MISS01P002.ISE_DATE_OPENING, 10, ColumnsType.DateTime),
+        new GridColumn("ISE_STATUS", Translation.MIS.MISS01P002.ISE_STATUS, 10, render: "RENDER_ISE_STATUS"),
+        new GridColumn("ASSIGN_STATUS", Translation.MIS.MISS01P002.ASSIGN_STATUS, 10, render: "RENDER_ASSIGN_STATUS")
+
+        )
+
+    <script>
+        $(document).ready(function () {
+            $("#ASSIGN_USER").change(function (e) {
+                waitingDialog.show();
+                var ASSINGMENT = $('#ASSIGN_USER').val();
+                $.ajax({
+                    url: '@Url.Action("GetFiexd")',
+                    type: 'post',
+                    processData: false,
+                    data: JSON.stringify({ ASSINGMENT: ASSINGMENT }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (resultAfter) {
+                        $("#Total").text(resultAfter.data.Total);
+                        $("#Complete").text(resultAfter.data.Complete);
+                        $("#Incomplete").text(resultAfter.data.Incomplete);
+
+                        bindGridSearch({ page: 1 });
+                        //bindGridResult({ page: 1 });
+
+                        waitingDialog.hide();
+                    },
+                    error: function () {
+                        OnAjaxError
+                        waitingDialog.hide();
+                    }
+                })
+            });
+        })
+        var RENDER_ISE_STATUS = function (data, type, full, meta) {
+            var tag = '';
+
+            if (!isNullOrEmpty(data)) {
+                var tag = '';
+
+                if (data == 'O') {
+                    tag += '<i class="ace-icon fa @FaIcons.FaSpinner fa-spin align-top bigger-130 blue"></i>';
+                    tag += ' Opening';
+                }
+                else if (data == 'P') {
+                    tag += '<i class="ace-icon fa @FaIcons.FaCheckCircle align-top bigger-130 green"></i>'
+                    tag += ' On Process';
+                }
+                else if (data == 'F') {
+                    tag += '<i class="ace-icon fa @FaIcons.FaTimesCircle align-top bigger-130 red"></i>';
+                    tag += ' Follow Up';
+                }
+                else if (data == 'C') {
+                    tag += '<i class="ace-icon fa @FaIcons.FaTimesCircle align-top bigger-130 red"></i>';
+                    tag += ' Cancel';
+                }
+                else if (data == 'G') {
+                    tag += '<i class="ace-icon fa @FaIcons.FaTimesCircle align-top bigger-130 red"></i>';
+                    tag += ' Go live';
+                }
+                else if (data == 'S') {
+                    tag += '<i class="ace-icon fa @FaIcons.FaTimesCircle align-top bigger-130 red"></i>';
+                    tag += ' Close';
+                }
+            }
+
+            return tag;
+        };
+        var RENDER_ASSIGN_STATUS = function (data, type, full, meta) {
+            var tag = '';
+
+            if (!isNullOrEmpty(data)) {
+                if (data == 'W') {
+                    tag += '<i class="ace-icon fa @FaIcons.FaSpinner fa-spin align-top bigger-130 blue"></i>';
+                    tag += ' Waiting';
+                }
+                else if (data == 'D') {
+                    tag += '<i class="ace-icon fa @FaIcons.FaCheckCircle align-top bigger-130 green"></i>'
+                    tag += ' Doing';
+                }
+                else if (data == 'E') {
+                    tag += '<i class="ace-icon fa @FaIcons.FaTimesCircle align-top bigger-130 red"></i>';
+                    tag += ' Done';
+                }
+                else if (data == 'T') {
+                    tag += '<i class="ace-icon fa @FaIcons.FaTimesCircle align-top bigger-130 red"></i>';
+                    tag += ' Testing';
+                }
+                else if (data == 'C') {
+                    tag += '<i class="ace-icon fa @FaIcons.FaTimesCircle align-top bigger-130 red"></i>';
+                    tag += ' Cancel';
+                }
+            }
+
+            return tag;
+        };
+    </script>
+
+
+}
+

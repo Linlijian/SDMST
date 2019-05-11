@@ -1,0 +1,82 @@
+﻿@using FluentBootstrap
+@using WEBAPP.Helper
+@using DataAccess.MIS
+@using UtilityLib
+
+@model MISS02P001Model
+
+@{
+    ViewBag.Title = "Infomation";
+    Layout = "~/Views/Shared/_LayoutChildPage.cshtml";
+}
+
+
+@using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
+{
+    @form.ValidationSummary(true).AddCss(Css.Hidden)
+    @Html.AntiForgeryToken()
+    using (var rowInfo = Html.Bootstrap().GridRow().Begin())
+    {
+        using (rowInfo.GridColumn(12).SetXs(12).Begin())
+        {
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.COM_CODE).SetReadonly()
+                }
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.YEAR, isRequired: true).SetHelp("Format : YYYY Example: (2014)").SetMaxLength(4).SetReadonly()
+                }
+            }
+        }
+    }
+}
+@using (var row = Html.Bootstrap().GridRow().SetId("rowGridSearch").SetVisibility(Visibility.Hidden).Begin())
+{
+    using (row.GridColumn(12).Begin())
+    {
+        @Html.Bootstrap().Table().SetId("GridSearch").SetStyle(TableStyle.TableStripedBorderedHover)
+    }
+}
+
+@section scripts{
+    @Html.GridScript("Search",
+        new GridConfig
+        {
+            GetConfig = new DefaultConfig(Url.Action("SearchInfo")),
+            DefaultBinding = true,
+            ScrollX = false,
+        },
+            new GridColumn("YEAR").SetNotVisible().SetKey(),
+            new GridColumn("COM_CODE", Translation.CenterLang.Center.APP_CODE, 10, ColumnsTextAlign.Right),
+            new GridColumn("YEAR", Translation.MIS.MISS02P001.YEAR, 10,ColumnsTextAlign.Right),
+            new GridColumn("TYPE_DAY", Translation.MIS.MISS02P001.TYPE_DAY, 10, render: "RENDER_TYPEDAY"),
+            new GridColumn("DEPLOYMENT_DATE", Translation.MIS.MISS02P001.DATE_INFO, 10, ColumnsTextAlign.Center),
+            new GridColumn("DEPLOY_PRG", Translation.MIS.MISS02P001.DEPLOY_PRG, 20),
+            new GridColumn("DEPLOY_USER", Translation.MIS.MISS02P001.DEPLOY_USER, 20)
+        )
+
+    <script>
+        var RENDER_TYPEDAY = function (data, type, full, meta) {
+            var tag = '';
+
+            if (!isNullOrEmpty(data)) {
+                if (data == "H") {
+                    tag = "Holiday";
+                } else if (data == "W") {
+                    tag = "Saturday Working";
+                } else if (data == "S") {
+                    tag = "Send Program Package";
+                } else if (data == "D") {
+                    tag = "Deployment on PROD/QA.";
+                } else {
+                    tag = "V-Smart infrom issue no deployment";
+                }
+            }
+
+            return tag;
+        };
+    </script>
+}

@@ -1,0 +1,56 @@
+﻿@using WEBAPP.Helper
+@model DataAccess.SEC.SECS02P001Model
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutChildPage.cshtml";
+}
+
+@using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
+{
+    @Html.AntiForgeryToken()
+
+    using (var row = Html.Bootstrap().GridRow().Begin())
+    {
+        using (row.GridColumn(12).SetXs(12).Begin())
+        {
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.HiddenFor(m => m.COM_CODE)
+                    @form.HiddenFor(m => m.USG_ID)
+                    @form.InputFor(m => m.USG_CODE, isRequired: true).SetMaxLength(8).SetReadonly()
+                }
+            }
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.USG_NAME_TH, isRequired: true).SetMaxLength(255)
+                }
+
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.USG_NAME_EN, isRequired: true).SetMaxLength(255)
+                }
+            }
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.SelectFor(m => m.USG_LEVEL, Model.USG_LEVEL_MODEL.ToSelectList("Value", "Text", Model.USG_LEVEL), isRequired: true)
+                }
+
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.SelectFor(m => m.USG_STATUS, Model.USG_STATUS_MODEL.ToSelectList("Value", "Text", Model.USG_STATUS), isRequired: true)
+                }
+            }
+        }
+    }
+}
+
+@section Scripts {
+   
+}

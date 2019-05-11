@@ -1,0 +1,103 @@
+﻿@using FluentBootstrap
+@using WEBAPP.Helper
+@using DataAccess
+@model OperateDataModel
+
+@if (TempData.ContainsKey(StandardTempKey.OperateData) &&
+                 TempData[StandardTempKey.OperateData] != null &&
+                 ((List<ButtonConfig>)TempData[StandardTempKey.OperateData]).Count > 0)
+{
+    @Html.GetVSMWidgetsBegin(Translation.CenterLang.Center.TitleOperateData, "", true, 12,false,"", ((List<ButtonConfig>)TempData[StandardTempKey.OperateData]).ToArray())
+}
+else
+{
+    @Html.GetVSMWidgetsBegin(Translation.CenterLang.Center.TitleOperateData, collapsed: true)
+}
+
+@using (var form = Html.Bootstrap().Form().SetId("formHeader").SetHorizontal().Begin())
+{
+    using (var rowM = Html.Bootstrap().GridRow().Begin())
+    {
+        using (rowM.GridColumn(12).Begin())
+        {
+            using (var row = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row.GridColumn(4).Begin())
+                {
+                    @form.InputFor(m => m.MS_CORP_GROUP_NAME_TH).SetReadonly()
+                }
+                using (row.GridColumn(8).Begin())
+                {
+                    @form.InputFor(m => m.MS_CORP_NAME_TH).SetReadonly().AddLabelCss(Css.ColMd2).SetMd(10)
+                }
+            }
+            using (var row = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row.GridColumn(4).Begin())
+                {
+                    @form.InputFor(m => m.YEAR_CODE).SetReadonly()
+                }
+                using (row.GridColumn(4).Begin())
+                {
+                    @form.InputFor(m => m.SEND_NO).SetReadonly()
+                }
+                using (row.GridColumn(4).Begin())
+                {
+                    @form.InputFor(m => m.STATUS_REPORT_NAME_TH).SetReadonly()
+                }
+            }
+            using (var row = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row.GridColumn(4).Begin())
+                {
+                    @form.InputFor(m => m.REFERENCE_DOC).SetReadonly()
+                }
+                using (row.GridColumn(4).Begin())
+                {
+                    @form.DatepickerFor(m => m.SEND_DT).SetReadonly()
+                }
+                using (row.GridColumn(4).Begin())
+                {
+                    @form.InputFor(m => m.SEND_BY_TH).SetReadonly()
+                }
+            }
+            if (Model.ExistsReceive)
+            {
+                using (var row = Html.Bootstrap().GridRow().Begin())
+                {
+                    using (row.GridColumn(4).Begin())
+                    {
+                        @form.InputFor(m => m.RECEIVE_DOC).SetReadonly()
+                    }
+                    using (row.GridColumn(4).Begin())
+                    {
+                        @form.DatepickerFor(m => m.RECEIVE_DT).SetReadonly()
+                    }
+                    using (row.GridColumn(4).Begin())
+                    {
+                        @form.InputFor(m => m.RECEIVE_BY_TH).SetReadonly()
+                    }
+                }
+            }
+            if (Model.ExistsApprove)
+            {
+                using (var row = Html.Bootstrap().GridRow().Begin())
+                {
+                    using (row.GridColumn(4).Begin())
+                    {
+                        @form.InputFor(m => m.APPROVED_NO).SetReadonly()
+                    }
+                    using (row.GridColumn(4).Begin())
+                    {
+                        @form.DatepickerFor(m => m.APPROVED_DT).SetReadonly()
+                    }
+                    using (row.GridColumn(4).Begin())
+                    {
+                        @form.InputFor(m => m.APPROVED_BY_TH).SetReadonly()
+                    }
+                }
+            }
+        }
+    }
+}
+@Html.GetVSMWidgetsEnd()

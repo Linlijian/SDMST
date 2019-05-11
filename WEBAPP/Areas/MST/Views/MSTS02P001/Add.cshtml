@@ -1,0 +1,42 @@
+﻿@using FluentBootstrap
+@using WEBAPP.Helper
+@using DataAccess.MST
+@using UtilityLib
+
+@model MSTS02P001Model
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_LayoutChildPage.cshtml";
+}
+
+@using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
+{
+    @Html.AntiForgeryToken()
+    using (var row1 = Html.Bootstrap().GridRow().Begin())
+    {
+        using (row1.GridColumn(12).SetXs(12).Begin())
+        {
+            using (var row1a = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1a.GridColumn(6).Begin())
+                {
+                    @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true).SetIndexParameter(0)
+                }
+            }
+            using (var row1a = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1a.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.YEAR).SetHelp("Format : YYYY Example: (2014)").SetMaxLength(4).SetIndexParameter(1)
+                }
+                using (row1a.GridColumn(6).Begin())
+                {
+                    @form.InputNumberFor(m => m.MANDAY_VAL, digits: 1, isRequired: true)
+                }
+            }
+        }
+        //@Html.HiddenFor(m => m.COM_CODE, new { data_indexparameter = 0 })
+    }
+}
+

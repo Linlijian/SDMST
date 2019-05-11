@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="SEC_SECR00500" targetNamespace="http://tempuri.org/SEC_SECR00500.xsd" xmlns:mstns="http://tempuri.org/SEC_SECR00500.xsd" xmlns="http://tempuri.org/SEC_SECR00500.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" GeneratorFunctionsComponentClassName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" UserFunctionsComponentName="QueriesTableAdapter" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="ConnectionString" IsAppSettingsProperty="true" Modifier="Assembly" Name="ConnectionString (Web.config)" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.ConnectionString.ConnectionString" Provider="System.Data.OracleClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="SEC_SECR00500" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="SEC_SECR00500" msprop:Generator_UserDSName="SEC_SECR00500">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="dsSEC_SECR00500" msprop:Generator_TableClassName="dsSEC_SECR00500DataTable" msprop:Generator_TableVarName="tabledsSEC_SECR00500" msprop:Generator_TablePropName="dsSEC_SECR00500" msprop:Generator_RowDeletingName="dsSEC_SECR00500RowDeleting" msprop:Generator_RowChangingName="dsSEC_SECR00500RowChanging" msprop:Generator_RowEvHandlerName="dsSEC_SECR00500RowChangeEventHandler" msprop:Generator_RowDeletedName="dsSEC_SECR00500RowDeleted" msprop:Generator_UserTableName="dsSEC_SECR00500" msprop:Generator_RowChangedName="dsSEC_SECR00500RowChanged" msprop:Generator_RowEvArgName="dsSEC_SECR00500RowChangeEvent" msprop:Generator_RowClassName="dsSEC_SECR00500Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="APP_NAME_TH" msprop:Generator_ColumnVarNameInTable="columnAPP_NAME_TH" msprop:Generator_ColumnPropNameInRow="APP_NAME_TH" msprop:Generator_ColumnPropNameInTable="APP_NAME_THColumn" msprop:Generator_UserColumnName="APP_NAME_TH" type="xs:string" minOccurs="0" />
+              <xs:element name="YEAR_CODE" msprop:Generator_ColumnVarNameInTable="columnYEAR_CODE" msprop:Generator_ColumnPropNameInRow="YEAR_CODE" msprop:Generator_ColumnPropNameInTable="YEAR_CODEColumn" msprop:Generator_UserColumnName="YEAR_CODE" type="xs:string" minOccurs="0" />
+              <xs:element name="QUARTER_ID" msprop:Generator_ColumnVarNameInTable="columnQUARTER_ID" msprop:Generator_ColumnPropNameInRow="QUARTER_ID" msprop:Generator_ColumnPropNameInTable="QUARTER_IDColumn" msprop:Generator_UserColumnName="QUARTER_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="MONTH_NAME" msprop:Generator_ColumnVarNameInTable="columnMONTH_NAME" msprop:Generator_ColumnPropNameInRow="MONTH_NAME" msprop:Generator_ColumnPropNameInTable="MONTH_NAMEColumn" msprop:Generator_UserColumnName="MONTH_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="MONTH_ID" msprop:Generator_ColumnVarNameInTable="columnMONTH_ID" msprop:Generator_ColumnPropNameInRow="MONTH_ID" msprop:Generator_ColumnPropNameInTable="MONTH_IDColumn" msprop:Generator_UserColumnName="MONTH_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="SYSTEM_CODE" msprop:Generator_ColumnVarNameInTable="columnSYSTEM_CODE" msprop:Generator_ColumnPropNameInRow="SYSTEM_CODE" msprop:Generator_ColumnPropNameInTable="SYSTEM_CODEColumn" msprop:Generator_UserColumnName="SYSTEM_CODE" type="xs:string" minOccurs="0" />
+              <xs:element name="SUB_SYSTEM_CODE" msprop:Generator_ColumnVarNameInTable="columnSUB_SYSTEM_CODE" msprop:Generator_ColumnPropNameInRow="SUB_SYSTEM_CODE" msprop:Generator_ColumnPropNameInTable="SUB_SYSTEM_CODEColumn" msprop:Generator_UserColumnName="SUB_SYSTEM_CODE" type="xs:string" minOccurs="0" />
+              <xs:element name="PRG_ID" msprop:Generator_ColumnVarNameInTable="columnPRG_ID" msprop:Generator_ColumnPropNameInRow="PRG_ID" msprop:Generator_ColumnPropNameInTable="PRG_IDColumn" msprop:Generator_UserColumnName="PRG_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="PRG_NAME_TH" msprop:Generator_ColumnVarNameInTable="columnPRG_NAME_TH" msprop:Generator_ColumnPropNameInRow="PRG_NAME_TH" msprop:Generator_ColumnPropNameInTable="PRG_NAME_THColumn" msprop:Generator_UserColumnName="PRG_NAME_TH" type="xs:string" minOccurs="0" />
+              <xs:element name="FUNCTION_NAME" msprop:Generator_ColumnVarNameInTable="columnFUNCTION_NAME" msprop:Generator_ColumnPropNameInRow="FUNCTION_NAME" msprop:Generator_ColumnPropNameInTable="FUNCTION_NAMEColumn" msprop:Generator_UserColumnName="FUNCTION_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="NO_OF_ERRORLOG" msprop:Generator_ColumnVarNameInTable="columnNO_OF_ERRORLOG" msprop:Generator_ColumnPropNameInRow="NO_OF_ERRORLOG" msprop:Generator_ColumnPropNameInTable="NO_OF_ERRORLOGColumn" msprop:Generator_UserColumnName="NO_OF_ERRORLOG" type="xs:string" minOccurs="0" />
+              <xs:element name="ROW_ID" msprop:Generator_ColumnVarNameInTable="columnROW_ID" msprop:Generator_ColumnPropNameInRow="ROW_ID" msprop:Generator_ColumnPropNameInTable="ROW_IDColumn" msprop:Generator_UserColumnName="ROW_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="PRG_CODE" msprop:Generator_ColumnVarNameInTable="columnPRG_CODE" msprop:Generator_ColumnPropNameInRow="PRG_CODE" msprop:Generator_ColumnPropNameInTable="PRG_CODEColumn" msprop:Generator_UserColumnName="PRG_CODE" type="xs:string" minOccurs="0" />
+              <xs:element name="NO_OF_ERROR" msprop:Generator_ColumnVarNameInTable="columnNO_OF_ERROR" msprop:Generator_ColumnPropNameInRow="NO_OF_ERROR" msprop:Generator_ColumnPropNameInTable="NO_OF_ERRORColumn" msprop:Generator_UserColumnName="NO_OF_ERROR" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="dsSEC_SECR00500HD" msprop:Generator_TableClassName="dsSEC_SECR00500HDDataTable" msprop:Generator_TableVarName="tabledsSEC_SECR00500HD" msprop:Generator_TablePropName="dsSEC_SECR00500HD" msprop:Generator_RowDeletingName="dsSEC_SECR00500HDRowDeleting" msprop:Generator_RowChangingName="dsSEC_SECR00500HDRowChanging" msprop:Generator_RowEvHandlerName="dsSEC_SECR00500HDRowChangeEventHandler" msprop:Generator_RowDeletedName="dsSEC_SECR00500HDRowDeleted" msprop:Generator_UserTableName="dsSEC_SECR00500HD" msprop:Generator_RowChangedName="dsSEC_SECR00500HDRowChanged" msprop:Generator_RowEvArgName="dsSEC_SECR00500HDRowChangeEvent" msprop:Generator_RowClassName="dsSEC_SECR00500HDRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="APP_NAME_TH" msprop:Generator_ColumnVarNameInTable="columnAPP_NAME_TH" msprop:Generator_ColumnPropNameInRow="APP_NAME_TH" msprop:Generator_ColumnPropNameInTable="APP_NAME_THColumn" msprop:Generator_UserColumnName="APP_NAME_TH" type="xs:string" minOccurs="0" />
+              <xs:element name="LOG_HEADER_TXT" msprop:Generator_ColumnVarNameInTable="columnLOG_HEADER_TXT" msprop:Generator_ColumnPropNameInRow="LOG_HEADER_TXT" msprop:Generator_ColumnPropNameInTable="LOG_HEADER_TXTColumn" msprop:Generator_UserColumnName="LOG_HEADER_TXT" type="xs:string" minOccurs="0" />
+              <xs:element name="PRG_ID_TXT" msprop:Generator_ColumnVarNameInTable="columnPRG_ID_TXT" msprop:Generator_ColumnPropNameInRow="PRG_ID_TXT" msprop:Generator_ColumnPropNameInTable="PRG_ID_TXTColumn" msprop:Generator_UserColumnName="PRG_ID_TXT" type="xs:string" minOccurs="0" />
+              <xs:element name="PRG_NAME_TH" msprop:Generator_ColumnVarNameInTable="columnPRG_NAME_TH" msprop:Generator_ColumnPropNameInRow="PRG_NAME_TH" msprop:Generator_ColumnPropNameInTable="PRG_NAME_THColumn" msprop:Generator_UserColumnName="PRG_NAME_TH" type="xs:string" minOccurs="0" />
+              <xs:element name="SYSTEM_NAME_TH" msprop:Generator_ColumnVarNameInTable="columnSYSTEM_NAME_TH" msprop:Generator_ColumnPropNameInRow="SYSTEM_NAME_TH" msprop:Generator_ColumnPropNameInTable="SYSTEM_NAME_THColumn" msprop:Generator_UserColumnName="SYSTEM_NAME_TH" type="xs:string" minOccurs="0" />
+              <xs:element name="DATA_TYPE_TXT" msprop:Generator_ColumnVarNameInTable="columnDATA_TYPE_TXT" msprop:Generator_ColumnPropNameInRow="DATA_TYPE_TXT" msprop:Generator_ColumnPropNameInTable="DATA_TYPE_TXTColumn" msprop:Generator_UserColumnName="DATA_TYPE_TXT" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,42 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="ReportMaster.master.cs" Inherits="WEBAPP.Reports.MasterPage.ReportMaster" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <!--[if !IE]> -->
+    <%: System.Web.Optimization.Scripts.Render("~/bundles/jquery") %>
+    <!-- <![endif]-->
+    <!--[if IE]>
+            <%: System.Web.Optimization.Scripts.Render("~/bundles/jqueryIE") %>
+        <![endif]-->
+    <script src="<%=ResolveUrl("~/Scripts/plugin/jquery-browser/jquery.browser.min.js")%>"></script>
+    <script src="<%=ResolveUrl("~/Scripts/CustomReportViewer.js")%>"></script>
+    <script type="text/javascript">
+        function CallParentRedirect(exception, errorcode) {
+            if (errorcode == undefined || errorcode == 'NaN' || errorcode == null) {
+                errorcode = '';
+            }
+            parent.RedirectToErrorOniframe(exception, errorcode);
+        }
+    </script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+    <input type="hidden" id="hdSysRootPath" value="<%= ResolveUrl("~") %>" />
+    <iframe id="frmPrint" name="IframeName" width="500"
+        height="200" runat="server" style="display: none;"></iframe>
+
+    <asp:ContentPlaceHolder ID="foot" runat="server">
+    </asp:ContentPlaceHolder>
+</body>
+</html>

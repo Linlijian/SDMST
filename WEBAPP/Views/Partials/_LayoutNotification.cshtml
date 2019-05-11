@@ -1,0 +1,29 @@
+﻿@using UtilityLib
+@using WEBAPP.Helper
+
+<li id="item-li" class="divider"></li>
+@if (SessionHelper.Notification.Count != 0)
+    {
+        foreach (var item in SessionHelper.Notification)
+        {
+        <li>
+            <a id="userTH @item.NTF_KEY" href="@Url.Action("index","MISS01P003", new {Area = "MIS"})" tabindex="-1">
+                <i class="ace-icon fa fa-bell"></i>
+                <p hidden id="item-KEY">@item.NTF_KEY</p>
+                @item.DETAIL <br>
+                <small>@item.CRET_DATE</small>
+            </a>
+        </li>
+        <li class="divider"></li>
+    }
+}
+else
+{
+    <li>
+        <a id="userTH" href="#" tabindex="-1">
+            <i class="ace-icon fa "></i>
+            ไม่มีอะไรให้เลย~
+        </a>
+    </li>
+    <li class="divider"></li>
+}

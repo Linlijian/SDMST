@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Trirong-Light';
+  src: url('Trirong-Light.eot');
+  src: url('Trirong-Light.woff2') format('woff2'),
+       url('Trirong-Light.woff') format('woff'),
+       url('Trirong-Light.ttf') format('truetype'),
+       url('Trirong-Light.svg#Trirong-Light') format('svg'),
+       url('Trirong-Light.eot?#iefix') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+

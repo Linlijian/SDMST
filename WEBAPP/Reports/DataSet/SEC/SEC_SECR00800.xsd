@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="SEC_SECR00800" targetNamespace="http://tempuri.org/SEC_SECR00800.xsd" xmlns:mstns="http://tempuri.org/SEC_SECR00800.xsd" xmlns="http://tempuri.org/SEC_SECR00800.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="SEC_SECR00800" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="SEC_SECR00800" msprop:Generator_UserDSName="SEC_SECR00800">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="SEC_SECR00800" msprop:Generator_TableClassName="SEC_SECR00800DataTable" msprop:Generator_TableVarName="tableSEC_SECR00800" msprop:Generator_TablePropName="_SEC_SECR00800" msprop:Generator_RowDeletingName="SEC_SECR00800RowDeleting" msprop:Generator_RowChangingName="SEC_SECR00800RowChanging" msprop:Generator_RowEvHandlerName="SEC_SECR00800RowChangeEventHandler" msprop:Generator_RowDeletedName="SEC_SECR00800RowDeleted" msprop:Generator_UserTableName="SEC_SECR00800" msprop:Generator_RowChangedName="SEC_SECR00800RowChanged" msprop:Generator_RowEvArgName="SEC_SECR00800RowChangeEvent" msprop:Generator_RowClassName="SEC_SECR00800Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ROW_ID" msprop:Generator_ColumnVarNameInTable="columnROW_ID" msprop:Generator_ColumnPropNameInRow="ROW_ID" msprop:Generator_ColumnPropNameInTable="ROW_IDColumn" msprop:Generator_UserColumnName="ROW_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="APP_NAME_TH" msprop:Generator_ColumnVarNameInTable="columnAPP_NAME_TH" msprop:Generator_ColumnPropNameInRow="APP_NAME_TH" msprop:Generator_ColumnPropNameInTable="APP_NAME_THColumn" msprop:Generator_UserColumnName="APP_NAME_TH" type="xs:string" minOccurs="0" />
+              <xs:element name="LOG_DT" msprop:Generator_ColumnVarNameInTable="columnLOG_DT" msprop:Generator_ColumnPropNameInRow="LOG_DT" msprop:Generator_ColumnPropNameInTable="LOG_DTColumn" msprop:Generator_UserColumnName="LOG_DT" type="xs:string" minOccurs="0" />
+              <xs:element name="LOG_TIME" msprop:Generator_ColumnVarNameInTable="columnLOG_TIME" msprop:Generator_ColumnPropNameInRow="LOG_TIME" msprop:Generator_ColumnPropNameInTable="LOG_TIMEColumn" msprop:Generator_UserColumnName="LOG_TIME" type="xs:string" minOccurs="0" />
+              <xs:element name="TYPE_OF_TRANS" msprop:Generator_ColumnVarNameInTable="columnTYPE_OF_TRANS" msprop:Generator_ColumnPropNameInRow="TYPE_OF_TRANS" msprop:Generator_ColumnPropNameInTable="TYPE_OF_TRANSColumn" msprop:Generator_UserColumnName="TYPE_OF_TRANS" type="xs:string" minOccurs="0" />
+              <xs:element name="DETAIL" msprop:Generator_ColumnVarNameInTable="columnDETAIL" msprop:Generator_ColumnPropNameInRow="DETAIL" msprop:Generator_ColumnPropNameInTable="DETAILColumn" msprop:Generator_UserColumnName="DETAIL" type="xs:string" minOccurs="0" />
+              <xs:element name="NO_OF_TRANS" msprop:Generator_ColumnVarNameInTable="columnNO_OF_TRANS" msprop:Generator_ColumnPropNameInRow="NO_OF_TRANS" msprop:Generator_ColumnPropNameInTable="NO_OF_TRANSColumn" msprop:Generator_UserColumnName="NO_OF_TRANS" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

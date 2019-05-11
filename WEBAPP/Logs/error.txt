@@ -1,0 +1,560 @@
+﻿ERROR 2018-10-03 00:13:11,303 AccountController.SignIn2 - The network path was not found
+ERROR 2018-10-03 00:39:17,174 AccountController.SignIn2 - The network path was not found
+ERROR 2018-10-03 00:43:56,368 AccountController.SignIn2 - The network path was not found
+ERROR 2018-11-01 15:23:50,028 AccountController.SignIn2 - Cannot open database "CFZDB" requested by the login. The login failed.
+Login failed for user 'sa'.
+ERROR 2018-11-01 15:24:10,090 AccountController.SignIn2 - Cannot open database "CFZDB" requested by the login. The login failed.
+Login failed for user 'sa'.
+ERROR 2018-11-01 21:57:18,527 BaseController.OnException - 
+Path : Users/Account/SignIn2
+Error Messages: Object reference not set to an instance of an object.
+
+ERROR 2018-11-08 12:53:47,828 BaseController.OnException - 
+Path : Users/Account/SignIn2
+Error Messages: Object reference not set to an instance of an object.
+
+ERROR 2018-11-08 12:54:52,560 BaseController.OnException - 
+Path : Users/Account/SignIn2
+Error Messages: Object reference not set to an instance of an object.
+
+ERROR 2018-11-09 11:08:32,157 BaseDA.SetStandardLog - SetStandardLog : The underlying provider failed on Open.
+ERROR 2018-11-09 11:09:06,832 BaseController.OnException - 
+Path : Users/Account/SignIn
+Error Messages: The "RenderBody" method has not been called for layout page "~/Views/Shared/_LoginPartial.cshtml".
+
+ERROR 2019-01-24 15:34:16,932 BaseController.OnException - 
+Path : MIS/MISS01P001/SaveFilePacket
+Error Messages: This SqlTransaction has completed; it is no longer usable.
+
+ERROR 2019-02-25 16:32:18,137 BaseController.OnException - 
+Path : Users/Account/AAAA
+Error Messages: The parameters dictionary contains a null entry for parameter 'a' of non-nullable type 'System.Decimal' for method 'System.Web.Mvc.ActionResult AAAA(System.Decimal)' in 'WEBAPP.Areas.Users.Controllers.AccountController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+
+ERROR 2019-02-25 16:33:06,973 BaseController.OnException - 
+Path : Users/Account/AAAA
+Error Messages: The parameters dictionary contains a null entry for parameter 'a' of non-nullable type 'System.Decimal' for method 'System.Web.Mvc.ActionResult AAAA(System.Decimal)' in 'WEBAPP.Areas.Users.Controllers.AccountController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+
+ERROR 2019-02-25 16:33:14,265 BaseController.OnException - 
+Path : Users/Account/AAAA
+Error Messages: The parameters dictionary contains a null entry for parameter 'a' of non-nullable type 'System.Decimal' for method 'System.Web.Mvc.ActionResult AAAA(System.Decimal)' in 'WEBAPP.Areas.Users.Controllers.AccountController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+
+ERROR 2019-02-25 16:33:35,925 BaseController.OnException - 
+Path : Users/Account/AAAA
+Error Messages: The parameters dictionary contains a null entry for parameter 'a' of non-nullable type 'System.Decimal' for method 'System.Web.Mvc.ActionResult AAAA(System.Decimal)' in 'WEBAPP.Areas.Users.Controllers.AccountController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+
+ERROR 2019-02-25 17:07:32,954 BaseController.OnException - 
+Path : Users/Account/RemoveCountNTF
+Error Messages: Object reference not set to an instance of an object.
+
+ERROR 2019-02-25 17:08:04,921 BaseController.OnException - 
+Path : Users/Account/RemoveCountNTF
+Error Messages: Object reference not set to an instance of an object.
+
+ERROR 2019-02-25 17:09:47,881 BaseController.OnException - 
+Path : Users/Account/RemoveCountNTF
+Error Messages: Object reference not set to an instance of an object.
+
+ERROR 2019-02-26 11:19:28,168 BaseController.OnException - 
+Path : Users/Account/SelectModule
+Error Messages: The partial view 'GetData' was not found or no view engine supports the searched locations. The following locations were searched:
+~/Areas/Users/Views/Account/GetData.aspx
+~/Areas/Users/Views/Account/GetData.ascx
+~/Areas/Users/Views/Shared/GetData.aspx
+~/Areas/Users/Views/Shared/GetData.ascx
+~/Views/Account/GetData.aspx
+~/Views/Account/GetData.ascx
+~/Views/Shared/GetData.aspx
+~/Views/Shared/GetData.ascx
+~/Areas/Users/Views/Account/GetData.cshtml
+~/Areas/Users/Views/Account/GetData.vbhtml
+~/Areas/Users/Views/Shared/GetData.cshtml
+~/Areas/Users/Views/Shared/GetData.vbhtml
+~/Views/Account/GetData.cshtml
+~/Views/Account/GetData.vbhtml
+~/Views/Shared/GetData.cshtml
+~/Views/Shared/GetData.vbhtml
+~/Views/Account/Partials/GetData.cshtml
+~/Views/Shared/Partials/GetData.cshtml
+~/Views/Partials/GetData.cshtml
+
+ERROR 2019-03-05 15:57:17,286 BaseController.OnException - 
+Path : MIS/MISS01P002/SearchOpening
+Error Messages: Value cannot be null.
+Parameter name: source
+
+ERROR 2019-03-05 15:58:32,125 BaseController.OnException - 
+Path : MIS/MISS01P002/SearchOpening
+Error Messages: Value cannot be null.
+Parameter name: source
+
+ERROR 2019-03-05 15:59:00,815 BaseController.OnException - 
+Path : MIS/MISS01P002/SearchOpening
+Error Messages: Value cannot be null.
+Parameter name: source
+
+ERROR 2019-03-09 15:27:33,480 BaseController.OnException - 
+Path : MIS/MISS01P001/Add
+Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MIS\Views\MISS01P001\Add.cshtml(25): error CS1929: 'ComponentBuilder<MvcBootstrapConfig<MISS01P001Model>, ControlLabel>' does not contain a definition for 'SetReadonly' and the best extension method overload 'FormExtensions.SetReadonly<MvcBootstrapConfig<MISS01P001Model>>(ComponentBuilder<MvcBootstrapConfig<MISS01P001Model>, Input>, bool)' requires a receiver of type 'ComponentBuilder<MvcBootstrapConfig<MISS01P001Model>, Input>'
+
+ERROR 2019-03-12 16:36:10,853 BaseController.OnException - 
+Path : MIS/MISS01P002/BindOwner
+Error Messages: Object reference not set to an instance of an object.
+
+ERROR 2019-03-12 16:36:32,662 BaseController.OnException - 
+Path : MIS/MISS01P002/BindOwner
+Error Messages: Object reference not set to an instance of an object.
+
+ERROR 2019-03-12 16:39:25,513 BaseController.OnException - 
+Path : MIS/MISS01P002/BindOwner
+Error Messages: Object reference not set to an instance of an object.
+
+ERROR 2019-03-12 16:41:02,791 BaseController.OnException - 
+Path : MIS/MISS01P002/BindOwner
+Error Messages: Object reference not set to an instance of an object.
+
+ERROR 2019-03-12 16:41:19,015 BaseController.OnException - 
+Path : MIS/MISS01P002/BindOwner
+Error Messages: Object reference not set to an instance of an object.
+
+ERROR 2019-03-14 16:01:02,315 BaseController.OnException - 
+Path : MIS/MISS01P003/Index
+Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MIS\Views\MISS01P003\Index.cshtml(9): error CS0117: 'MISS01P003' does not contain a definition for 'STEP_1'
+
+ERROR 2019-03-14 16:15:43,400 BaseController.OnException - 
+Path : Users/Account/ReloadNotification
+Error Messages: Object reference not set to an instance of an object.
+
+ERROR 2019-03-14 17:34:27,541 BaseController.OnException - 
+Path : MIS/MISS01P002/Assignment
+Error Messages: The model item passed into the dictionary is of type 'DataAccess.MIS.MISS01P002Model', but this dictionary requires a model item of type 'DataAccess.MIS.MISS01P003Model'.
+
+ERROR 2019-03-16 00:22:29,466 BaseController.OnException - 
+Path : MIS/MISS01P002/Index
+Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MIS\Views\MISS01P002\Status5Close.cshtml(30): error CS1061: 'MISS01P002Model' does not contain a definition for 'FILE_ID' and no extension method 'FILE_ID' accepting a first argument of type 'MISS01P002Model' could be found (are you missing a using directive or an assembly reference?)
+
+ERROR 2019-03-16 00:22:34,844 BaseController.OnException - 
+Path : MIS/MISS01P002/Index
+Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MIS\Views\MISS01P002\Status5Close.cshtml(30): error CS1061: 'MISS01P002Model' does not contain a definition for 'FILE_ID' and no extension method 'FILE_ID' accepting a first argument of type 'MISS01P002Model' could be found (are you missing a using directive or an assembly reference?)
+
+ERROR 2019-03-16 23:50:57,946 BaseController.OnException - 
+Path : MIS/MISS01P003/CancelOrAreed
+Error Messages: The view 'CancelOrAreed' or its master was not found or no view engine supports the searched locations. The following locations were searched:
+~/Areas/MIS/Views/MISS01P003/CancelOrAreed.aspx
+~/Areas/MIS/Views/MISS01P003/CancelOrAreed.ascx
+~/Areas/MIS/Views/Shared/CancelOrAreed.aspx
+~/Areas/MIS/Views/Shared/CancelOrAreed.ascx
+~/Views/MISS01P003/CancelOrAreed.aspx
+~/Views/MISS01P003/CancelOrAreed.ascx
+~/Views/Shared/CancelOrAreed.aspx
+~/Views/Shared/CancelOrAreed.ascx
+~/Areas/MIS/Views/MISS01P003/CancelOrAreed.cshtml
+~/Areas/MIS/Views/MISS01P003/CancelOrAreed.vbhtml
+~/Areas/MIS/Views/Shared/CancelOrAreed.cshtml
+~/Areas/MIS/Views/Shared/CancelOrAreed.vbhtml
+~/Views/MISS01P003/CancelOrAreed.cshtml
+~/Views/MISS01P003/CancelOrAreed.vbhtml
+~/Views/Shared/CancelOrAreed.cshtml
+~/Views/Shared/CancelOrAreed.vbhtml
+
+ERROR 2019-03-16 23:52:12,252 BaseController.OnException - 
+Path : MIS/MISS01P003/CancelOrAreed
+Error Messages: The view 'CancelOrAreed' or its master was not found or no view engine supports the searched locations. The following locations were searched:
+~/Areas/MIS/Views/MISS01P003/CancelOrAreed.aspx
+~/Areas/MIS/Views/MISS01P003/CancelOrAreed.ascx
+~/Areas/MIS/Views/Shared/CancelOrAreed.aspx
+~/Areas/MIS/Views/Shared/CancelOrAreed.ascx
+~/Views/MISS01P003/CancelOrAreed.aspx
+~/Views/MISS01P003/CancelOrAreed.ascx
+~/Views/Shared/CancelOrAreed.aspx
+~/Views/Shared/CancelOrAreed.ascx
+~/Areas/MIS/Views/MISS01P003/CancelOrAreed.cshtml
+~/Areas/MIS/Views/MISS01P003/CancelOrAreed.vbhtml
+~/Areas/MIS/Views/Shared/CancelOrAreed.cshtml
+~/Areas/MIS/Views/Shared/CancelOrAreed.vbhtml
+~/Views/MISS01P003/CancelOrAreed.cshtml
+~/Views/MISS01P003/CancelOrAreed.vbhtml
+~/Views/Shared/CancelOrAreed.cshtml
+~/Views/Shared/CancelOrAreed.vbhtml
+
+ERROR 2019-03-16 23:53:06,497 BaseController.OnException - 
+Path : MIS/MISS01P003/CancelOrAreed
+Error Messages: The view 'CancelOrAreed' or its master was not found or no view engine supports the searched locations. The following locations were searched:
+~/Areas/MIS/Views/MISS01P003/CancelOrAreed.aspx
+~/Areas/MIS/Views/MISS01P003/CancelOrAreed.ascx
+~/Areas/MIS/Views/Shared/CancelOrAreed.aspx
+~/Areas/MIS/Views/Shared/CancelOrAreed.ascx
+~/Views/MISS01P003/CancelOrAreed.aspx
+~/Views/MISS01P003/CancelOrAreed.ascx
+~/Views/Shared/CancelOrAreed.aspx
+~/Views/Shared/CancelOrAreed.ascx
+~/Areas/MIS/Views/MISS01P003/CancelOrAreed.cshtml
+~/Areas/MIS/Views/MISS01P003/CancelOrAreed.vbhtml
+~/Areas/MIS/Views/Shared/CancelOrAreed.cshtml
+~/Areas/MIS/Views/Shared/CancelOrAreed.vbhtml
+~/Views/MISS01P003/CancelOrAreed.cshtml
+~/Views/MISS01P003/CancelOrAreed.vbhtml
+~/Views/Shared/CancelOrAreed.cshtml
+~/Views/Shared/CancelOrAreed.vbhtml
+
+ERROR 2019-03-16 23:54:02,017 BaseController.OnException - 
+Path : MIS/MISS01P003/CancelOrAreed
+Error Messages: The view 'CancelOrAreed' or its master was not found or no view engine supports the searched locations. The following locations were searched:
+~/Areas/MIS/Views/MISS01P003/CancelOrAreed.aspx
+~/Areas/MIS/Views/MISS01P003/CancelOrAreed.ascx
+~/Areas/MIS/Views/Shared/CancelOrAreed.aspx
+~/Areas/MIS/Views/Shared/CancelOrAreed.ascx
+~/Views/MISS01P003/CancelOrAreed.aspx
+~/Views/MISS01P003/CancelOrAreed.ascx
+~/Views/Shared/CancelOrAreed.aspx
+~/Views/Shared/CancelOrAreed.ascx
+~/Areas/MIS/Views/MISS01P003/CancelOrAreed.cshtml
+~/Areas/MIS/Views/MISS01P003/CancelOrAreed.vbhtml
+~/Areas/MIS/Views/Shared/CancelOrAreed.cshtml
+~/Areas/MIS/Views/Shared/CancelOrAreed.vbhtml
+~/Views/MISS01P003/CancelOrAreed.cshtml
+~/Views/MISS01P003/CancelOrAreed.vbhtml
+~/Views/Shared/CancelOrAreed.cshtml
+~/Views/Shared/CancelOrAreed.vbhtml
+
+ERROR 2019-03-16 23:55:43,772 BaseController.OnException - 
+Path : MIS/MISS01P003/CancelOrAreed
+Error Messages: The view 'CancelOrAreed' or its master was not found or no view engine supports the searched locations. The following locations were searched:
+~/Areas/MIS/Views/MISS01P003/CancelOrAreed.aspx
+~/Areas/MIS/Views/MISS01P003/CancelOrAreed.ascx
+~/Areas/MIS/Views/Shared/CancelOrAreed.aspx
+~/Areas/MIS/Views/Shared/CancelOrAreed.ascx
+~/Views/MISS01P003/CancelOrAreed.aspx
+~/Views/MISS01P003/CancelOrAreed.ascx
+~/Views/Shared/CancelOrAreed.aspx
+~/Views/Shared/CancelOrAreed.ascx
+~/Areas/MIS/Views/MISS01P003/CancelOrAreed.cshtml
+~/Areas/MIS/Views/MISS01P003/CancelOrAreed.vbhtml
+~/Areas/MIS/Views/Shared/CancelOrAreed.cshtml
+~/Areas/MIS/Views/Shared/CancelOrAreed.vbhtml
+~/Views/MISS01P003/CancelOrAreed.cshtml
+~/Views/MISS01P003/CancelOrAreed.vbhtml
+~/Views/Shared/CancelOrAreed.cshtml
+~/Views/Shared/CancelOrAreed.vbhtml
+
+ERROR 2019-03-16 23:57:25,455 BaseController.OnException - 
+Path : MIS/MISS01P003/CancelOrAreed
+Error Messages: The view 'CancelOrAreed' or its master was not found or no view engine supports the searched locations. The following locations were searched:
+~/Areas/MIS/Views/MISS01P003/CancelOrAreed.aspx
+~/Areas/MIS/Views/MISS01P003/CancelOrAreed.ascx
+~/Areas/MIS/Views/Shared/CancelOrAreed.aspx
+~/Areas/MIS/Views/Shared/CancelOrAreed.ascx
+~/Views/MISS01P003/CancelOrAreed.aspx
+~/Views/MISS01P003/CancelOrAreed.ascx
+~/Views/Shared/CancelOrAreed.aspx
+~/Views/Shared/CancelOrAreed.ascx
+~/Areas/MIS/Views/MISS01P003/CancelOrAreed.cshtml
+~/Areas/MIS/Views/MISS01P003/CancelOrAreed.vbhtml
+~/Areas/MIS/Views/Shared/CancelOrAreed.cshtml
+~/Areas/MIS/Views/Shared/CancelOrAreed.vbhtml
+~/Views/MISS01P003/CancelOrAreed.cshtml
+~/Views/MISS01P003/CancelOrAreed.vbhtml
+~/Views/Shared/CancelOrAreed.cshtml
+~/Views/Shared/CancelOrAreed.vbhtml
+
+ERROR 2019-03-18 19:43:15,793 BaseController.OnException - 
+Path : MIS/MISS01P003/Index
+Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MIS\Views\MISS01P003\Index.cshtml(55): error CS0117: 'MISS01P003' does not contain a definition for 'NO'
+
+ERROR 2019-03-19 16:32:08,535 BaseController.OnException - 
+Path : MIS/MISS01P003/Index
+Error Messages: Object reference not set to an instance of an object.
+
+ERROR 2019-03-19 16:32:30,084 BaseController.OnException - 
+Path : MIS/MISS01P003/Index
+Error Messages: Object reference not set to an instance of an object.
+
+ERROR 2019-03-19 20:21:16,361 BaseController.OnException - 
+Path : MIS/MISS01P002/Index
+Error Messages: Expected "}".
+
+
+ERROR 2019-03-19 20:24:35,967 BaseController.OnException - 
+Path : MIS/MISS01P002/Index
+Error Messages: Expected "}".
+
+
+ERROR 2019-03-19 21:15:25,613 BaseController.OnException - 
+Path : MIS/MISS01P002/Index
+Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MIS\Views\MISS01P002\Status2Onprocess.cshtml(63): error CS0117: 'MISS01P002' does not contain a definition for 'DOING'
+
+ERROR 2019-03-20 18:41:59,245 BaseController.OnException - 
+Path : MIS/MISS01P002/Index
+Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MIS\Views\MISS01P002\Status3Followup.cshtml(30): error CS1061: 'MISS01P002Model' does not contain a definition for 'FILE_ID' and no extension method 'FILE_ID' accepting a first argument of type 'MISS01P002Model' could be found (are you missing a using directive or an assembly reference?)
+
+ERROR 2019-03-20 18:41:59,301 BaseController.OnException - 
+Path : MIS/MISS01P002/Index
+Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MIS\Views\MISS01P002\Status3Followup.cshtml(30): error CS1061: 'MISS01P002Model' does not contain a definition for 'FILE_ID' and no extension method 'FILE_ID' accepting a first argument of type 'MISS01P002Model' could be found (are you missing a using directive or an assembly reference?)
+
+ERROR 2019-03-20 18:41:59,318 BaseController.OnException - 
+Path : MIS/MISS01P002/Index
+Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MIS\Views\MISS01P002\Status3Followup.cshtml(30): error CS1061: 'MISS01P002Model' does not contain a definition for 'FILE_ID' and no extension method 'FILE_ID' accepting a first argument of type 'MISS01P002Model' could be found (are you missing a using directive or an assembly reference?)
+
+ERROR 2019-03-20 18:41:59,412 BaseController.OnException - 
+Path : MIS/MISS01P002/Index
+Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MIS\Views\MISS01P002\Status3Followup.cshtml(30): error CS1061: 'MISS01P002Model' does not contain a definition for 'FILE_ID' and no extension method 'FILE_ID' accepting a first argument of type 'MISS01P002Model' could be found (are you missing a using directive or an assembly reference?)
+
+ERROR 2019-03-20 18:41:59,586 BaseController.OnException - 
+Path : MIS/MISS01P002/Index
+Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MIS\Views\MISS01P002\Status3Followup.cshtml(30): error CS1061: 'MISS01P002Model' does not contain a definition for 'FILE_ID' and no extension method 'FILE_ID' accepting a first argument of type 'MISS01P002Model' could be found (are you missing a using directive or an assembly reference?)
+
+ERROR 2019-03-20 18:41:59,767 BaseController.OnException - 
+Path : MIS/MISS01P002/Index
+Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MIS\Views\MISS01P002\Status3Followup.cshtml(30): error CS1061: 'MISS01P002Model' does not contain a definition for 'FILE_ID' and no extension method 'FILE_ID' accepting a first argument of type 'MISS01P002Model' could be found (are you missing a using directive or an assembly reference?)
+
+ERROR 2019-03-20 18:41:59,925 BaseController.OnException - 
+Path : MIS/MISS01P002/Index
+Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MIS\Views\MISS01P002\Status3Followup.cshtml(30): error CS1061: 'MISS01P002Model' does not contain a definition for 'FILE_ID' and no extension method 'FILE_ID' accepting a first argument of type 'MISS01P002Model' could be found (are you missing a using directive or an assembly reference?)
+
+ERROR 2019-03-20 18:42:00,113 BaseController.OnException - 
+Path : MIS/MISS01P002/Index
+Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MIS\Views\MISS01P002\Status3Followup.cshtml(30): error CS1061: 'MISS01P002Model' does not contain a definition for 'FILE_ID' and no extension method 'FILE_ID' accepting a first argument of type 'MISS01P002Model' could be found (are you missing a using directive or an assembly reference?)
+
+ERROR 2019-03-20 18:42:00,614 BaseController.OnException - 
+Path : MIS/MISS01P002/Index
+Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MIS\Views\MISS01P002\Status3Followup.cshtml(30): error CS1061: 'MISS01P002Model' does not contain a definition for 'FILE_ID' and no extension method 'FILE_ID' accepting a first argument of type 'MISS01P002Model' could be found (are you missing a using directive or an assembly reference?)
+
+ERROR 2019-03-21 18:08:50,771 BaseController.OnException - 
+Path : MIS/MISS01P002/Index
+Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MIS\Views\MISS01P002\Status3Followup.cshtml(30): error CS1061: 'MISS01P002Model' does not contain a definition for 'FILE_ID' and no extension method 'FILE_ID' accepting a first argument of type 'MISS01P002Model' could be found (are you missing a using directive or an assembly reference?)
+
+ERROR 2019-03-21 21:32:20,651 BaseController.OnException - 
+Path : MIS/MISS01P002/Index
+Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MIS\Views\MISS01P002\Status3Followup.cshtml(30): error CS1061: 'MISS01P002Model' does not contain a definition for 'FILE_ID' and no extension method 'FILE_ID' accepting a first argument of type 'MISS01P002Model' could be found (are you missing a using directive or an assembly reference?)
+
+ERROR 2019-03-27 15:37:13,456 BaseController.OnException - 
+Path : MIS/MISS01P002/Index
+Error Messages: Cannot retrieve property 'Name' because localization failed.  Type 'Translation.MIS.MISS01P001' is not public or does not contain a public static string property with the name 'TIMEOUT'.
+
+ERROR 2019-03-29 11:00:40,568 BaseController.OnException - 
+Path : MST/MSTS03P001/Index
+Error Messages: Method not found: 'Void DataAccess.MST.MSTS03P001Model.set_APP_CODE_MODEL(System.Collections.Generic.IEnumerable`1<DataAccess.DDLCenterModel>)'.
+
+ERROR 2019-03-29 11:18:35,504 BaseController.OnException - 
+Path : MST/MSTS03P001/Index
+Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MST\Views\MSTS03P001\Index.cshtml(35): error CS0103: The name 'r' does not exist in the current context
+
+ERROR 2019-03-29 13:52:21,108 BaseController.OnException - 
+Path : MST/MSTS03P001/Add
+Error Messages: Validation type names in unobtrusive client validation rules must be unique. The following validation type was seen more than once: required
+
+ERROR 2019-04-01 15:18:45,226 BaseController.OnException - 
+Path : MIS/MISS02P001/Add
+Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MIS\Views\MISS02P001\Add.cshtml(33): error CS1061: 'HtmlHelper<MISS02P001Model>' does not contain a definition for 'InputFor' and no extension method 'InputFor' accepting a first argument of type 'HtmlHelper<MISS02P001Model>' could be found (are you missing a using directive or an assembly reference?)
+
+ERROR 2019-04-09 16:19:44,011 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 16:22:30,009 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 16:22:33,791 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 16:31:48,769 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 16:31:48,885 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 16:32:16,029 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 16:32:16,076 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 16:40:58,661 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 16:41:00,480 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 16:41:36,161 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 16:41:36,213 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 16:42:39,521 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 16:43:18,004 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 17:26:38,294 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 17:26:39,076 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 17:28:39,963 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 17:28:41,542 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 17:30:36,231 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 17:33:14,347 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-09 17:54:56,160 BaseDA.SetStandardLog - SetStandardLog : Object reference not set to an instance of an object.
+ERROR 2019-04-11 18:39:30,051 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Cannot find column 1.
+
+ERROR 2019-04-13 22:37:19,924 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Cannot find column 1.
+
+ERROR 2019-04-13 22:40:55,736 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Cannot find table 0.
+
+ERROR 2019-04-13 22:41:45,762 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Cannot find table 0.
+
+ERROR 2019-04-13 22:43:59,695 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Cannot find table 0.
+
+ERROR 2019-04-14 16:52:17,677 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'App Code' does not belong to table Sheet1.
+
+ERROR 2019-04-14 23:25:59,845 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'App Code' does not belong to table Sheet1.
+
+ERROR 2019-04-14 23:32:02,535 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'App Code' does not belong to table Sheet1.
+
+ERROR 2019-04-19 13:41:55,348 BaseController.OnException - 
+Path : MIS/MISS01P001/LoadExcel
+Error Messages: This SqlTransaction has completed; it is no longer usable.
+
+ERROR 2019-04-19 13:46:30,995 BaseController.OnException - 
+Path : MIS/MISS01P001/LoadExcel
+Error Messages: This SqlTransaction has completed; it is no longer usable.
+
+ERROR 2019-04-19 16:11:28,617 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-19 16:12:53,680 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-19 16:13:30,779 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-19 16:14:46,088 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-19 16:15:06,449 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Object cannot be cast from DBNull to other types.
+
+ERROR 2019-04-19 16:15:22,682 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Object cannot be cast from DBNull to other types.
+
+ERROR 2019-04-19 16:15:30,023 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Object cannot be cast from DBNull to other types.
+
+ERROR 2019-04-19 16:16:48,765 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-19 16:20:24,482 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-19 16:20:38,916 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-19 16:20:54,484 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-19 16:21:29,796 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 09:35:09,291 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 09:41:36,756 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 09:48:52,556 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 09:49:34,740 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:19:34,370 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:22:02,269 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:23:58,725 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:25:04,987 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:27:58,503 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:29:37,401 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:30:55,546 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:31:51,988 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:33:32,109 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:34:13,466 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:39:26,356 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:39:55,584 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:41:20,506 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:42:21,019 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:43:11,772 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:45:06,279 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-22 10:49:11,449 BaseController.OnException - 
+Path : Ux/ValidateExcel/GetValidateExcel
+Error Messages: Column 'Man Hour QA' does not belong to table C.
+
+ERROR 2019-04-26 17:17:40,251 BaseController.OnException - 
+Path : MST/MSTS01P001/Add
+Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MST\Views\MSTS01P001\Add.cshtml(24): error CS0311: The type 'FluentBootstrap.Mvc.Forms.HiddenFor<DataAccess.MST.MSTS01P001Model, string>' cannot be used as type parameter 'TTag' in the generic type or method 'TagExtensions.SetIndexParameter<TConfig, TTag>(ComponentBuilder<TConfig, TTag>, int)'. There is no implicit reference conversion from 'FluentBootstrap.Mvc.Forms.HiddenFor<DataAccess.MST.MSTS01P001Model, string>' to 'FluentBootstrap.Tag'.
+
+ERROR 2019-04-29 14:15:29,084 BaseController.OnException - 
+Path : Users/Account/ReloadNotification
+Error Messages: Object reference not set to an instance of an object.
+
+ERROR 2019-04-29 16:09:57,486 BaseController.OnException - 
+Path : MIS/MISS01P001/Add
+Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MIS\Views\MISS01P001\Add.cshtml(86): error CS1001: Identifier expected
+
+ERROR 2019-04-29 16:20:25,886 BaseController.OnException - 
+Path : MIS/MISS01P001/Edit
+Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MIS\Views\MISS01P001\Edit.cshtml(85): error CS1001: Identifier expected
+

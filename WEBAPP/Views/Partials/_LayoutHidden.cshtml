@@ -1,0 +1,14 @@
+﻿@using WEBAPP.Helper
+
+@Html.Hidden("hdSystemLang", SessionHelper.SYS_CurrentCulture)
+@Html.Hidden("hdSysRootPath", Url.Content("~"))
+@Html.Hidden("hdSysSelectDefaultSearch", Translation.CenterLang.Center.SelectDefaultSearch)
+@Html.Hidden("hdSysSelectDefaultRequired", Translation.CenterLang.Center.SelectDefaultRequired)
+@Html.Hidden("hdSysInputPlaceholderRequired", Translation.CenterLang.Center.InputPlaceholderRequired)
+@Html.Hidden("hdSysOK", Translation.CenterLang.Center.OK)
+@Html.Hidden("hdSysCancel", Translation.CenterLang.Center.Cancel)
+@Html.Hidden("hdSysValidateError", Translation.CenterLang.Center.ValidateError)
+@Html.Hidden("hdSysAddFile", Translation.CenterLang.Center.AddFile)
+@Html.Hidden("hdSysDeleteFile", Translation.CenterLang.Center.DeleteFile)
+
+

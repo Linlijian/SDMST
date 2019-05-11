@@ -1,0 +1,27 @@
+﻿[
+  {
+    "Comment": "Example 1",
+    "Key": "SEC002TP001",
+    "Value": "SEC/SEC002TP001.xlsx"
+  },
+  {
+    "Comment": "Example 2",
+    "Key": "XXX2",
+    "Value": "XXX2.xlsx"
+  },
+  {
+    "Comment": "Part Info",
+    "Key": "ZQM010TP001",
+    "Value": "MAS/ZQM010TP001.xlsx"
+  },
+  {
+    "Comment": "Deploy Management",
+    "Key": "MISS02TP001",
+    "Value": "MIS/MISS02TP001.xlsx"
+  },
+  {
+    "Comment": "Issue Management",
+    "Key": "MISS01TP001",
+    "Value": "MIS/MISS01TP001.xlsx"
+  }
+]

@@ -1,0 +1,107 @@
+﻿@using FluentBootstrap
+@using WEBAPP.Helper
+@using UtilityLib
+@using DataAccess.Admin.Dashboard
+
+@model DashboardModel
+
+@using UtilityLib
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMaster.cshtml";
+}
+
+@using (var form = Html.Bootstrap().Form().SetHorizontal().Begin())
+{
+    using (var row2 = Html.Bootstrap().GridRow().Begin())
+    {
+        using (row2.GridColumn(12).SetXs(12).Begin())
+        {
+            @form.ControlLabel(Translation.Admin.Dashboard.Responsible + " " + SessionHelper.SYS_USER_NAME_TH)
+        }
+    }
+    <div class="space"></div>
+    using (var row2 = Html.Bootstrap().GridRow().Begin())
+    {
+        using (row2.GridColumn(12).SetXs(12).Begin())
+        {
+            @form.ControlLabel(Translation.Admin.Dashboard.User)
+        }
+    }
+
+    using (var row = Html.Bootstrap().GridRow().SetId("rowGrid1").SetVisibility(Visibility.Hidden).Begin())
+    {
+        using (row.GridColumn(12).Begin())
+        {
+            @Html.Bootstrap().Table().SetId("Grid1").SetStyle(TableStyle.TableStripedBorderedHover)
+        }
+    }
+    <div class="space"></div>
+    using (var row2 = Html.Bootstrap().GridRow().Begin())
+    {
+        using (row2.GridColumn(12).SetXs(12).Begin())
+        {
+            @form.ControlLabel(Translation.Admin.Dashboard.ManageCertificate)
+        }
+    }
+
+    using (var row = Html.Bootstrap().GridRow().SetId("rowGrid2").SetVisibility(Visibility.Hidden).Begin())
+    {
+        using (row.GridColumn(12).Begin())
+        {
+            @Html.Bootstrap().Table().SetId("Grid2").SetStyle(TableStyle.TableStripedBorderedHover)
+        }
+    }
+}
+
+@section scripts{
+    <script type="text/javascript">
+        function RenderEdit(data, type, full, meta) {
+            var rootPath = $("#hdSysRootPath").val();
+            if (rootPath == undefined || rootPath == null || rootPath == "/") {
+                rootPath = "/";
+            }
+            var url = rootPath + full.PRG_AREA + "/" + full.PRG_CONTROLLER + '/' + full.PRG_ACTION;
+
+            var tag = '<a data-toggle="tooltip" data-placement="right" title="@Translation.Admin.Dashboard.CONSIDER_PETITION" href=\"' + url + '?';
+            tag += 'USER_ID=' + toUrlString(full.USER_ID);
+            tag += '&PRG_CODE=' + toUrlString(full.PRG_CODE);
+            tag += '\"><i class=\"ace-icon fa fa-pencil-square-o bigger-130\"></i></a>';
+
+            return tag;
+        }
+    </script>
+    @Html.GridScript("1",
+        new GridConfig
+        {
+            GetConfig = new DefaultConfig(Url.Action("BindGridUser")),
+            VisibleCheckBox = false,
+            DefaultBinding = true
+        },
+        new GridColumn("USER_ID", null, 10, ColumnsType.None, ColumnsTextAlign.Center, "RenderEdit").SetButtonColumn().SetOrderable(false),
+        new GridColumn("ACT_DATE", Translation.Admin.Dashboard.ACT_DATE, 100, ColumnsType.DateTime),
+        new GridColumn("TODO_TYPE", Translation.Admin.Dashboard.TODO_TYPE, 200).SetOrderable(false),
+        new GridColumn("MS_CORP_GROUP_TH", Translation.Admin.Dashboard.MS_CORP_GROUP, 100),
+        new GridColumn("MS_CORP_NAME_TH", Translation.Admin.Dashboard.MS_CORP_NAME_TH, 200),
+        new GridColumn("USER_ID", Translation.Admin.Dashboard.USER_ID, 200),
+        new GridColumn("USER_FNAME_TH", Translation.Admin.Dashboard.USER_FNAME_TH, 200),
+        new GridColumn("USER_LNAME_TH", Translation.Admin.Dashboard.USER_LNAME_TH, 200),
+        new GridColumn("POSITION", Translation.Admin.Dashboard.POSITION, 100)
+        )
+    @Html.GridScript("2",
+        new GridConfig
+        {
+            GetConfig = new DefaultConfig(Url.Action("BindGridManageCertificate")),
+            VisibleCheckBox = false,
+            DefaultBinding = true
+        },
+        new GridColumn("USER_ID", null, 10, ColumnsType.None, ColumnsTextAlign.Center, "RenderEdit").SetButtonColumn().SetOrderable(false),
+        new GridColumn("ACT_DATE", Translation.Admin.Dashboard.ACT_DATE, 100, ColumnsType.DateTime),
+        new GridColumn("TODO_TYPE", Translation.Admin.Dashboard.TODO_TYPE, 200).SetOrderable(false),
+        new GridColumn("MS_CORP_GROUP_TH", Translation.Admin.Dashboard.MS_CORP_GROUP, 100),
+        new GridColumn("MS_CORP_NAME_TH", Translation.Admin.Dashboard.MS_CORP_NAME_TH, 200),
+        new GridColumn("ISSUER", Translation.Admin.Dashboard.ISSUER, 200),
+        new GridColumn("VALID_FROM", Translation.Admin.Dashboard.VALID_FROM, 100, ColumnsType.Date),
+        new GridColumn("VALID_TO", Translation.Admin.Dashboard.VALID_TO, 100, ColumnsType.Date)
+        )
+}

@@ -1,0 +1,164 @@
+﻿@using DataAccess.SEC
+@using WEBAPP.Helper
+@using UtilityLib
+
+<ul class="nav nav-list">
+    @{
+        var breadcrumb = TempData.ContainsKey(Breadcrumb.TempDataKey)
+                  ? (Breadcrumb)TempData[Breadcrumb.TempDataKey]
+               : new Breadcrumb();
+        var syscode = string.Empty;
+        if (!string.IsNullOrEmpty(breadcrumb.SYS_CODE))
+        {
+            syscode = breadcrumb.SYS_CODE;
+        }
+        var prgcode = string.Empty;
+        if (!string.IsNullOrEmpty(breadcrumb.PRG_CODE))
+        {
+            prgcode = breadcrumb.PRG_CODE;
+        }
+
+        var areaName = ViewContext.RouteData.DataTokens["area"].ToString();
+        var controllerName = ViewContext.RouteData.GetRequiredString("controller");
+        var menu = SessionHelper.SYS_MenuModel;
+        if (menu != null)
+        {
+            var home = menu.Where(m => m.SYS_CODE.AsString().ToUpper() == "HOME").FirstOrDefault();
+            var mainActive = "";
+            if (home != null && AppExtensions.ExistsAction(home.PRG_ACTION, home.PRG_CONTROLLER, home.PRG_AREA))
+            {
+                if (home.PRG_CONTROLLER == controllerName && home.PRG_AREA == areaName && home.SYS_CODE == syscode)
+                {
+                    mainActive = "active";
+                }
+                var prgUrl = string.Empty;
+                try
+                {
+                    if (AppExtensions.ExistsAction(home.PRG_ACTION, home.PRG_CONTROLLER, home.PRG_AREA))
+                    {
+                        prgUrl = Url.Action(home.PRG_ACTION, home.PRG_CONTROLLER, new { Area = home.PRG_AREA, SYS_SYS_CODE = home.SYS_CODE, SYS_PRG_CODE = home.PRG_CODE, UrlType = "M" });
+                    }
+                }
+                catch (Exception ex)
+                {
+                }
+                <li @if (!mainActive.IsNullOrEmpty()) { <text> class="@mainActive" </text>             }>
+                    <a @if (!prgUrl.IsNullOrEmpty() && mainActive.IsNullOrEmpty()) { <text> href="@prgUrl" class="menu" </text> } >
+                        <i class="menu-icon fa fa-tachometer"></i>
+                        <span class="menu-text">
+                            Dashboard
+                        </span>
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+            }
+            else
+            {
+                if (areaName == "Admin" && controllerName == "Default")
+                {
+                    mainActive = "active";
+                }
+                <li @if (!mainActive.IsNullOrEmpty()) { <text> class="@mainActive" </text>               }>
+                    <a href="@Url.Action("Index", "Default", new { Area = "Admin" })" class="menu">
+                        <i class="menu-icon fa fa-tachometer"></i>
+                        <span class="menu-text">
+                            @Translation.CenterLang.Center.Home
+                        </span>
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+            }
+
+            var sys = (from s in menu
+                       orderby s.SYS_SEQ
+                       where s.SYS_CODE.AsString().ToUpper() != "HOME"
+                       select new
+                       {
+                           SYS_CODE = s.SYS_CODE,
+                           SYS_NAME_EN = s.SYS_NAME_EN,
+                           SYS_NAME_TH = s.SYS_NAME_TH,
+                           SEQ = s.SYS_SEQ
+                       }).Distinct();
+
+
+            foreach (var iSys in sys)
+            {
+                var prg = from p in menu
+                          where p.SYS_CODE == iSys.SYS_CODE
+                          orderby p.PRG_SEQ
+                          select p;
+
+                mainActive = "";
+                if (prg.Any(m => m.PRG_CONTROLLER == controllerName && m.PRG_AREA == areaName && m.SYS_CODE == syscode))
+                {
+                    mainActive = "active open";
+                }
+                var culture = System.Threading.Thread.CurrentThread.CurrentUICulture;
+                var systemName = iSys.SYS_NAME_TH;
+                if (culture.Name == "en-US")
+                {
+                    systemName = iSys.SYS_NAME_EN;
+                }
+
+                <li @if (!mainActive.IsNullOrEmpty()) { <text> class="@mainActive" </text>               }>
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-file-o"></i>
+                        <span class="menu-text">
+                            @systemName
+                        </span>
+                    </a>
+                    <b class="arrow"></b>
+                    @if (prg.Any())
+                    {
+                        <ul class="submenu">
+                            @foreach (var item in prg)
+                            {
+                                var prgActive = "";
+                                if (item.PRG_CONTROLLER == controllerName && item.PRG_AREA == areaName && item.SYS_CODE == syscode && item.PRG_CODE == prgcode)
+                                {
+                                    prgActive = "active";
+                                }
+                                var programName = item.PRG_NAME_TH;
+                                if (culture.Name == "en-US")
+                                {
+                                    programName = item.PRG_NAME_EN;
+                                }
+
+                                var prgUrl = string.Empty;
+                                try
+                                {
+                                    if (AppExtensions.ExistsAction(item.PRG_ACTION, item.PRG_CONTROLLER, item.PRG_AREA))
+                                    {
+                                        prgUrl = Url.Action(item.PRG_ACTION, item.PRG_CONTROLLER, new { Area = item.PRG_AREA, SYS_SYS_CODE = item.SYS_CODE, SYS_PRG_CODE = item.PRG_CODE, UrlType = "M" });
+                                        if (!item.PRG_PARAMETER.IsNullOrEmpty())
+                                        {
+                                            prgUrl = prgUrl + item.PRG_PARAMETER;
+                                        }
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                }
+
+                                <li @if (!prgActive.IsNullOrEmpty()) { <text> class="@prgActive" </text>                     }>
+                                    <a @if (!prgUrl.IsNullOrEmpty() && prgActive.IsNullOrEmpty()) { <text> href="@prgUrl" class="menu" </text>               }>
+                                        @if (!item.PRG_IMG.IsNullOrEmpty())
+                                        {
+                                            <i class="@item.PRG_IMG"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                        }
+                                        @programName
+                                    </a>
+                                    <b class="arrow"></b>
+                                </li>
+                            }
+                        </ul>
+                    }
+                </li>
+            }
+        }
+    }
+</ul>

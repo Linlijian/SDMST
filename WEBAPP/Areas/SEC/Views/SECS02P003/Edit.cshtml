@@ -1,0 +1,41 @@
+﻿@using FluentBootstrap
+@using WEBAPP.Helper
+@using DataAccess
+@using DataAccess.SEC
+@using UtilityLib
+
+@model SECS02P003Model
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutChildPage.cshtml";
+}
+
+@using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
+{
+    @Html.AntiForgeryToken()
+    using (var row = Html.Bootstrap().GridRow().Begin())
+    {
+        using (row.GridColumn(12).SetXs(12).Begin())
+        {
+            using (var r = Html.Bootstrap().GridRow().Begin())
+            {
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.HiddenFor(m => m.TITLE_ID)
+                    @form.InputFor(m => m.TITLE_NAME_TH, isRequired: true)
+                }
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.TITLE_NAME_EN)
+                }
+            }
+        }
+    }
+}
+@section modals{
+
+}
+@section Scripts {
+
+}

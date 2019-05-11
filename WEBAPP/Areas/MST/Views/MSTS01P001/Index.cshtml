@@ -1,0 +1,92 @@
+﻿@using FluentBootstrap
+@using WEBAPP.Helper
+@using DataAccess.MST   
+@using UtilityLib
+
+@model MSTS01P001Model
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMaster.cshtml";
+}
+
+
+@using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
+{
+    @form.ValidationSummary(true).AddCss(Css.Hidden)
+    @Html.AntiForgeryToken()
+    using (var rowInfo = Html.Bootstrap().GridRow().Begin())
+    {
+        using (rowInfo.GridColumn(12).SetXs(12).Begin())
+        {
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                @*using (row1.GridColumn(6).Begin())
+                {
+                    @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), IsSearch: true)
+                }*@
+            }
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.SelectFor(t => t.ISSUE_TYPE, Model.ISSUE_TYPE_MODEL.ToSelectList("Value", "Text", Model.ISSUE_TYPE), IsSearch: true)
+                    //@form.SelectFor(t => t.ISSUE_TYPE, Model.ISSUE_TYPE_MODEL.ToSelectList("Value", "Text", Model.ISSUE_TYPE), IsSearch: true)
+                }
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.SelectFor(t => t.TYPE_RATE, Model.TYPE_RATE_MODEL.ToSelectList("Value", "Text", Model.TYPE_RATE), IsSearch: true)
+                }
+            }
+        }
+    }
+}
+@using (var row = Html.Bootstrap().GridRow().SetId("rowGridSearch").SetVisibility(Visibility.Hidden).Begin())
+{
+    using (row.GridColumn(12).Begin())
+    {
+        @Html.Bootstrap().Table().SetId("GridSearch").SetStyle(TableStyle.TableStripedBorderedHover)
+    }
+}
+
+
+@section scripts{
+    @Html.GridScript("Search",
+        new GridConfig
+        {
+            GetConfig = new DefaultConfig(Url.Action("Search")),
+            DeleteConfig = new DefaultConfig(Url.Action("DeleteSearch")),
+            DefaultBinding = Model.IsDefaultSearch,
+            ScrollX = false,
+            WidthType = ColumnsWidthType.Percentage
+        },
+        Html.GridColumnCommand(Html.GridCommand(StandardButtonName.Edit, Translation.CenterLang.Center.Edit, Url.Action(StandardButtonName.Edit), FaIcons.FaPencil, TextColor.orange2,
+                new VSMParameter("COM_CODE"), 
+                new VSMParameter("ISSUE_TYPE"), 
+                new VSMParameter("TYPE_RATE"))),
+        new GridColumn("COM_CODE").SetNotVisible().SetKey(),
+        //new GridColumn("COM_CODE", Translation.CenterLang.Center.APP_CODE, 10),
+        new GridColumn("ISSUE_TYPE", Translation.MST.MSTS01P001.ISSUE_TYPE, 10).SetKey(),
+        new GridColumn("TYPE_RATE", Translation.MST.MSTS01P001.TYPE_RATE, 10, render: "RENDER_TYPERATE").SetKey(),
+        new GridColumn("MAN_PLM_SA", Translation.MST.MSTS01P001.MAN_PLM_SA, 10, ColumnsType.Number, ColumnsTextAlign.Right),
+        new GridColumn("MAN_PLM_QA", Translation.MST.MSTS01P001.MAN_PLM_QA, 10, ColumnsType.Number, ColumnsTextAlign.Right),
+        new GridColumn("MAN_PLM_PRG", Translation.MST.MSTS01P001.MAN_PLM_PRG, 10, ColumnsType.Number, ColumnsTextAlign.Right)
+        )
+
+    <script>
+        var RENDER_TYPERATE = function (data, type, full, meta) {
+            var tag = '';
+
+            if (!isNullOrEmpty(data)) {
+                if (data == "S") {
+                    tag = "Standard";
+                } else if (data == "M") {
+                    tag = "Maximum";
+                } 
+            }
+
+            return tag;
+        };
+
+    </script>
+}

@@ -1,0 +1,152 @@
+﻿@using FluentBootstrap
+@using WEBAPP.Helper
+@using DataAccess.MIS
+@using UtilityLib
+
+@model MISS01P001Model
+
+@{
+    ViewBag.Title = "Info";
+    Layout = "~/Views/Shared/_LayoutChildPage.cshtml";
+}
+
+@using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().SetEnctype().Begin())
+{
+    @Html.AntiForgeryToken()
+    using (var row = Html.Bootstrap().GridRow().Begin())
+    {
+        using (var rowMain = Html.Bootstrap().GridRow().Begin())
+        {
+            using (rowMain.GridColumn(12).SetXs(12).Begin())
+            {
+                @Html.GetVSMWidgetsBegin(Translation.CenterLang.Center.UPLOAD_INSTRUCTION)
+                using (var r = Html.Bootstrap().GridRow().Begin())
+                {
+                    using (r.GridColumn(6).Begin())
+                    {
+                        @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true)
+                    }
+                }
+
+                using (var r = Html.Bootstrap().GridRow().Begin())
+                {
+                    using (r.GridColumn(12).Begin())
+                    {
+                        @Html.GetVSMFileUploadExcelFor(m => m.EXCEL_UPLOAD, true, 2, false)
+                    }
+                }
+                @Html.GetVSMWidgetsEnd()
+            }
+
+        }
+
+    }
+}
+
+@using (var row = Html.Bootstrap().GridRow().SetId("rowGridSearch").SetVisibility(Visibility.Hidden).Begin())
+{
+    using (row.GridColumn(12).Begin())
+    {
+        @Html.Bootstrap().Table().SetId("GridSearch").SetStyle(TableStyle.TableStripedBorderedHover)
+    }
+}
+
+@section modals{
+    @Html.GetVSMModalValidate(m => m.EXCEL_UPLOAD)
+
+}
+
+@section Scripts {
+    @Html.GridScript("Search",
+        new GridConfig
+        {
+            GetConfig = new DefaultConfig(Url.Action("SearchExl")),
+            DefaultBinding = Model.IsDefaultSearch,
+            ScrollX = false,
+        },
+            new GridColumn("NO").SetNotVisible().SetKey(),
+            new GridColumn("COM_CODE").SetNotVisible().SetKey(),
+            new GridColumn("COM_CODE", Translation.CenterLang.Center.APP_CODE, 10).SetKey(),
+            new GridColumn("NO", Translation.MIS.MISS01P001.NO, 10),
+            new GridColumn("FLAG", Translation.MIS.MISS02P001.FLAG, 2, render: "RENDER_FLAG"),
+            new GridColumn("ERROR_CODE", Translation.MIS.MISS02P001.REMARK, 100)
+        )
+    <script>
+        var RENDER_FLAG = function (data, type, full, meta) {
+            var tag = '';
+
+            if (!isNullOrEmpty(data)) {
+                if (data == "I") {
+                    tag += '<center><i class="ace-icon fa @FaIcons.FaTimesCircle align-top bigger-180 red"></i></center>';
+                } else if (data == "C") {
+                    tag += '<center><i class="ace-icon fa @FaIcons.FaCheckCircle align-top bigger-180 green"></i></center>'
+                }
+            }
+
+            return tag;
+        };
+        var RENDER_TYPEDAY = function (data, type, full, meta) {
+            var tag = '';
+
+            if (!isNullOrEmpty(data)) {
+                if (data == "H") {
+                    tag = "Holiday";
+                } else if (data == "W") {
+                    tag = "Saturday Working";
+                } else if (data == "S") {
+                    tag = "Send Program Package";
+                } else if (data == "D") {
+                    tag = "Deployment on PROD/QA.";
+                } else {
+                    tag = "V-Smart infrom issue no deployment";
+                }
+            }
+
+            return tag;
+        };
+        $(document).ready(function () {
+
+            $("#Confirm").click(function () {
+
+                $("#notification").remove()
+                $.ajax({
+                    url: '@Url.Action("Confirm")',
+                    type: 'post',
+                    data: formData,
+                    success: function (result) {
+                        OnAjaxSuccess(result);
+                    },
+                    error: OnAjaxError
+
+                });
+            });
+
+            $("#btnContinueValExcel").click(function () {
+                var button = $(this);
+                var modal = button.closest(".modal");
+                modal.modal("hide");
+
+                var formData = $("#form1").serializeFormData();
+                waitingDialog.show();
+
+                $.ajax({
+                        url: '@Url.Action("LoadExcel")',
+                        type: 'post',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success: function (result) {
+                            OnAjaxSuccess(result);
+                            bindGridSearch({ page: 1 });
+                        },
+                        error: OnAjaxError
+                });
+            });
+        });
+
+    </script>
+
+    @Html.GetVSMFileUploadExcelScriptFor(m => m.EXCEL_UPLOAD, prgCode: SessionHelper.SYS_CurrentPRG_CODE.Trim())
+
+}
+

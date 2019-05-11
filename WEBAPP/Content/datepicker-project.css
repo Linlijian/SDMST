@@ -1,0 +1,22 @@
+﻿/*.ui-datepicker-year{
+    display:none;
+}
+ .ui-datepicker-month{
+    display:none;
+}
+
+#ALL_SATURDAY_W {
+
+}
+
+.ui-datepicker-calendar {
+    display: none;
+    }
+/*.datepicker th.datepicker-switch {
+display: none;
+}*/
+
+
+.datepicker table tr td, .datepicker table tr th {
+background-color:aqua;
+}*/

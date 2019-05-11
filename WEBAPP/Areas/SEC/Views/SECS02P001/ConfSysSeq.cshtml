@@ -1,0 +1,131 @@
+﻿@using WEBAPP.Helper
+@model DataAccess.SEC.SECS02P001Model
+
+@{
+    ViewBag.Title = "ConfSysSeq";
+    Layout = "~/Views/Shared/_LayoutChildPage.cshtml";
+}
+@using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
+{
+    @Html.AntiForgeryToken()
+    using (var row = Html.Bootstrap().GridRow().Begin())
+    {
+        using (row.GridColumn(12).SetXs(12).Begin())
+        {
+            @Html.GetVSMWidgetsBegin(Translation.SEC.SECS02P001.TitleUsgDetail)
+
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.USG_CODE, isRequired: true).SetReadonly()
+                }
+            }
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.USG_NAME_TH, isRequired: true).SetReadonly()
+                }
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.USG_NAME_EN, isRequired: true).SetReadonly()
+                }
+            }
+
+            @Html.GetVSMWidgetsEnd()
+
+            @Html.GetVSMWidgetsBegin(Translation.SEC.SECS02P001.SortSystemSequence)
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.SelectFor(m => m.SYS_GROUP_NAME, Model.SYS_GROUP_NAME_MODEL.ToSelectList("Value", "Text", Model.SYS_GROUP_NAME), isRequired: true)
+                }
+            }
+            using (var row1 = Html.Bootstrap().GridRow().SetId("rowGridPRIV_MODEL").Begin())
+            {
+                using (row1.GridColumn(12).Begin())
+                {
+                    @Html.Bootstrap().Table().SetId("GridPRIV_MODEL").SetType(TableType.Multiselect).SetStyle(TableStyle.TableStripedBorderedHover).AddAttributes(new { data_col = "" })
+                }
+            }
+            @Html.GetVSMWidgetsEnd()
+        }
+    }
+}
+
+@section stylesheet{
+    <link href="@Url.Content("~/Content/DataTables/css/rowReorder.bootstrap.min.css")" rel="stylesheet" />
+
+}
+
+@section scripts{
+    <script src="@Url.Content("~/Scripts/DataTables/dataTables.rowReorder.min.js")"></script>
+
+    @Html.GridScript("PRIV_MODEL",
+        new GridConfig
+        {
+            GetConfig = new DefaultConfig(Url.Action("GetSysSeq")),
+            DisableDefaultSorting = true,
+            DefaultBinding = false,
+            Paging = false,
+            ScrollX = false,
+            WidthType = ColumnsWidthType.Percentage,
+            ScrollY = 380,
+            ScrollCollapse = true,
+            VisibleExportButton = false
+        },
+        new GridColumn("SYS_CODE", Translation.SEC.SECS02P001.SYS_CODE, 20).SetOrderable(false),
+        new GridColumn("SYS_NAME", Translation.SEC.SECS02P001.SYS_NAME, 80).SetOrderable(false)
+        )
+
+    <script>
+
+        $(document).ready(function () {
+            $("#SYS_GROUP_NAME").change(function (e) {
+                bindGridPRIV_MODEL({ SYS_GROUP_NAME: this.value });
+            });
+            $("#GridPRIV_MODEL").sortable({
+                items: 'tbody tr',
+                cursor: 'move',
+                axis: 'y,x',
+                dropOnEmpty: false,
+                update: function (event, ui) {
+                    if (ui.item[0].offsetParent != null) {
+                        var gid = ui.item[0].offsetParent.attributes["0"].nodeValue;
+                        if (gid == "GridPRIV_MODEL" && ui.sender == null) {
+                            var sourceIndex = ui.item[0]._DT_RowIndex;
+                            var distIndex = ui.item[0].sectionRowIndex;
+
+                            var data = GridPRIV_MODEL.row(sourceIndex).data();
+                            var data2 = GridPRIV_MODEL.rows().data();
+                            var newData = [];
+                            if (data2.length > 0) {
+                                $.each(data2.toArray(), function (i, item) {
+
+                                    if (i != sourceIndex) {
+                                        if (distIndex < sourceIndex && i == distIndex) {
+                                            newData.push(data);
+                                        }
+                                        newData.push(item);
+                                        if (distIndex > sourceIndex && i == distIndex) {
+                                            newData.push(data);
+                                        }
+                                    }
+
+                                });
+                            }
+                            else {
+                                newData.push(data);
+                            }
+
+                            GridPRIV_MODEL.rows().remove().draw();
+                            GridPRIV_MODEL.rows.add(newData).draw();
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+}

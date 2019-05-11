@@ -1,0 +1,215 @@
+﻿@using FluentBootstrap
+@using WEBAPP.Helper
+@using DataAccess.SEC
+@using UtilityLib
+
+@model SECS01P001Model
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_LayoutChildPage.cshtml";
+}
+
+@using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
+{
+    @Html.AntiForgeryToken()
+    using (var row = Html.Bootstrap().GridRow().Begin())
+    {
+        using (row.GridColumn(12).SetXs(12).Begin())
+        {
+            using (var r = Html.Bootstrap().GridRow().Begin())
+            {
+                using (r.GridColumn(12).Begin())
+                {
+                    @form.ControlLabel(Translation.SEC.SECS01P001.COM_HEADER)
+                }
+            }
+
+            using (var r = Html.Bootstrap().GridRow().Begin())
+            {
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.COM_CODE, isRequired: true).SetMaxLength(5)
+                }
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.COM_BRANCH, isRequired: true)
+                }
+            }
+
+            <hr />
+
+            using (var r = Html.Bootstrap().GridRow().Begin())
+            {
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.COM_NAME_T, isRequired: true)
+                }
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.COM_NAME_SHORT_T)
+                }
+            }
+            using (var r = Html.Bootstrap().GridRow().Begin())
+            {
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.COM_NAME_E, isRequired: true)
+                }
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.COM_NAME_SHORT_E)
+                }
+            }
+
+            using (var r = Html.Bootstrap().GridRow().Begin())
+            {
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.COM_BRANCH_T, isRequired: true)
+                }
+            }
+            using (var r = Html.Bootstrap().GridRow().Begin())
+            {
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.COM_BRANCH_E, isRequired: true)
+                }
+            }
+
+            using (var r = Html.Bootstrap().GridRow().Begin())
+            {
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.COM_LICENSE_ID)
+                }
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.COM_TAX_ID)
+                }
+            }
+            using (var r = Html.Bootstrap().GridRow().Begin())
+            {
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.COM_TEL_NO)
+                }
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.COM_FAX_NO)
+                }
+            }
+            using (var r = Html.Bootstrap().GridRow().Begin())
+            {
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.COM_E_MAIL)
+                }
+            }
+            using (var r = Html.Bootstrap().GridRow().Begin())
+            {
+                using (r.GridColumn(6).Begin())
+                {
+                    @*@form.SelectFor(m => m.COM_USE_LANGUAGE)*@
+                    @form.SelectFor(t => t.COM_USE_LANGUAGE, Model.COM_USE_LANGUAGE_MODEL.ToSelectList("Value", "Text"))
+                }
+            }
+
+            <hr />
+
+            using (var r = Html.Bootstrap().GridRow().Begin())
+            {
+                using (r.GridColumn(6).Begin())
+                {
+                    @Html.GetVSMWidgetsBegin(Translation.SEC.SECS01P001.Address_T)
+
+                    using (r.GridColumn(12).Begin())
+                    {
+                        @form.InputFor(m => m.COM_ADDR1_T)
+                        @form.InputFor(m => m.COM_ADDR2_T)
+                        @form.InputFor(m => m.COM_SOI_T)
+                        @form.InputFor(m => m.COM_ROAD_T)
+                        @form.InputFor(m => m.COM_AMPHUR_T)
+                        @form.InputFor(m => m.COM_DISTRICT_T)
+                        @*@form.SelectFor(m => m.COM_PROVINCE_T)*@
+                        @form.SelectFor(t => t.COM_PROVINCE_T, Model.COM_PROVINCE_T_MODEL.ToSelectList("Value", "Text"))
+                        @form.InputFor(m => m.COM_POST_CODE_T)
+                    }
+                    @Html.GetVSMWidgetsEnd()
+                }
+
+                using (r.GridColumn(6).Begin())
+                {
+                    @Html.GetVSMWidgetsBegin(Translation.SEC.SECS01P001.Address_Eng)
+
+                    using (r.GridColumn(12).Begin())
+                    {
+                        @form.InputFor(m => m.COM_ADDR1_E)
+                        @form.InputFor(m => m.COM_ADDR2_E)
+                        @form.InputFor(m => m.COM_SOI_E)
+                        @form.InputFor(m => m.COM_ROAD_E)
+                        @form.InputFor(m => m.COM_AMPHUR_E)
+                        @form.InputFor(m => m.COM_DISTRICT_E)
+                       
+                        @form.SelectFor(t => t.COM_PROVINCE_E, Model.COM_PROVINCE_E_MODEL.ToSelectList("Value", "Text"))
+                        @form.InputFor(m => m.COM_POST_CODE_E)
+                    }
+                    @Html.GetVSMWidgetsEnd()
+                }
+            }
+
+
+            using (var r = Html.Bootstrap().GridRow().Begin())
+            {
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.COM_FAC_NAME_T, isRequired: true)
+                }
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.COM_FAC_NAME_E, isRequired: true)
+                }
+            }
+
+            <hr />
+            using (var r = Html.Bootstrap().GridRow().Begin())
+            {
+                using (r.GridColumn(6).Begin())
+                {
+                    @Html.GetVSMWidgetsBegin(Translation.SEC.SECS01P001.Address_T)
+
+                    using (r.GridColumn(12).Begin())
+                    {
+                        @form.InputFor(m => m.COM_FAC_ADDR1_T)
+                        @form.InputFor(m => m.COM_FAC_ADDR2_T)
+                        @form.InputFor(m => m.COM_FAC_SOI_T)
+                        @form.InputFor(m => m.COM_FAC_ROAD_T)
+                        @form.InputFor(m => m.COM_FAC_DISTRICT_T)
+                        @form.InputFor(m => m.COM_FAC_AMP_T)
+                        @form.SelectFor(t => t.COM_FAC_PRV_T, Model.COM_FAC_PRV_T_MODEL.ToSelectList("Value", "Text"))
+                        @form.InputFor(m => m.COM_FAC_POST_T)
+                    }
+                    @Html.GetVSMWidgetsEnd()
+                }
+
+                using (r.GridColumn(6).Begin())
+                {
+                    @Html.GetVSMWidgetsBegin(Translation.SEC.SECS01P001.Address_Eng)
+
+                    using (r.GridColumn(12).Begin())
+                    {
+                        @form.InputFor(m => m.COM_FAC_ADDR1_E)
+                        @form.InputFor(m => m.COM_FAC_ADDR2_E)
+                        @form.InputFor(m => m.COM_FAC_SOI_E)
+                        @form.InputFor(m => m.COM_FAC_ROAD_E)
+                        @form.InputFor(m => m.COM_FAC_DISTRICT_E)
+                        @form.InputFor(m => m.COM_FAC_AMP_E)
+                        @form.SelectFor(t => t.COM_FAC_PRV_E, Model.COM_FAC_PRV_E_MODEL.ToSelectList("Value", "Text"))
+                        @form.InputFor(m => m.COM_FAC_POST_E)
+                    }
+                    @Html.GetVSMWidgetsEnd()
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2005/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSources>
+    <DataSource Name="DTS_SDDB">
+      <rd:DataSourceID>af5a73db-dc9d-4296-bbe3-1b922ed31d88</rd:DataSourceID>
+      <DataSourceReference>DTS_SDDB</DataSourceReference>
+    </DataSource>
+  </DataSources>
+  <rd:ReportID>195ec3f3-4a4e-4c87-8745-67beb2cbe290</rd:ReportID>
+  <Width>5in</Width>
+  <Body>
+    <Height>0.42in</Height>
+    <ColumnSpacing>0.5in</ColumnSpacing>
+    <ReportItems>
+      <Textbox Name="textbox1">
+        <Style>
+          <FontFamily>Segoe UI Light</FontFamily>
+          <FontSize>24pt</FontSize>
+          <FontWeight>Bold</FontWeight>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+        <rd:DefaultName>textbox1</rd:DefaultName>
+        <Value>TestSPR01</Value>
+        <CanGrow>true</CanGrow>
+        <Height>0.42in</Height>
+      </Textbox>
+      <Table Name="table1">
+        <Top>0.42in</Top>
+        <Style />
+        <Header>
+          <RepeatOnNewPage>true</RepeatOnNewPage>
+          <TableRows>
+            <TableRow>
+              <TableCells />
+              <Height>0in</Height>
+            </TableRow>
+          </TableRows>
+        </Header>
+        <Details>
+          <TableRows>
+            <TableRow>
+              <TableCells />
+              <Height>0in</Height>
+            </TableRow>
+          </TableRows>
+        </Details>
+        <TableColumns />
+        <DataSetName>DataSet1</DataSetName>
+      </Table>
+    </ReportItems>
+  </Body>
+  <Language>en-US</Language>
+  <LeftMargin>1in</LeftMargin>
+  <RightMargin>1in</RightMargin>
+  <TopMargin>1in</TopMargin>
+  <BottomMargin>1in</BottomMargin>
+  <PageWidth>8.5in</PageWidth>
+  <PageHeight>11in</PageHeight>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Fields />
+      <Query>
+        <DataSourceName>DTS_SDDB</DataSourceName>
+        <CommandType>Text</CommandType>
+        <CommandText>EXECUTE bond.SP_VSMS_ISSUE_R001 @error_code output, @CRET_BY, @ISSUE_DATE_PERIOD</CommandText>
+        <QueryParameters>
+          <QueryParameter Name="@error_code">
+            <Value>=Parameters!error_code.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@CRET_BY">
+            <Value>=Parameters!CRET_BY.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@ISSUE_DATE_PERIOD">
+            <Value>=Parameters!ISSUE_DATE_PERIOD.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <Timeout>0</Timeout>
+      </Query>
+    </DataSet>
+  </DataSets>
+  <ReportParameters>
+    <ReportParameter Name="error_code">
+      <DataType>String</DataType>
+      <Prompt>error code</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="CRET_BY">
+      <DataType>String</DataType>
+      <Prompt>CRET BY</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ISSUE_DATE_PERIOD">
+      <DataType>String</DataType>
+      <Prompt>ISSUE DATE PERIOD</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+</Report>

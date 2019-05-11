@@ -1,0 +1,81 @@
+﻿@using FluentBootstrap
+@using WEBAPP.Helper
+@using DataAccess.MST
+@using UtilityLib
+
+@model MSTS03P002Model
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutChildPage.cshtml";
+}
+
+
+
+@using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
+{
+    @Html.AntiForgeryToken()
+    using (var row1 = Html.Bootstrap().GridRow().Begin())
+    {
+        using (row1.GridColumn(6).SetMdOffset(2).Begin())
+        {
+           // @form.SelectFor(t => t.KEY_ID, Model.KEY_ID_MODEL.ToSelectList("Value", "Text", Model.KEY_ID), isRequired: true).IsDisabled()
+        }
+        @form.HiddenFor(t => t.PIT_ID)
+    }
+    <br>
+    using (Html.Bootstrap().Div().SetId("HEADER").SetVisibility(Visibility.Hidden).Begin())
+    {
+        @Html.GetVSMWidgetsBegin(Translation.MST.MSTS03P002.ISSUE_CRITERIA)
+        using (var row = Html.Bootstrap().GridRow().Begin())
+        {
+            using (row.GridColumn(12).SetXs(12).Begin())
+            {
+                using (var r = Html.Bootstrap().GridRow().Begin())
+                {
+                    
+                    using (r.GridColumn(8).SetMdOffset(1).Begin())
+                    {
+                        @form.InputFor(t => t.PRIORITY_NAME).SetReadonly()
+                    }
+                }
+                using (var r = Html.Bootstrap().GridRow().Begin())
+                {
+                    using (r.GridColumn(8).SetMdOffset(1).Begin())
+                    {
+                        @form.InputFor(m => m.ISSUE_TYPE, isRequired: true).SetIndexParameter(1)
+                    }
+                    @*using (r.GridColumn(8).SetMdOffset(1).Begin())
+                    {
+                        @form.CheckBoxFor(m => m.IS_FREE)
+                    }*@
+                }
+                using (var r = Html.Bootstrap().GridRow().Begin())
+                {
+                    @*using (r.GridColumn(8).SetMdOffset(1).Begin())
+                    {
+                        @form.CheckBoxFor(m => m.IS_CONS)
+                    }*@
+                    using (r.GridColumn(8).SetMdOffset(1).Begin())
+                    {
+                        @form.TextAreaFor(m => m.REMASK, 4).SetMaxLength(400)
+                    }
+                }
+            }
+        }
+    @Html.GetVSMWidgetsEnd()
+    }
+}
+
+
+<script type="text/javascript">
+    //$("#btnFinish").removeAttr("disabled");
+    // $("#formDetailModels #P_NO").attr("disabled", "disabled");
+    $("#form1 #HEADER").removeClass('@Css.Hidden');
+    var a = '@Model.IS_USED';
+    if (a == 'True') {
+        $("#HEADER #ISSUE_TYPE").attr("disabled", "disabled");
+        $("#HEADER #REMASK").attr("disabled", "disabled");
+        $("#HEADER #IS_FREE").attr("disabled", "disabled");
+    }
+    
+</script>

@@ -1,0 +1,63 @@
+﻿@using System.Activities.Expressions
+@using WEBAPP.Helper
+@using UtilityLib
+
+@{
+    var HeaderConfig = TempData.ContainsKey(WizardHelper.WizardHeaderConfig.TempDataKey)
+                ? (WizardHelper.WizardHeaderConfig)TempData[WizardHelper.WizardHeaderConfig.TempDataKey]
+                : new WizardHelper.WizardHeaderConfig();
+}
+@if (HeaderConfig != null && HeaderConfig.WizardHeader != null && HeaderConfig.WizardHeader.Count > 0)
+{
+    <text>
+        <div class="row center-block wizard-headerfixedcircle">
+            <div class="col-xs-12">
+                <ul class="steps nav-justified">
+                    @{
+                        var MaxStep = HeaderConfig.WizardHeader.Count();
+                        var currentHeader = HeaderConfig.CurrentWizard[0].AsInt();
+                        var lastHeader = HeaderConfig.LastWizard[0].AsInt();
+                        var index = 1;
+                        foreach (var Header in HeaderConfig.WizardHeader)
+                        {
+                            var HeaderClass = WizardHelper.WizardHeaderMode.disabled;
+                            var HeaderUrl = "";
+                            if (Header.Skip)
+                            {
+                                HeaderClass = WizardHelper.WizardHeaderMode.complete_dis;
+                            }
+                            else if (index == currentHeader)
+                            {
+                                HeaderClass = WizardHelper.WizardHeaderMode.active;
+                                HeaderUrl = "#";
+                            }
+                            else if (index <= lastHeader)
+                            {
+                                HeaderClass = WizardHelper.WizardHeaderMode.complete;
+                                HeaderUrl = string.IsNullOrEmpty(Header.Url) ? "#" : Header.Url;
+                            }
+                            else if (index > lastHeader)
+                            {
+                                HeaderClass = WizardHelper.WizardHeaderMode.disabled;
+                                HeaderUrl = "#";
+                            }
+
+                            <li class="@HeaderClass">
+                                <a @if (!HeaderUrl.IsNullOrEmpty()) { <text> href="@HeaderUrl" </text>     }>
+                                    <span class="step">@index</span>
+                                    <span class="title">@Header.Text</span>
+                                </a>
+                            </li>
+
+                            index++;
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </text>
+}
+
+@{
+    Html.RenderPartial("_StandardWizardButton");
+}

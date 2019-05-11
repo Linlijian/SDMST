@@ -1,0 +1,272 @@
+﻿@using FluentBootstrap
+@using WEBAPP.Helper
+@using DataAccess.MIS
+@using UtilityLib
+
+@model MISS02P001Model
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_LayoutChildPage.cshtml";
+}
+
+@using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
+{
+    @Html.AntiForgeryToken()
+    using (var row1 = Html.Bootstrap().GridRow().Begin())
+    {
+        using (row1.GridColumn(6).Begin())
+        {
+            @form.InputFor(m => m.COM_CODE).SetReadonly()
+        }
+        using (row1.GridColumn(6).Begin())
+        {
+            @form.InputFor(m => m.YEAR, isRequired: true).SetHelp("Format : YYYY Example: (2014)").SetMaxLength(4)
+        }
+    }
+
+    using (var row1 = Html.Bootstrap().GridRow().Begin())
+    {
+        using (row1.GridColumn(12).Begin())
+        {
+            @Html.GetVSMDetailFor(m => m.Details, isRequired: true)
+        }
+    }
+}
+
+@section modals{
+    @Html.GetVSMModalDetailBeginFor(m => m.Details)
+
+    @using (var formPopup = Html.Bootstrap().Form().SetId("formDetails").SetHorizontal().Begin())
+    {
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        using (var rowInfo = Html.Bootstrap().GridRow().Begin())
+        {
+            using (rowInfo.GridColumn(6).SetXs(6).Begin())
+            {
+                @formPopup.SelectFor(t => t.TYPE_DAY, Model.TYPE_DAY_MODEL.ToSelectList("Value", "Text"), isRequired: true)
+            }
+        }
+        using (var rowInfo = Html.Bootstrap().GridRow().Begin())
+        {
+            using (rowInfo.GridColumn(6).SetXs(6).Begin())
+            {
+                @formPopup.InputFor(t => t.DEPLOY_PRG)
+            }
+            using (rowInfo.GridColumn(6).SetXs(6).Begin())
+            {
+                @formPopup.InputFor(t => t.DEPLOY_USER)
+            }
+        }
+        using (var rowInfo = Html.Bootstrap().GridRow().Begin())
+        {
+            using (rowInfo.GridColumn(6).Begin())
+            {
+                @formPopup.InputFor(t => t.DAY, isRequired: true, addValidateMessage: true).RemoveCss(Css.TextRight, "number-format").SetHelp("Formate: dd Example: (14)").SetMaxLength(2)
+            }
+            using (rowInfo.GridColumn(6).Begin())
+            {
+                @formPopup.InputFor(t => t.MONTH, isRequired: true, addValidateMessage: true).RemoveCss(Css.TextRight, "number-format").SetHelp("Formate: mm Example: (02)").SetMaxLength(2)
+            }
+        }
+        using (var rowInfo = Html.Bootstrap().GridRow().Begin())
+        {
+            using (rowInfo.GridColumn(6).Begin())
+            {
+                @formPopup.InputFor(t => t.YEAR, addValidateMessage: true).SetReadonly().RemoveCss(Css.TextRight, "number-format")
+            }
+        }
+        @formPopup.HiddenFor(t => t.DEPLOYMENT_DATE)
+        @formPopup.HiddenFor(t => t.COM_CODE)
+    }
+    @Html.GetVSMModalDetailEnd()
+}
+
+@section Scripts {
+    @Html.GetVSMDetailScriptFor(
+            t => t.Details,
+            new VSMDetailConfig
+            {
+                DefaultConfig = new DefaultConfig(Url.Action("Bind_DetailAdd")),
+                IsRequired = true,
+                Searching = true,
+                ScrollX = false,
+                OnBeforeAdd = "OnBeforeAddDetail",
+                WidthType = ColumnsWidthType.Pixel
+            },
+
+            new GridColumn("YEAR").SetNotVisible().SetKey(),
+            new GridColumn("DAY").SetNotVisible().SetKey(),
+            new GridColumn("MONTH").SetNotVisible().SetKey(),
+            //new GridColumn("APP_CODE").SetNotVisible().SetKey(),
+
+            //new GridColumn("APP_CODE", Translation.CenterLang.Center.APP_CODE, 20),
+            new GridColumn("YEAR", Translation.MIS.MISS02P001.YEAR, 10),
+            new GridColumn("TYPE_DAY", Translation.MIS.MISS02P001.TYPE_DAY, 10, render: "RENDER_TYPEDAY"),
+            new GridColumn("DEPLOYMENT_DATE", Translation.MIS.MISS02P001.DEPLOYMENT_DATE, 10, ColumnsTextAlign.Center),
+            new GridColumn("DEPLOY_PRG", Translation.MIS.MISS02P001.DEPLOY_PRG, 20),
+            new GridColumn("DEPLOY_USER", Translation.MIS.MISS02P001.DEPLOY_USER, 20)
+        )
+
+
+    <script>
+        /*********************************************SET_VALUE***********************************************/
+        $("#APP_CODE").val($("#APP_CODE").val());
+
+        function OnBeforeAddDetail(e) {
+            $("#formDetails #YEAR").val($("#form1 #YEAR").val());
+            //$("#formDetails #APP_CODE").val($("#form1 #APP_CODE").val());
+        }
+        /********************************************CONTROL_CD***********************************************/
+        /******************************************RENDER_TYPEDAY*********************************************/
+        var RENDER_TYPEDAY = function (data, type, full, meta) {
+            var tag = '';
+
+            if (!isNullOrEmpty(data)) {
+                if (data == "H") {
+                    tag = "Holiday";
+                } else if (data == "W") {
+                    tag = "Saturday Working";
+                } else if (data == "S") {
+                    tag = "Send Program Package";
+                } else if (data == "D") {
+                    tag = "Deployment on PROD/QA.";
+                } else {
+                    tag = "V-Smart infrom issue no deployment";
+                }
+            }
+
+            return tag;
+        };
+        /************************************************END**************************************************/
+        /********************************************CONTROL_CD***********************************************/
+        var y = false;
+        var a = false;
+
+        $("#btnAddDetails").hide()
+        $("#formDetails").change(function () { $("#form1 #YEAR").prop("readonly", true); })
+        $("#formDetails").change(function () { $("#form1 #APP_CODE").attr("disabled", true) })
+        $("#form1 #YEAR").change(function () { y = true; if (y) cd() })
+        //$("#form1 #APP_CODE").change(function () { a = true; if (a && y) cd() })
+
+        function cd() {
+            var app = $('#form1 #APP_CODE').val();
+            var year = $('#form1 #YEAR').val();
+            if (app != isNullOrEmpty && year != isNullOrEmpty) {
+                $.ajax({
+                    url: '@Url.Action("CD_DUP")',
+                    type: 'post',
+                    processData: false,
+                    data: JSON.stringify({ YEAR: year, APP_CODE: app }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (resultAfter) {
+                        if (resultAfter.data.ERROR_CODE != null) {
+                            if (resultAfter.data.ERROR_CODE == 1) {
+                                $("#mdDetails").modal('hide');
+                                alertErr('Duplicate Year or App code')
+                            }
+                            else {
+                                $("#btnAddDetails").show()
+                                $("#notification").hide()
+                            }
+                        }
+                    },
+                    error: OnAjaxError
+                })
+            }
+        }
+        /************************************************END**************************************************/
+        /*******************************************CCONCAT_DATE**********************************************/
+        $("#btnSaveDetails").on("click", function () {
+            var d = $("#formDetails #DAY").val();
+            var m = $("#formDetails #MONTH").val();
+            var y = $("#formDetails #YEAR").val();
+
+            var date = d + "/" + m + "/" + y;
+            //date = new Date(date);
+            $("#formDetails #DEPLOYMENT_DATE").val(date);
+            $("#notification").hide()
+            @*$.ajax({
+            url: '@Url.Action("Bind_DetailAdd")',
+            type: "post",
+            data: date
+        });*@
+
+        });
+        /************************************************END**************************************************/
+        /************************************************DATE*************************************************/
+        $(document).ready(function () {
+
+            $("#MONTH").attr("autocomplete", "off");
+            $("#DAY").attr("autocomplete", "off");
+            //month
+            $("#MONTH").JDatepicker();
+            $("#MONTH").datepicker({
+                locale: "en",
+                format: "mm",  //  format: "yyyymm", ปีเดือน
+                autoclose: true,
+                orientation: 'bottom',
+                enableOnReadonly: false,
+                minViewMode: 'months',
+                maxViewMode: 'months',
+                startView: 'months'
+            }).on("hide", function (selected) {
+                $(this).blur();
+            }).next().on(ace.click_event, function () {
+                $(this).prev().focus();
+            });
+
+            //day
+            $("#DAY").JDatepicker();
+            $("#DAY").datepicker({
+                format: "dd",
+                locale: "en",
+                autoclose: true,
+                orientation: 'bottom',
+                enableOnReadonly: false
+
+
+            });
+
+            var sortable1 = $("#sortable-format").html();
+            var sortable2 = $("#sortable-seperate").html();
+
+            $('.btn-refreshSort').click(function () {
+                if (this.id == "refresh-1") {
+                    $("#sortable-format").html(sortable1).sortable("refresh");
+                }
+                else if (this.id == "refresh-2") {
+                    $("#sortable-seperate").html(sortable2).sortable("refresh");
+                }
+            });
+        });
+        /************************************************END**************************************************/
+        /***********************************************ALERT*************************************************/
+        function alertSucs() {
+            $("#notification").hide()
+            var content = '<div class="alert alert-' + 'success' + ' alert-dismissable alert-' + 'success' + 'new"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button><h2>';
+            content += '<i class="ace-icon fa fa-exclamation-triangle bigger-130"></i> ';
+            content += 'ผ่าน ๆ' + '</h2>';
+            content += '</div>';
+
+            $("#notification").html(content).fadeTo(2000, 500);
+        }
+        function alertErr(data) {
+            $("#notification").hide()
+            var content = '<div class="alert alert-' + 'danger' + ' alert-dismissable alert-' + 'danger' + 'new"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button><h2>';
+            content += '<i class="ace-icon fa fa-exclamation-triangle bigger-130"></i> ';
+            content += data + '</h2>';
+            content += '</div>';
+
+            $("#notification").html(content).fadeTo(2000, 500);
+        }
+        /************************************************END**************************************************/
+    </script>
+
+
+
+}
+
+
+

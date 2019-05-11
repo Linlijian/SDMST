@@ -1,0 +1,80 @@
+﻿<#@ template debug="true" language="C#" hostSpecific="true" #>
+<#@ assembly name="System.Core" #> 
+<#@ assembly name="System.Configuration" #>
+<#@ assembly name="System.Data" #>
+<#@ assembly name="$(SolutionDir)UtilityLib\\bin\\Debug\\UtilityLib.dll" #>
+<#@ assembly name="$(SolutionDir)UtilityLib\\bin\\Debug\\Newtonsoft.Json.dll" #>
+<#@ assembly name="$(SolutionDir)DBConnectionBase\\bin\\Debug\\DBConnectionBase.dll" #>
+
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Globalization" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Configuration" #>
+<#@ import namespace="System.Data.SqlClient" #>
+<#@ import namespace="System.Data" #>
+<#@ import namespace="System.Linq" #>
+
+<# Process(); #>
+<#+
+	public void Process()
+	{
+		WriteLine("namespace DataAccess");
+		WriteLine("{");
+		WriteLine("\tpublic static class DDLCenterKey");
+		WriteLine("\t{");
+		// ===================================================== Start Gen
+		string path = (this.Host.ResolvePath("").Replace("DBConnectionBase\\DDLCenter",""))+"WEBAPP\\App_Data\\DBConnection.json";
+		var json = Newtonsoft.Json.JsonConvert.DeserializeObject<List<DataAccess.DBConnnectionConfig>>(System.IO.File.ReadAllText(path));
+
+		string connetionString = null; SqlConnection connection; SqlCommand command; 
+		SqlDataReader dataReader;
+		connetionString = json.Where(m => m.Name == "Connection").Select(m => m.ConnectionString).FirstOrDefault();
+		connection = new SqlConnection(connetionString); 
+		try 
+		{ 
+			string sql = "select KEY_ID from VSMS_DROPDOWN_LIST";
+
+			connection.Open();
+			command = new SqlCommand(sql, connection);
+			DataTable KEY_ID_Table = new DataTable();
+			using (SqlDataAdapter Adapter = new SqlDataAdapter(command))
+			{
+				Adapter.Fill(KEY_ID_Table);
+			}
+
+            command.Dispose();
+			connection.Close(); 
+
+			if(KEY_ID_Table.Rows.Count > 0)
+			{
+				foreach (DataRow dr in KEY_ID_Table.Rows)
+				{
+					string key_id = dr["KEY_ID"].ToString();
+					WriteLine("\t\tpublic const string " + key_id + " = \"" + key_id + "\";");
+				}
+			}
+		} 
+		catch (Exception ex) 
+		{ 
+		}
+
+		//หา web.config ไม่เจอ
+		//var ddl = new DataAccess.DDLCenterDA();
+		//ddl.DTO.Execute.ExecuteType = "GetAll";
+		//ddl.Select(ddl.DTO);
+		//if (ddl.DTO.KeyDDLCenters != null)
+        //{
+        //    foreach (var item in ddl.DTO.KeyDDLCenters)
+        //    {
+        //        WriteLine("\t\tpublic const string " + item.KEY_ID + " = \"" + item.KEY_ID + "\";");
+        //    }
+        //}
+		//WriteLine("\t\tpublic const string COMPANY = \"COMPANY" + "\";");
+		
+		// ===================================================== End Gen
+		WriteLine("\t}");
+		WriteLine("}");
+	}
+#>

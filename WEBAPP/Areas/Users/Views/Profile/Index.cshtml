@@ -1,0 +1,185 @@
+﻿@using FluentBootstrap
+@using WEBAPP.Helper
+@using DataAccess.Users
+@using UtilityLib
+
+@model UserModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMaster.cshtml";
+}
+<br />
+@using (var form = Html.Bootstrap().Form("SaveModify", "Profile", FormMethod.Post).SetHorizontal().Begin())
+{
+    @Html.AntiForgeryToken()
+    Html.RenderPartial(Partials.StandardButton);
+    using (var rowInfo = Html.Bootstrap().GridRow().Begin())
+    {
+        using (rowInfo.GridColumn(12).SetXs(12).Begin())
+        {
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                    using (form.FormGroup(m => m.USER_TYPE).AddCss(Css.FormInline).Begin())
+                    {
+                        @form.InputFor(m => m.USER_TYPE_NAME).SetReadonly().SetControlLabel(null).AddStyle("width", "100%")
+                    }
+                    @form.InputFor(m => m.USER_FNAME_TH).SetReadonly()
+                    @form.InputFor(m => m.USER_FNAME_EN).SetReadonly()
+                    @form.InputFor(m => m.POSITION)
+                    @form.InputFor(m => m.TELEPHONE)
+                    @form.InputFor(m => m.FAX)
+                    @form.InputFor(m => m.TTL_TNAME).SetReadonly()
+                    @form.InputFor(m => m.GENERAL_NAME).SetReadonly()
+                    @form.InputFor(m => m.DEPT_NAME).SetReadonly()
+                    @form.InputFor(m => m.DE_SECTION_NAME).SetReadonly()
+                    @form.DatepickerFor(m => m.START_DATE).SetReadonly()
+                    @form.HiddenFor(m => m.ACTIVE)
+                    @form.HiddenFor(m => m.STATUS)
+
+                }
+                using (row1.GridColumn(6).Begin())
+                {
+                    using (form.FormGroup(m => m.MS_CORP_ID).AddCss(Css.FormInline).Begin())
+                    {
+                        @form.InputFor(m => m.MS_CORP_NAME_TH).SetReadonly().SetControlLabel(null).AddStyle("width", "100%")
+                    }
+                    @form.InputFor(m => m.USER_LNAME_TH).SetReadonly()
+                    @form.InputFor(m => m.USER_LNAME_EN).SetReadonly()
+                    @form.InputFor(m => m.SECTION_NAME).SetReadonly()
+                    @form.InputFor(m => m.EMAIL)
+                    @form.InputFor(m => m.SECRETARY_GENERAL_NAME).SetReadonly()
+                    @form.InputFor(m => m.SECRETARY_GENERAL_NAME).SetReadonly()
+                    @form.InputFor(m => m.GROUP_NAME).SetReadonly()
+                    @form.InputFor(m => m.DIVISION_NAME).SetReadonly()
+                    @form.InputFor(m => m.EMP_TYPE_NAME).SetReadonly()
+                    using (form.FormGroup(m => m.EMP_STATUS).Begin())
+                    {
+                        var chkEMP_STATUS = Model.EMP_STATUS == "Y" ? "checked" : "";
+                        <input name="EMP_STATUS" type="checkbox" @chkEMP_STATUS class="ace ace-switch ace-switch-4" /> @*checked= "checked"*@
+                        <span class="lbl middle"></span>
+                    }
+                }
+            }
+        }
+    }
+}
+
+@section scripts{
+    <script type="text/javascript">
+        function OnAjaxSubmit(btn, form) {
+            var formData = form.serializeFormData();
+
+            formData.append("button", $(btn).attr("name"));
+
+            $.ajax({
+                url: form[0].action,
+                type: form[0].method,
+                contentType: false,
+                processData: false,
+                data: formData,
+                success: OnAjaxSuccess,
+                error: OnAjaxError
+            });
+        }
+    </script>
+}
+
+@*<div id="user-profile-1" class="user-profile row">
+        <div class="col-xs-12 col-sm-3 center">
+            <div>
+                <span class="profile-picture">
+                    <img id="avatar" class="editable img-responsive editable-click editable-empty" alt="Alex's Avatar" src="@Url.Content("~/Uploads/Image/Profiles/profile-pic.jpg")"></img>
+                </span>
+
+                <div class="space-4"></div>
+
+                <div class="width-80 label label-info label-xlg arrowed-in arrowed-in-right">
+                    <div class="inline position-relative">
+                        <a href="#" class="user-title-label dropdown-toggle" data-toggle="dropdown">
+                            <i class="ace-icon fa fa-circle light-green"></i>
+                            &nbsp;
+                            <span class="white">Jubpas V-Smart</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="space-6"></div>
+        </div>
+        <div class="col-xs-12 col-sm-9">
+
+
+            <div class="space-12"></div>
+
+            <div class="profile-user-info profile-user-info-striped">
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> ชื่อ </div>
+
+                    <div class="profile-info-value">
+                        <span class="editable editable-click" id="username">Jubpas V-Smart</span>
+                    </div>
+                </div>
+
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> Company </div>
+
+                    <div class="profile-info-value">
+                        <i class="fa fa-map-marker light-orange bigger-110"></i>
+                        <span class="editable editable-click" id="country">The Mall , Bangkaphi</span>
+                        <span class="editable editable-click" id="city">Bangkok</span>
+                    </div>
+                </div>
+
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> Age </div>
+
+                    <div class="profile-info-value">
+                        <span class="editable editable-click" id="age">38</span>
+                    </div>
+                </div>
+
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> Joined </div>
+
+                    <div class="profile-info-value">
+                        <span class="editable editable-click" id="signup">2010/06/20</span>
+                    </div>
+                </div>
+
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> Last login </div>
+
+                    <div class="profile-info-value">
+                        <span class="editable editable-click" id="login">3 hours ago</span>
+                    </div>
+                </div>
+
+                <div class="profile-info-row">
+                    <div class="profile-info-name"> เกี่ยวกับ </div>
+
+                    <div class="profile-info-value">
+                        <span class="editable editable-click" id="about">Editable as WYSIWYG</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-20"></div>
+
+            <div class="widget-box transparent">
+
+                <div class="hr hr2 hr-double"></div>
+
+                <div class="space-6"></div>
+
+                <div class="center">
+                    <button class="btn">
+                        <i class="ace-icon fa fa-pencil align-top bigger-125"></i>
+                        แก้ไขข้อมูล
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>*@
+

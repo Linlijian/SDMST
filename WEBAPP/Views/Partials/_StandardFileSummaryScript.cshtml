@@ -1,0 +1,69 @@
+﻿@using WEBAPP.Helper
+@using DataAccess
+@using UtilityLib
+@model FileModel
+@{
+    var lsParam = new List<VSMParameter>();
+    if (!Model.PRG_CODE.IsNullOrEmpty())
+    {
+        lsParam.Add(new VSMParameter(VSMParameterType.ByModelData, "PRG_CODE", Model.PRG_CODE));
+    }
+    if (!Model.DOCUMENT_TYPE_ID.IsNullOrEmpty())
+    {
+        lsParam.Add(new VSMParameter(VSMParameterType.ByModelData, "DOCUMENT_TYPE_ID", Model.DOCUMENT_TYPE_ID));
+    }
+    if (!Model.SECTION_GROUP_ID.IsNullOrEmpty())
+    {
+        lsParam.Add(new VSMParameter(VSMParameterType.ByModelData, "SECTION_GROUP_ID", Model.SECTION_GROUP_ID));
+    }
+    if (!Model.COVER_SHEET_SEND_ID.IsNullOrEmpty())
+    {
+        lsParam.Add(new VSMParameter(VSMParameterType.ByModelData, "COVER_SHEET_SEND_ID", Model.COVER_SHEET_SEND_ID));
+    }
+    if (!Model.HEADER_INPUT_ID.IsNullOrEmpty())
+    {
+        lsParam.Add(new VSMParameter(VSMParameterType.ByModelData, "HEADER_INPUT_ID", Model.HEADER_INPUT_ID));
+    }
+    if (!Model.DETAIL_INPUT_ID.IsNullOrEmpty())
+    {
+        lsParam.Add(new VSMParameter(VSMParameterType.ByModelData, "DETAIL_INPUT_ID", Model.DETAIL_INPUT_ID));
+    }
+}
+<script>
+    $(document).ready(function () {
+        $('#wg@(Model.Name)').on('show.ace.widget', function (event) {
+            var binded = $('#Grid@(Model.Name)').data('binded');
+            if (!binded) {
+                bindGrid@(Model.Name)({});
+                $('#Grid@(Model.Name)').data('binded', true);
+            }
+        });
+    });
+</script>
+
+@Html.GridScript(Model.Name,
+        new GridConfig
+        {
+            GetConfig = new DefaultConfig(Url.Action("GetFileInfo", "File", new { Area = "Ux" }), lsParam.ToArray()),
+            DefaultBinding = false,
+            VisibleCheckBox = false,
+            ScrollX = false,
+            WidthType = ColumnsWidthType.Percentage,
+            DisableDefaultSorting = true
+
+        },
+        Html.GridColumnCommand(Html.GridCommand(StandardButtonName.Export,
+        Translation.CenterLang.Center.Download,
+        Url.Action("Download", "File", new { Area = "Ux" }),
+        FaIcons.FaDownload,
+        TextColor.blue,
+        "full.CREATE_DT != null",
+        new VSMParameter("ID")
+        )),
+        new GridColumn("DOCUMENT_TYPE_NAME_TH", Translation.Ux.File.DOCUMENT_TYPE_NAME_TH, 23),
+        new GridColumn("SECTION_GROUP_NAME_TH", Translation.Ux.File.SECTION_GROUP_NAME_TH, 20),
+        new GridColumn("FILE_NAME", Translation.CenterLang.Center.FileName, 30),
+        new GridColumn("FILE_SIZE", Translation.CenterLang.Center.FileSize, 5, type: ColumnsType.NumberFormat2),
+        new GridColumn("FILE_DATE", Translation.CenterLang.Center.FileDateModified, 15, type: ColumnsType.DateTime),
+        new GridColumn("CREATE_DT", Translation.CenterLang.Center.FileUploadDate, 15, type: ColumnsType.DateTime)
+        )

@@ -1,0 +1,61 @@
+﻿@using WEBAPP.Helper
+<div class="footer vsm-footer hidden-xs">
+    <div class="footer-inner">
+        <div class="footer-content vsm-footer-content">
+            <span>
+                @*@{
+                    var sysComModel = SessionHelper.SYS_Company;
+
+                    var sysComName = string.Empty;
+                    var sysComAddress = string.Empty;
+                    if (SessionHelper.SYS_CurrentCulture == "th-TH")
+                    {
+                        sysComName = sysComModel.COM_NAME_T;
+                        sysComAddress = sysComModel.COM_ADDR1_T
+                        + " " + sysComModel.COM_PROVINCE_T
+                        + " " + sysComModel.COM_POST_CODE;
+                    }
+                    else
+                    {
+                        sysComName = sysComModel.COM_NAME_E;
+                        sysComAddress = sysComModel.COM_ADDR1_E
+                        + " " + sysComModel.COM_PROVINCE_E
+                        + " " + sysComModel.COM_POST_CODE;
+                    }
+
+                    //var sysComName = sysComModel.COM_NAME_T;
+                    //var sysComAddress = sysComModel.COM_ADDR1_T
+                    //    + " " + sysComModel.COM_PROVINCE_T
+                    //    + " " + sysComModel.COM_POST_CODE;
+                    //+ " ถนน" + sysComModel.COM_ROAD_T
+                    //+ " แขวง" + sysComModel.COM_DISTRICT_T
+                    //+ " เขต" + sysComModel.COM_AMPHUR_T
+                    var sysComContact = Translation.CenterLang.Center.HelpDesk + sysComModel.COM_PHONE_NO
+                                        //+ " ต่อ" + sysComModel.COM_PHONE_EXT
+                                        + " E-mail : " + sysComModel.COM_E_MAIL;
+                }
+                @sysComName<br />
+                @sysComAddress<br />
+                @sysComContact<br />*@
+                <a href="#" id="btnPrivacyPolicy"><span class="blue bolder">@Translation.CenterLang.Center.PrivacyPolicy</span></a>|
+                <a href="#" id="btnTermsofService"><span class="blue bolder">@Translation.CenterLang.Center.TermsofServiceF</span></a>|
+                @Translation.CenterLang.Center.CopyRight @DateTime.Now.Year
+            </span>
+            @*&nbsp; &nbsp;
+                <span class="action-buttons">
+                    <a href="#">
+                        <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="ace-icon fa fa-rss-square orange bigger-150"></i>
+                    </a>
+                </span>*@
+        </div>
+    </div>
+</div>
+

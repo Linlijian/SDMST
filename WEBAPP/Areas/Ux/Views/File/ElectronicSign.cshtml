@@ -1,0 +1,153 @@
+﻿@using FluentBootstrap
+@using WEBAPP.Helper
+
+@model DataAccess.Ux.ElectronicSignModel
+
+@{
+    ViewBag.Title = "ElectronicSign";
+    Layout = "~/Views/Shared/_LayoutChildPage.cshtml";
+}
+@using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
+{
+    @Html.AntiForgeryToken()
+    @Html.GetVSMWidgetsBegin(Translation.Ux.File.Panel_Header)
+    using (var row = Html.Bootstrap().GridRow().Begin())
+    {
+        using (row.GridColumn(6).Begin())
+        {
+            @form.DatepickerFor(t => t.RECEIVE_DT).SetReadonly()
+        }
+    }
+
+    using (var row = Html.Bootstrap().GridRow().Begin())
+    {
+        using (row.GridColumn(6).Begin())
+        {
+            @form.InputFor(t => t.MS_CORP_NAME_TH).SetReadonly()
+        }
+        using (row.GridColumn(6).Begin())
+        {
+            @form.InputFor(t => t.MS_CORP_ADDR1).SetReadonly()
+        }
+    }
+
+    using (var row = Html.Bootstrap().GridRow().Begin())
+    {
+        using (row.GridColumn(6).Begin())
+        {
+            @form.InputFor(t => t.DOCUMENT_TYPE_NAME_TH).SetReadonly()
+        }
+        using (row.GridColumn(6).Begin())
+        {
+            @form.InputFor(t => t.PERIOD_NAME).SetReadonly()
+        }
+    }
+
+    using (var row = Html.Bootstrap().GridRow().Begin())
+    {
+        using (row.GridColumn(6).Begin())
+        {
+            @form.InputFor(t => t.SEND_BY_TH).SetReadonly()
+        }
+        using (row.GridColumn(6).Begin())
+        {
+            @form.InputFor(t => t.REFERENCE_DOC).SetReadonly()
+        }
+    }
+
+    using (var row = Html.Bootstrap().GridRow().Begin())
+    {
+        using (row.GridColumn(6).Begin())
+        {
+            @form.InputFor(t => t.CERTIFICATE_NUMBER).SetReadonly()
+        }
+        using (row.GridColumn(6).Begin())
+        {
+            @form.InputFor(t => t.RECEIVE_DOC).SetReadonly()
+        }
+    }
+
+    using (var row = Html.Bootstrap().GridRow().Begin())
+    {
+        using (row.GridColumn(6).Begin())
+        {
+            @form.InputFor(t => t.SEND_NO).SetReadonly()
+        }
+        using (row.GridColumn(6).Begin())
+        {
+            @form.InputFor(t => t.RECEIVE_BY_NAME_TH).SetReadonly()
+        }
+    }
+
+    using (var row = Html.Bootstrap().GridRow().Begin())
+    {
+        using (row.GridColumn(6).Begin())
+        {
+            @form.InputFor(t => t.COM_ADDR1_T).SetReadonly()
+        }
+        using (row.GridColumn(6).Begin())
+        {
+            @form.InputFor(t => t.COM_CODE).SetReadonly()
+        }
+    }
+
+    using (var row = Html.Bootstrap().GridRow().Begin())
+    {
+        using (row.GridColumn(6).Begin())
+        {
+            @form.InputFor(t => t.APP_VERSION).SetReadonly()
+        }
+        using (row.GridColumn(6).Begin())
+        {
+            @form.InputFor(t => t.DATA_FORMAT).SetReadonly()
+        }
+    }
+
+    @Html.GetVSMWidgetsEnd()
+
+    @Html.GetVSMWidgetsBegin(Translation.Ux.File.Panel_Grid)
+
+    using (var row1 = Html.Bootstrap().GridRow().Begin())
+    {
+        using (row1.GridColumn(12).Begin())
+        {
+            @Html.Bootstrap().Table().SetId("GridDetail").SetStyle(TableStyle.TableStripedBorderedHover)
+        }
+    }
+    @Html.GetVSMWidgetsEnd()
+
+}
+
+
+@section modals{
+}
+
+
+@section scripts{
+    @Html.GridScript("Detail",
+        new GridConfig
+        {
+            GetConfig = new DefaultConfig(Url.Action("GetFileInfo_ElectronicSign")),
+            DefaultBinding = true,
+            VisibleCheckBox = false,
+            DisableDefaultSorting = true
+
+        },
+        Html.GridColumnCommand(Html.GridCommand(StandardButtonName.Export,
+        Translation.CenterLang.Center.Download,
+        Url.Action("Download", "File", new { Area = "Ux" }),
+        FaIcons.FaDownload,
+        TextColor.blue,
+        "full.CREATE_DT != null",
+        new VSMParameter("ID")
+        )),
+        new GridColumn("DOCUMENT_TYPE_NAME_TH", Translation.Ux.File.DOCUMENT_TYPE_NAME_TH, 200),
+        new GridColumn("SECTION_GROUP_NAME_TH", Translation.Ux.File.SECTION_GROUP_NAME_TH, 200),
+        new GridColumn("FILE_NAME", Translation.CenterLang.Center.FileName, 200),
+        new GridColumn("FILE_SIZE", Translation.CenterLang.Center.FileSize, 50, type: ColumnsType.NumberFormat2),
+        new GridColumn("FILE_DATE", Translation.CenterLang.Center.FileDateModified, 100, type: ColumnsType.DateTime),
+        new GridColumn("CREATE_DT", Translation.CenterLang.Center.FileUploadDate, 100, type: ColumnsType.DateTime),
+        new GridColumn("SIGNATURE_SIGN", Translation.Ux.File.SIGNATURE_SIGN, 300, ColumnsTextAlign.Wordbreak)
+        )
+
+}

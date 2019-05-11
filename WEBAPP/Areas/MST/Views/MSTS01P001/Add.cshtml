@@ -1,0 +1,76 @@
+﻿@using FluentBootstrap
+@using WEBAPP.Helper
+@using DataAccess.MST
+@using UtilityLib
+
+@model MSTS01P001Model
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_LayoutChildPage.cshtml";
+}
+
+@using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
+{
+    @Html.AntiForgeryToken()
+    using (var rowInfo = Html.Bootstrap().GridRow().Begin())
+    {
+        using (rowInfo.GridColumn(12).SetXs(12).Begin())
+        {
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                    @*@form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true).SetIndexParameter(0)*@
+                }
+            }
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.SelectFor(t => t.TYPE_RATE, Model.TYPE_RATE_MODEL.ToSelectList("Value", "Text", Model.TYPE_RATE), isRequired: true).SetIndexParameter(2)
+                }
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.SelectFor(t => t.ISSUE_TYPE, Model.ISSUE_TYPE_MODEL.ToSelectList("Value", "Text", Model.ISSUE_TYPE), isRequired: true).SetIndexParameter(1)
+                    @*@form.InputJAutocompleteFor(t => t.ISSUE_TYPE, isRequired: true).JAutoKeySource("AC_MSTS01P001_001").JAutoBindField("ISSUE_TYPE").JAutoSetExtraParamsByCtrl("APP_CODE").SetIndexParameter(1)*@
+                    //@form.SelectFor(t => t.ISSUE_TYPE, Model.ISSUE_TYPE_MODEL.ToSelectList("Value", "Text", Model.ISSUE_TYPE), isRequired: true).SetIndexParameter(1).IsDisabled()
+                }
+            }
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.InputNumberFor(m => m.MAN_PLM_SA, digits: 1, isRequired: true, addValidateMessage: true).SetPlaceholder("00.0")
+                }
+            }
+            using (var row1 = Html.Bootstrap().GridRow().Begin())
+            {
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.InputNumberFor(m => m.MAN_PLM_QA, digits: 1, isRequired: true, addValidateMessage: true).SetPlaceholder("00.0")
+                }
+                using (row1.GridColumn(6).Begin())
+                {
+                    @form.InputNumberFor(m => m.MAN_PLM_PRG, digits: 1, isRequired: true, addValidateMessage: true).SetPlaceholder("00.0")
+                }
+            }
+            @Html.HiddenFor(m => m.COM_CODE, new { data_indexparameter = 0 })
+            @Html.HiddenFor(m => m.APP_CODE, new { data_indexparameter = 0 })
+        }
+    }
+}
+
+<script>
+
+    //$(document).ready(function () {
+    //    $("#APP_CODE").click(function () {
+    //        $("#ISSUE_TYPE").removeAttr("disabled")
+    //    })
+    //    $("#APP_CODE").change(function () {
+    //        $("#ISSUE_TYPE").removeAttr("disabled")
+    //    })
+    //})
+
+</script>
+

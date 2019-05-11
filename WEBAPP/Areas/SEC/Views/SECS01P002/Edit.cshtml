@@ -1,0 +1,98 @@
+﻿@using FluentBootstrap
+@using WEBAPP.Helper
+@using DataAccess.SEC
+@using UtilityLib
+
+@model SECS01P002Model
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutChildPage.cshtml";
+}
+
+@using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
+{
+    @Html.AntiForgeryToken()
+    using (var row = Html.Bootstrap().GridRow().Begin())
+    {
+        using (row.GridColumn(12).SetXs(12).Begin())
+        {
+            using (var r = Html.Bootstrap().GridRow().Begin())
+            {
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.NAME, isRequired: true)
+                }
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.InputNumberFor(m => m.SEQUENCE)
+                }
+            }
+            using (var r = Html.Bootstrap().GridRow().Begin())
+            {
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.IMG, isRequired: true).AddAttributes(new { data_input_search = "true" })
+                }
+                using (r.GridColumn(6).Begin())
+                {
+                    @form.InputFor(m => m.IMG_COLOR)
+                }
+            }
+        }
+    }
+    using (var row = Html.Bootstrap().GridRow().Begin())
+    {
+        using (row.GridColumn(12).SetXs(12).Begin())
+        {
+            using (row.GridColumn(12).Begin())
+            {
+                @Html.Bootstrap().Table().SetId("GridSystemModels").SetStyle(TableStyle.TableStripedBorderedHover).SetType(TableType.Multiselect).AddAttributes(new { data_col = "SYS_CODE", data_isrequired = "true", data_selectedonly = "true" })
+            }
+        }
+    }
+}
+
+@section modals{
+
+}
+@section stylesheet{
+    <link href="@Url.Content("~/Content/fontawesome-iconpicker.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/bootstrap-colorpicker.min.css")" rel="stylesheet" />
+}
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/fontawesome-iconpicker.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap-colorpicker.min.js")"></script>
+
+    @Html.GridScript("SystemModels",
+        new GridConfig
+        {
+            GetConfig = new DefaultConfig(Url.Action("BindSystem")),
+            DisableDefaultSorting = true,
+            VisibleCheckBox = true,
+            DefaultBinding = true,
+            ScrollX = false,
+            WidthType = ColumnsWidthType.Percentage,
+            OnInit = "OnInitSourceSystemModels"
+        },
+        new GridColumn("SYS_CODE").SetNotVisible().SetKey(),
+        new GridColumn("ROW_NO", Translation.SEC.SECS01P002.NO, 5, ColumnsTextAlign.Center),
+        new GridColumn("SYS_NAME_TH", Translation.SEC.SECS01P002.SYSTEM_NAME_TH, 30),
+        new GridColumn("SYS_NAME_EN", Translation.SEC.SECS01P002.SYSTEM_NAME_EN, 30)
+
+        )
+
+    <script>
+
+        var OnInitSourceSystemModels = function () {
+            GridSystemModels.rows(function (idx, data, node) { return data.SELECTED; }).select();
+        };
+        $(document).ready(function () {
+            $('#IMG').iconpicker({
+                hideOnSelect: true
+            });
+            $('#IMG_COLOR').colorpicker();
+        });
+    </script>
+}
+
