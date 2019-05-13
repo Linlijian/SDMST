@@ -558,3 +558,11 @@ ERROR 2019-04-29 16:20:25,886 BaseController.OnException -
 Path : MIS/MISS01P001/Edit
 Error Messages: E:\Senior\SDLC\sdmsbitbucket\WEBAPP\Areas\MIS\Views\MISS01P001\Edit.cshtml(85): error CS1001: Identifier expected
 
+ERROR 2019-05-13 22:09:40,204 BaseController.OnException - 
+Path : Users/Account/ReloadNotification
+Error Messages: Object reference not set to an instance of an object.
+
+ERROR 2019-05-13 22:11:21,368 BaseController.OnException - 
+Path : Users/Account/ReloadNotification
+Error Messages: Object reference not set to an instance of an object.
+
