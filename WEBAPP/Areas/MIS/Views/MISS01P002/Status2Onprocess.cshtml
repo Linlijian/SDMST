@@ -166,15 +166,7 @@
             });
         })
 
-        function alertErr() {
-            $("#notification").hide()
-            var content = '<div class="alert alert-' + 'danger' + ' alert-dismissable alert-' + 'danger' + 'new"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button><h2>';
-            content += '<i class="ace-icon fa fa-exclamation-triangle bigger-130"></i> ';
-            content += 'พัง' + '</h2>';
-            content += '</div>';
-
-            $("#notification").html(content).fadeTo(2000, 500);
-        }
+        /***********************************************ALERT*************************************************/
         function alertSucs() {
             $("#notification").hide()
             var content = '<div class="alert alert-' + 'success' + ' alert-dismissable alert-' + 'success' + 'new"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button><h2>';
@@ -184,6 +176,16 @@
 
             $("#notification").html(content).fadeTo(2000, 500);
         }
+        function alertErr(data) {
+            $("#notification").hide()
+            var content = '<div class="alert alert-' + 'danger' + ' alert-dismissable alert-' + 'danger' + 'new"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button><h2>';
+            content += '<i class="ace-icon fa fa-exclamation-triangle bigger-130"></i> ';
+            content += data + '</h2>';
+            content += '</div>';
+
+            $("#notification").html(content).fadeTo(2000, 500);
+        }
+        /************************************************END**************************************************/
 
         var RENDER_CONFIRM_TEST = function (data, type, full, meta, status) {
             var tag = '';
@@ -272,7 +274,7 @@
                                             alertSucs();
                                         }
                                         else {
-                                            alertErr();
+                                            alertErr(result.data.FLAG);
                                             GridSearch.ajax.reload();
                                         }
                                     },
