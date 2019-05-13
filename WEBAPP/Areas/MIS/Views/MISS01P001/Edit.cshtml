@@ -41,9 +41,37 @@
         {
             using (var r = Html.Bootstrap().GridRow().Begin())
             {
+                using (row1.GridColumn(2).Begin())
+                {
+
+                }
+                using (row1.GridColumn(1).Begin())
+                {
+                    <label> <b>Issue No : </b> @Model.NO </label>
+                }
+                using (row1.GridColumn(2).Begin())
+                {
+                    <label> <b>Application Code :</b> @Model.APP_CODE</label>
+                }
+                using (row1.GridColumn(2).Begin())
+                {
+                    <label> <b>Response By :</b> @Model.RESPONSE_BY</label>
+                }
+                using (row1.GridColumn(2).Begin())
+                {
+
+                }
+                using (row1.GridColumn(1).Begin())
+                {
+
+                }
+            }
+            using (var r = Html.Bootstrap().GridRow().Begin())
+            {
                 using (row1.GridColumn(6).Begin())
                 {
                     @form.InputNumberFor(m => m.NO).SetReadonly()
+                    <label> <b>Issue No :</b> @Model.NO</label>
                 }
                 using (row1.GridColumn(6).Begin())
                 {
@@ -161,23 +189,23 @@
                     }
                     using (row1.GridColumn(12).Begin())
                     {
-                        @form.InputNumberFor(m => m.MAN_PLM_SA, digits: 1, isRequired: true, addValidateMessage: true)
+                        @form.InputNumberFor(m => m.MAN_PLM_SA, digits: 1, isRequired: true, addValidateMessage: true).SetHelp("Man / Day")
                     }
                     using (row1.GridColumn(12).Begin())
                     {
-                        @form.InputNumberFor(m => m.MAN_PLM_QA, digits: 1, isRequired: true, addValidateMessage: true)
+                        @form.InputNumberFor(m => m.MAN_PLM_QA, digits: 1, isRequired: true, addValidateMessage: true).SetHelp("Man / Day")
                     }
                     using (row1.GridColumn(12).Begin())
                     {
-                        @form.InputNumberFor(m => m.MAN_PLM_PRG, digits: 1, isRequired: true, addValidateMessage: true)
+                        @form.InputNumberFor(m => m.MAN_PLM_PRG, digits: 1, isRequired: true, addValidateMessage: true).SetHelp("Man / Day")
                     }
                     using (row1.GridColumn(12).Begin())
                     {
-                        @form.InputNumberFor(m => m.MAN_PLM_PL, digits: 1, isRequired: true, addValidateMessage: true)
+                        @form.InputNumberFor(m => m.MAN_PLM_PL, digits: 1, isRequired: true, addValidateMessage: true).SetHelp("Man / Day")
                     }
                     using (row1.GridColumn(12).Begin())
                     {
-                        @form.InputNumberFor(m => m.MAN_PLM_DBA, digits: 1, isRequired: true, addValidateMessage: true)
+                        @form.InputNumberFor(m => m.MAN_PLM_DBA, digits: 1, isRequired: true, addValidateMessage: true).SetHelp("Man / Day")
                     }
                     @Html.GetVSMWidgetsEnd()
                 }
@@ -509,5 +537,4 @@
 @section stylesheet{
     <link href="@Url.Content("~/Content/master-datetimepicker.min.css")" rel="stylesheet" />
 
-}
 }

@@ -115,7 +115,7 @@ namespace Translation.MIS {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Fixed Complete.
+        ///   Looks up a localized string similar to Job Complete.
         /// </summary>
         public static string COMPLETE {
             get {
@@ -187,7 +187,7 @@ namespace Translation.MIS {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Fixed In Complete.
+        ///   Looks up a localized string similar to Job Inconplete.
         /// </summary>
         public static string INCOMPLETE {
             get {
@@ -448,7 +448,7 @@ namespace Translation.MIS {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Fixed Total.
+        ///   Looks up a localized string similar to Job Total.
         /// </summary>
         public static string TOTAL {
             get {

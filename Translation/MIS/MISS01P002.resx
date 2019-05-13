@@ -136,7 +136,7 @@
     <value>Close</value>
   </data>
   <data name="COMPLETE" xml:space="preserve">
-    <value>Fixed Complete</value>
+    <value>Job Complete</value>
   </data>
   <data name="CONFIRM" xml:space="preserve">
     <value>Confirm</value>
@@ -160,7 +160,7 @@
     <value>Go Live</value>
   </data>
   <data name="INCOMPLETE" xml:space="preserve">
-    <value>Fixed In Complete</value>
+    <value>Job Inconplete</value>
   </data>
   <data name="INDEX" xml:space="preserve">
     <value>Assignment Issue</value>
@@ -247,7 +247,7 @@
     <value>Time Stemp QA</value>
   </data>
   <data name="TOTAL" xml:space="preserve">
-    <value>Fixed Total</value>
+    <value>Job Total</value>
   </data>
   <data name="USER_ID" xml:space="preserve">
     <value>Fix By</value>

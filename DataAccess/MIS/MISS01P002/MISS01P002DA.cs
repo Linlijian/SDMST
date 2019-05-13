@@ -260,6 +260,8 @@ namespace DataAccess.MIS
             var parameters = CreateParameter();
             parameters.AddParameter("USER_ID", dto.Model.ASSIGN_USER);
 
+            strSQL += " and ISE_STATUS = 'P'or ISE_STATUS = 'O' ";
+
             var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
             if (result.Success(dto))
             {

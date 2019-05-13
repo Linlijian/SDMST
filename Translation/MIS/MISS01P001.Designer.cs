@@ -376,7 +376,7 @@ namespace Translation.MIS {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Module Name.
+        ///   Looks up a localized string similar to Module Name / etc..
         /// </summary>
         public static string MODULE {
             get {
