@@ -180,6 +180,12 @@
   <data name="GOLIVE" xml:space="preserve">
     <value>Go Live</value>
   </data>
+  <data name="Index1" xml:space="preserve">
+    <value>Issue Information</value>
+  </data>
+  <data name="Index2" xml:space="preserve">
+    <value>Report Issue</value>
+  </data>
   <data name="ISSUE_BY" xml:space="preserve">
     <value>Issue By</value>
   </data>

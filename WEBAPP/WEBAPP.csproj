@@ -822,7 +822,7 @@
     <Content Include="Areas\MST\Views\MSTS02P001\Index.cshtml" />
     <Content Include="Areas\MIS\Views\MISS01P001\Add.cshtml" />
     <Content Include="Areas\MIS\Views\MISS01P001\Edit.cshtml" />
-    <Content Include="Areas\MIS\Views\MISS01P001\Index.cshtml" />
+    <Content Include="Areas\MIS\Views\MISS01P001\Index1.cshtml" />
     <Content Include="Areas\MST\Views\MSTS03P002\Add.cshtml" />
     <Content Include="Areas\MST\Views\MSTS03P002\Edit.cshtml" />
     <Content Include="Areas\MST\Views\MSTS03P002\Index.cshtml" />
@@ -840,6 +840,7 @@
     <Content Include="Areas\MIS\Views\MISS01P002\FilePacket.cshtml" />
     <Content Include="Areas\MIS\Views\MISS01P001\AddRefNo.cshtml" />
     <Content Include="Areas\MIS\Views\MISS01P001\Upload.cshtml" />
+    <Content Include="Areas\MIS\Views\MISS01P001\Index2.cshtml" />
     <None Include="Properties\PublishProfiles\A.pubxml" />
     <None Include="Properties\PublishProfiles\March.pubxml" />
     <None Include="Properties\PublishProfiles\Meiio.pubxml" />

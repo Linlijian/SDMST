@@ -250,6 +250,24 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Issue Information.
+        /// </summary>
+        public static string Index1 {
+            get {
+                return ResourceManager.GetString("Index1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Report Issue.
+        /// </summary>
+        public static string Index2 {
+            get {
+                return ResourceManager.GetString("Index2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Issue By.
         /// </summary>
         public static string ISSUE_BY {
