@@ -77,11 +77,13 @@ namespace WEBAPP.Areas.MIS.Controllers
             else if (ACTIVE_STEP == "2")
             {
                 view = "Index2";
+                SetClientSideRuleSet("Index2");
                 AddButton(StandButtonType.ButtonAjax, "report", "Report", iconCssClass: FaIcons.FaPrint, cssClass: "std-btn-print", url: Url.Action("ViewReport"), isValidate: true);
                 if (TempSearch.IsDefaultSearch && !Request.GetRequest("page").IsNullOrEmpty())
                 {
                     localModel = TempSearch.CloneObject();
                 }
+                SetDefaultData("Index2");
             }
             SetHeaderWizard(new WizardHelper.WizardHeaderConfig(
                 ACTIVE_STEP,
@@ -455,6 +457,10 @@ namespace WEBAPP.Areas.MIS.Controllers
                 localModel.PRIORITY_MODEL = BindPriority();
                 localModel.APP_CODE_MODEL = BindAppCode();
             }
+            else if (mode == "Index2")
+            {
+                localModel.REPORT_TYPE_MODEL = BindReport();
+            }
         }
         private void Set(MISS01P001Model model)
         {
@@ -536,6 +542,10 @@ namespace WEBAPP.Areas.MIS.Controllers
         public List<DDLCenterModel> BindResponseByIn()
         {
             return GetDDLCenter(DDLCenterKey.DD_MISS01P002_002, new VSMParameter(TempModel.APP_CODE.Trim()));
+        }
+        public List<DDLCenterModel> BindReport()
+        {
+            return GetDDLCenter(DDLCenterKey.DD_REPORT);
         }
         //----------------------------------------------//
         private DTOResult SaveData(string mode, object model)

@@ -303,4 +303,7 @@
   <data name="TARGET_DATE" xml:space="preserve">
     <value>Target Date</value>
   </data>
+  <data name="REPORT_TYPR" xml:space="preserve">
+    <value>Report Type</value>
+  </data>
 </root>
