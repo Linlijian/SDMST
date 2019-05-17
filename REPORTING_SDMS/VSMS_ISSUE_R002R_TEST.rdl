@@ -20,9 +20,6 @@
           <QueryParameter Name="@error_code">
             <Value>=Parameters!error_code.Value</Value>
           </QueryParameter>
-          <QueryParameter Name="@RE_BUG">
-            <Value>=Parameters!RE_BUG.Value</Value>
-          </QueryParameter>
           <QueryParameter Name="@CRET_BY">
             <Value>=Parameters!CRET_BY.Value</Value>
           </QueryParameter>
@@ -32,7 +29,6 @@
         </QueryParameters>
         <CommandText>EXEC	[bond].[SP_VSMS_ISSUE_R002]
                   @error_code  OUTPUT
-                  ,@RE_BUG OUTPUT
 	,@CRET_BY 
 	,@ISSUE_DATE_PERIOD </CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
@@ -211,23 +207,47 @@
           <QueryParameter Name="@error_code">
             <Value>=Parameters!error_code.Value</Value>
           </QueryParameter>
-          <QueryParameter Name="@RE_BUG">
-            <Value>=Parameters!RE_BUG.Value</Value>
-          </QueryParameter>
           <QueryParameter Name="@ISSUE_DATE_PERIOD">
             <Value>=Parameters!ISSUE_DATE_PERIOD.Value</Value>
           </QueryParameter>
         </QueryParameters>
-        <CommandText>EXEC	[bond].[SP_VSMS_ISSUE_R002]
+        <CommandText>EXEC	[bond].[SP_VSMS_ISSUE_R002_DATASET2]
                   @error_code  OUTPUT
-                  ,@RE_BUG OUTPUT
-	,HRPT
+	,CRET_BY
 	,@ISSUE_DATE_PERIOD </CommandText>
       </Query>
       <Fields>
         <Field Name="RE_BUG">
           <DataField>RE_BUG</DataField>
           <rd:UserDefined>true</rd:UserDefined>
+        </Field>
+        <Field Name="RE_BUG_NR">
+          <DataField>RE_BUG_NR</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="RE_BUSINESS">
+          <DataField>RE_BUSINESS</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="BUSINESS_WT">
+          <DataField>BUSINESS_WT</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="DATA">
+          <DataField>DATA</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="DATA_WT">
+          <DataField>DATA_WT</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="USER_R">
+          <DataField>USER_R</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="USER_WT">
+          <DataField>USER_WT</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>
@@ -240,12 +260,12 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>5in</Width>
+                  <Width>5.01042in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>4.67819in</Height>
+                  <Height>2.29167in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -310,6 +330,7 @@
                                                 <Style>Solid</Style>
                                                 <Width>1pt</Width>
                                               </RightBorder>
+                                              <BackgroundColor>LightBlue</BackgroundColor>
                                               <FontFamily />
                                               <PaddingLeft>2pt</PaddingLeft>
                                               <PaddingRight>2pt</PaddingRight>
@@ -607,6 +628,7 @@
                                               <Style>Solid</Style>
                                               <Width>1pt</Width>
                                             </RightBorder>
+                                            <BackgroundColor>LightBlue</BackgroundColor>
                                             <PaddingLeft>2pt</PaddingLeft>
                                             <PaddingRight>2pt</PaddingRight>
                                             <PaddingTop>2pt</PaddingTop>
@@ -665,6 +687,7 @@
                                                   <Style>Solid</Style>
                                                   <Width>1pt</Width>
                                                 </RightBorder>
+                                                <BackgroundColor>LightBlue</BackgroundColor>
                                                 <PaddingLeft>2pt</PaddingLeft>
                                                 <PaddingRight>2pt</PaddingRight>
                                                 <PaddingTop>2pt</PaddingTop>
@@ -723,6 +746,7 @@
                                                       <Style>Solid</Style>
                                                       <Width>1pt</Width>
                                                     </RightBorder>
+                                                    <BackgroundColor>LightBlue</BackgroundColor>
                                                     <PaddingLeft>2pt</PaddingLeft>
                                                     <PaddingRight>2pt</PaddingRight>
                                                     <PaddingTop>2pt</PaddingTop>
@@ -781,6 +805,7 @@
                                                           <Style>Solid</Style>
                                                           <Width>1pt</Width>
                                                         </RightBorder>
+                                                        <BackgroundColor>LightBlue</BackgroundColor>
                                                         <PaddingLeft>2pt</PaddingLeft>
                                                         <PaddingRight>2pt</PaddingRight>
                                                         <PaddingTop>2pt</PaddingTop>
@@ -839,26 +864,7 @@
                                             <Border>
                                               <Style>Solid</Style>
                                             </Border>
-                                            <TopBorder>
-                                              <Color>Black</Color>
-                                              <Style>Solid</Style>
-                                              <Width>1pt</Width>
-                                            </TopBorder>
-                                            <BottomBorder>
-                                              <Color>Black</Color>
-                                              <Style>Solid</Style>
-                                              <Width>1pt</Width>
-                                            </BottomBorder>
-                                            <LeftBorder>
-                                              <Color>Black</Color>
-                                              <Style>Solid</Style>
-                                              <Width>1pt</Width>
-                                            </LeftBorder>
-                                            <RightBorder>
-                                              <Color>Black</Color>
-                                              <Style>Solid</Style>
-                                              <Width>1pt</Width>
-                                            </RightBorder>
+                                            <BackgroundColor>LightBlue</BackgroundColor>
                                             <PaddingLeft>2pt</PaddingLeft>
                                             <PaddingRight>2pt</PaddingRight>
                                             <PaddingTop>2pt</PaddingTop>
@@ -1427,7 +1433,8 @@
                                 </TablixMembers>
                               </TablixRowHierarchy>
                               <DataSetName>DataSet1</DataSetName>
-                              <Top>0.06944in</Top>
+                              <Top>0.04167in</Top>
+                              <Left>0.01042in</Left>
                               <Height>1.18in</Height>
                               <Width>5in</Width>
                               <Style />
@@ -1459,10 +1466,10 @@
             <PageBreak>
               <BreakLocation>End</BreakLocation>
             </PageBreak>
-            <Top>0.36056in</Top>
-            <Left>0.03125in</Left>
-            <Height>4.67819in</Height>
-            <Width>5in</Width>
+            <Top>0.7425in</Top>
+            <Left>6.30208in</Left>
+            <Height>2.29167in</Height>
+            <Width>5.01042in</Width>
             <Style>
               <FontSize>14pt</FontSize>
             </Style>
@@ -1474,10 +1481,10 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>VSMS_ISSUER002T</Value>
+                    <Value>Trand Issue Summary</Value>
                     <Style>
                       <FontFamily>Tahoma</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontSize>24pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -1489,14 +1496,15 @@
             </Paragraphs>
             <rd:DefaultName>textbox1</rd:DefaultName>
             <Top>0.25053cm</Top>
-            <Left>0.07938cm</Left>
+            <Left>0cm</Left>
             <Height>0.66529cm</Height>
-            <Width>12.7cm</Width>
+            <Width>51.40536cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
               </Border>
+              <BackgroundColor>LightBlue</BackgroundColor>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -1543,7 +1551,7 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>CornflowerBlue</BackgroundColor>
+                            <BackgroundColor>LightBlue</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -1578,7 +1586,7 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>CornflowerBlue</BackgroundColor>
+                            <BackgroundColor>LightBlue</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -1748,47 +1756,29 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox53">
+                        <Textbox Name="RE_BUG_NR">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Fields!RE_BUG_NR.Value</Value>
                                   <Style>
                                     <FontFamily>Arial</FontFamily>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox53</rd:DefaultName>
+                          <rd:DefaultName>RE_BUG_NR</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
                             </Border>
-                            <TopBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </BottomBorder>
-                            <LeftBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </LeftBorder>
-                            <RightBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </RightBorder>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -1853,47 +1843,29 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox125">
+                        <Textbox Name="RE_BUSINESS">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Fields!RE_BUSINESS.Value</Value>
                                   <Style>
                                     <FontFamily>Arial</FontFamily>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox125</rd:DefaultName>
+                          <rd:DefaultName>RE_BUSINESS</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
                             </Border>
-                            <TopBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </BottomBorder>
-                            <LeftBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </LeftBorder>
-                            <RightBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </RightBorder>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -2063,47 +2035,29 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox81">
+                        <Textbox Name="USER_R">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Fields!USER_R.Value</Value>
                                   <Style>
                                     <FontFamily>Arial</FontFamily>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox81</rd:DefaultName>
+                          <rd:DefaultName>USER_R</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
                             </Border>
-                            <TopBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </BottomBorder>
-                            <LeftBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </LeftBorder>
-                            <RightBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </RightBorder>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -2168,47 +2122,29 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox79">
+                        <Textbox Name="DATA">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Fields!DATA.Value</Value>
                                   <Style>
                                     <FontFamily>Arial</FontFamily>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox79</rd:DefaultName>
+                          <rd:DefaultName>DATA</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
                             </Border>
-                            <TopBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </BottomBorder>
-                            <LeftBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </LeftBorder>
-                            <RightBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </RightBorder>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -2687,7 +2623,7 @@
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </RightBorder>
-                            <BackgroundColor>LightBlue</BackgroundColor>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -2698,48 +2634,30 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox67">
+                        <Textbox Name="BUSINESS_WT">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Fields!BUSINESS_WT.Value</Value>
                                   <Style>
                                     <FontFamily>Arial</FontFamily>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox67</rd:DefaultName>
+                          <rd:DefaultName>BUSINESS_WT</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
                             </Border>
-                            <TopBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </BottomBorder>
-                            <LeftBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </LeftBorder>
-                            <RightBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </RightBorder>
-                            <BackgroundColor>LightBlue</BackgroundColor>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -2796,7 +2714,7 @@
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </RightBorder>
-                            <BackgroundColor>LightBlue</BackgroundColor>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -2848,7 +2766,7 @@
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </RightBorder>
-                            <BackgroundColor>LightBlue</BackgroundColor>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -2905,7 +2823,7 @@
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </RightBorder>
-                            <BackgroundColor>LightBlue</BackgroundColor>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -2916,48 +2834,30 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox63">
+                        <Textbox Name="USER_WT">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Fields!USER_WT.Value</Value>
                                   <Style>
                                     <FontFamily>Arial</FontFamily>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox63</rd:DefaultName>
+                          <rd:DefaultName>USER_WT</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
                             </Border>
-                            <TopBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </BottomBorder>
-                            <LeftBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </LeftBorder>
-                            <RightBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </RightBorder>
-                            <BackgroundColor>LightBlue</BackgroundColor>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -3014,7 +2914,7 @@
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </RightBorder>
-                            <BackgroundColor>LightBlue</BackgroundColor>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -3025,48 +2925,30 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox60">
+                        <Textbox Name="BUSINESS_WT1">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Fields!BUSINESS_WT.Value</Value>
                                   <Style>
                                     <FontFamily>Arial</FontFamily>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox60</rd:DefaultName>
+                          <rd:DefaultName>BUSINESS_WT1</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
                             </Border>
-                            <TopBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </BottomBorder>
-                            <LeftBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </LeftBorder>
-                            <RightBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </RightBorder>
-                            <BackgroundColor>LightBlue</BackgroundColor>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -3123,7 +3005,7 @@
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </RightBorder>
-                            <BackgroundColor>LightBlue</BackgroundColor>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -3175,7 +3057,7 @@
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </RightBorder>
-                            <BackgroundColor>LightBlue</BackgroundColor>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -3232,7 +3114,7 @@
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </RightBorder>
-                            <BackgroundColor>LightBlue</BackgroundColor>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -3284,7 +3166,7 @@
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </RightBorder>
-                            <BackgroundColor>LightBlue</BackgroundColor>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -3341,7 +3223,7 @@
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </RightBorder>
-                            <BackgroundColor>LightBlue</BackgroundColor>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -3393,7 +3275,7 @@
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </RightBorder>
-                            <BackgroundColor>LightBlue</BackgroundColor>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -3442,8 +3324,8 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet2</DataSetName>
-            <Top>0.44042in</Top>
-            <Left>5.32167in</Left>
+            <Top>0.75292in</Top>
+            <Left>12.07167in</Left>
             <Height>4.5in</Height>
             <Width>2in</Width>
             <ZIndex>2</ZIndex>
@@ -3454,10 +3336,10 @@
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>5.22625in</Height>
+        <Height>5.37903in</Height>
         <Style />
       </Body>
-      <Width>12.95708in</Width>
+      <Width>20.23833in</Width>
       <Page>
         <LeftMargin>1in</LeftMargin>
         <RightMargin>1in</RightMargin>
@@ -3482,12 +3364,6 @@
       <DataType>String</DataType>
       <Prompt>ISSUE DATE PERIOD</Prompt>
     </ReportParameter>
-    <ReportParameter Name="RE_BUG">
-      <DataType>String</DataType>
-      <Nullable>true</Nullable>
-      <AllowBlank>true</AllowBlank>
-      <Prompt>RE BUG</Prompt>
-    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -3508,11 +3384,6 @@
           <ColumnIndex>2</ColumnIndex>
           <RowIndex>1</RowIndex>
           <ParameterName>ISSUE_DATE_PERIOD</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>3</ColumnIndex>
-          <RowIndex>1</RowIndex>
-          <ParameterName>RE_BUG</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

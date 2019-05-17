@@ -12,7 +12,7 @@
     <TargetDatasetFolder>Datasets</TargetDatasetFolder>
     <TargetDatasourceFolder>Data Sources</TargetDatasourceFolder>
     <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
-    <TargetServerURL>http://localhost/reportserver</TargetServerURL>
+    <TargetServerURL>http://chang/SDMSReport</TargetServerURL>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'DebugLocal' ">
     <FullPath>DebugLocal</FullPath>
@@ -52,13 +52,13 @@
     <DataSource Include="DTS_SDDB.rds" />
   </ItemGroup>
   <ItemGroup>
-    <Report Include="AA.rdl" />
     <Report Include="Copy of text003.rdl" />
     <Report Include="R002.rdl" />
     <Report Include="R002T.rdl" />
     <Report Include="R003.rdl" />
     <Report Include="R003T.rdl" />
     <Report Include="R003TM.rdl" />
+    <Report Include="RSUM.rdl" />
     <Report Include="test001.rdl" />
     <Report Include="test002.rdl" />
     <Report Include="test004.rdl" />
@@ -68,6 +68,10 @@
     <Report Include="TestR01.rdl" />
     <Report Include="text003.rdl" />
     <Report Include="VSMS_ISSUER002T.rdl" />
+    <Report Include="VSMS_ISSUE_R001R.rdl" />
+    <Report Include="VSMS_ISSUE_R002R.rdl" />
+    <Report Include="VSMS_ISSUE_R002R_TEST.rdl" />
+    <Report Include="VSMS_SUMMARY_ISSUE.rdl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
 </Project>

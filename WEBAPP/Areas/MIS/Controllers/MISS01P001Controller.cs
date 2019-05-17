@@ -49,6 +49,12 @@ namespace WEBAPP.Areas.MIS.Controllers
             }
             set { TempData[StandardActionName.Search + SessionHelper.SYS_CurrentAreaController] = value; }
         }
+
+        string ReportName1 = "VSMS_ISSUE_R001R";
+        //string ReportName = "VSMS_ISSUE_R002R";
+        string ReportName2 = "VSMS_ISSUE_R002R_TEST";
+        string ReportNameSum1 = "RSUM";
+
         #endregion
 
         #region Action 
@@ -77,7 +83,12 @@ namespace WEBAPP.Areas.MIS.Controllers
             else if (ACTIVE_STEP == "2")
             {
                 view = "Index2";
-                AddButton(StandButtonType.ButtonAjax, "report", "Report", iconCssClass: FaIcons.FaPrint, cssClass: "std-btn-print", url: Url.Action("ViewReport"), isValidate: true);
+                AddButton(StandButtonType.ButtonAjax, "report", "Report Issue", iconCssClass: FaIcons.FaPrint, cssClass: "std-btn-print", url: Url.Action("ViewReport"), isValidate: true);
+
+                AddButton(StandButtonType.ButtonAjax, "report", "Summary Issue", iconCssClass: FaIcons.FaPrint, cssClass: "std-btn-print", url: Url.Action("ViewReportSummary"), isValidate: true);
+
+                AddButton(StandButtonType.ButtonAjax, "report", "Report02", iconCssClass: FaIcons.FaPrint, cssClass: "std-btn-print", url: Url.Action("ViewReport02"), isValidate: true);
+
                 if (TempSearch.IsDefaultSearch && !Request.GetRequest("page").IsNullOrEmpty())
                 {
                     localModel = TempSearch.CloneObject();
@@ -93,6 +104,81 @@ namespace WEBAPP.Areas.MIS.Controllers
             return View(view, localModel);
         }
 
+        public ActionResult ViewReport(MISS01P001Model model)
+        {
+            string error_code = "0";
+            string RE_BUG = " ";
+            if (model.CRET_BY == null)
+            {
+                model.CRET_BY = SessionHelper.SYS_USER_ID;
+            }
+            
+            if (model.ISSUE_DATE_PERIOD == null)
+            {
+                model.ISSUE_DATE_PERIOD = "2019-04";
+            }
+
+            string Parameter = string.Concat
+                     (
+                         "&error_code=", error_code
+                       , "&CRET_BY=", model.CRET_BY
+                       //, "&RE_BUG" , HttpUtility.UrlEncode(RE_BUG)
+                       , "&ISSUE_DATE_PERIOD=", model.ISSUE_DATE_PERIOD
+                     );
+
+            return Content("http://" + "CHANG" + "/SDMSReport?/" + "REPORTING_SDMSBBK" + "/" + ReportName1 + "&rs:Command=Render&rs:Format=HTML4.0&rc:Parameters=false" + Parameter);
+        }
+
+        public ActionResult ViewReportSummary(MISS01P001Model model)
+        {
+            string error_code = "0";
+            string RE_BUG = " ";
+            if (model.CRET_BY == null)
+            {
+                model.CRET_BY = SessionHelper.SYS_USER_ID;
+            }
+
+            if (model.ISSUE_DATE_PERIOD == null)
+            {
+                model.ISSUE_DATE_PERIOD = "2019-04";
+            }
+
+            string Parameter = string.Concat
+                     (
+                         "&error_code=", error_code
+                       , "&CRET_BY=", model.CRET_BY
+                       //, "&RE_BUG" , HttpUtility.UrlEncode(RE_BUG)
+                       , "&ISSUE_DATE_PERIOD=", model.ISSUE_DATE_PERIOD
+                     );
+
+            return Content("http://" + "CHANG" + "/SDMSReport?/" + "REPORTING_SDMSBBK" + "/" + ReportNameSum1 + "&rs:Command=Render&rs:Format=HTML4.0&rc:Parameters=false" + Parameter);
+        }
+
+        public ActionResult ViewReport02(MISS01P001Model model)
+        {
+            string error_code = "0";
+            string RE_BUG = " ";
+            if (model.CRET_BY == null)
+            {
+                model.CRET_BY = SessionHelper.SYS_USER_ID;
+            }
+
+            if (model.ISSUE_DATE_PERIOD == null)
+            {
+                model.ISSUE_DATE_PERIOD = "2019-04";
+            }
+
+            string Parameter = string.Concat
+                     (
+                         "&error_code=", error_code
+                       , "&CRET_BY=", model.CRET_BY
+                       //, "&RE_BUG" , HttpUtility.UrlEncode(RE_BUG)
+                       , "&ISSUE_DATE_PERIOD=", model.ISSUE_DATE_PERIOD
+                     );
+
+            return Content("http://" + "CHANG" + "/SDMSReport?/" + "REPORTING_SDMSBBK" + "/" + ReportName2 + "&rs:Command=Render&rs:Format=HTML4.0&rc:Parameters=false" + Parameter);
+        }
+
         //public ActionResult ViewReport(MISS01P001Model model)
         //{
         //    string error_code = "0";
@@ -101,9 +187,7 @@ namespace WEBAPP.Areas.MIS.Controllers
         //        model.CRET_BY = SessionHelper.SYS_USER_ID;
         //    }
 
-        //    //model.CRET_BY = "Meiio";
-        //    //model.ISSUE_DATE_PERIOD = "2019-04";
-        //    string ReportName = "VSMS_ISSUE_R001R";
+        //    string ReportName = "VSMS_ISSUE_R002R";
 
         //    if (model.ISSUE_DATE_PERIOD == null)
         //    {
@@ -120,30 +204,6 @@ namespace WEBAPP.Areas.MIS.Controllers
         //    return Content("http://" + "CHANG" + "/SDMSReport?/" + "REPORTING_SDMSBBK" + "/" + ReportName + "&rs:Command=Render&rs:Format=HTML4.0&rc:Parameters=false" + Parameter);
         //}
 
-        public ActionResult ViewReport(MISS01P001Model model)
-        {
-            string error_code = "0";
-            if (model.CRET_BY == null)
-            {
-                model.CRET_BY = SessionHelper.SYS_USER_ID;
-            }
-
-            string ReportName = "VSMS_ISSUE_R002R";
-
-            if (model.ISSUE_DATE_PERIOD == null)
-            {
-                model.ISSUE_DATE_PERIOD = "2019-04";
-            }
-
-            string Parameter = string.Concat
-                     (
-                         "&error_code=", error_code
-                       , "&CRET_BY=", model.CRET_BY
-                       , "&ISSUE_DATE_PERIOD=", model.ISSUE_DATE_PERIOD
-                     );
-
-            return Content("http://" + "CHANG" + "/SDMSReport?/" + "REPORTING_SDMSBBK" + "/" + ReportName + "&rs:Command=Render&rs:Format=HTML4.0&rc:Parameters=false" + Parameter);
-        }
         public ActionResult Info(MISS01P001Model model)
         {
             var da = new MISS01P001DA();

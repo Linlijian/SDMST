@@ -2,7 +2,7 @@
   {
     "Comment": "Connection",
     "Name": "Connection",
-    "ConnectionString": "Data Source=OxlOlO;Persist Security Info=True;User ID=sa;Password=P@ssw0rd;Initial Catalog=SDDB"
+    "ConnectionString": "Data Source=CHANG;Persist Security Info=True;User ID=sa;Password=P@ssw0rd;Initial Catalog=SDDB"
     //"ConnectionString": "Data Source=10.8.7.206;Persist Security Info=True;User ID=sa;Password=P@ssw0rd;Initial Catalog=AAT_SEC"
   },
   {

@@ -39,43 +39,18 @@
     {
         using (row1.GridColumn(12).SetXs(12).Begin())
         {
-            using (var r = Html.Bootstrap().GridRow().Begin())
-            {
-                using (row1.GridColumn(2).Begin())
-                {
-
-                }
-                using (row1.GridColumn(1).Begin())
-                {
-                    <label> <b>Issue No : </b> @Model.NO </label>
-                }
-                using (row1.GridColumn(2).Begin())
-                {
-                    <label> <b>Application Code :</b> @Model.APP_CODE</label>
-                }
-                using (row1.GridColumn(2).Begin())
-                {
-                    <label> <b>Response By :</b> @Model.RESPONSE_BY</label>
-                }
-                using (row1.GridColumn(2).Begin())
-                {
-
-                }
-                using (row1.GridColumn(1).Begin())
-                {
-
-                }
-            }
+            
             using (var r = Html.Bootstrap().GridRow().Begin())
             {
                 using (row1.GridColumn(6).Begin())
                 {
                     @form.InputNumberFor(m => m.NO).SetReadonly()
-                    <label> <b>Issue No :</b> @Model.NO</label>
+                    //<label> <b>Issue No : </b> @Model.NO </label>
                 }
                 using (row1.GridColumn(6).Begin())
                 {
                     @form.SelectFor(t => t.APP_CODE, Model.APP_CODE_MODEL.ToSelectList("Value", "Text", Model.APP_CODE), isRequired: true, addValidateMessage: true).IsDisabled()
+                    //<label> <b>Application Code : </b> @Model.APP_CODE </label>
                 }
             }
             using (var r = Html.Bootstrap().GridRow().Begin())
@@ -117,12 +92,12 @@
             {
                 using (row1.GridColumn(6).Begin())
                 {
-                    @form.InputNumberFor(m => m.ESSR_NO)
+                    @form.InputFor(m => m.STR_RESPONSE_DATE, isRequired: true, addValidateMessage: true).SetControlLabel(Translation.MIS.MISS01P001.RESPONSE_DATE).AddCss("input-append")
+                    @form.HiddenFor(m => m.RESPONSE_DATE)
                 }
                 using (row1.GridColumn(6).Begin())
                 {
-                    @form.InputFor(m => m.STR_RESPONSE_DATE, isRequired: true, addValidateMessage: true).SetControlLabel(Translation.MIS.MISS01P001.RESPONSE_DATE).AddCss("input-append")
-                    @form.HiddenFor(m => m.RESPONSE_DATE)
+                    @form.InputNumberFor(m => m.ESSR_NO)
                 }
 
             }
