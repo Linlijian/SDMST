@@ -1481,7 +1481,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Trand Issue Summary</Value>
+                    <Value>Defect Summary</Value>
                     <Style>
                       <FontFamily>Tahoma</FontFamily>
                       <FontSize>24pt</FontSize>
@@ -1569,7 +1569,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Result</Value>
+                                  <Value>Count</Value>
                                   <Style>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>

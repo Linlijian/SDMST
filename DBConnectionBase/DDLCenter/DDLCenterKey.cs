@@ -31,9 +31,8 @@ namespace DataAccess
         public const string DD_MISS01P002_003 = "DD_MISS01P002_003";
         public const string DD_APPLICATION = "DD_APPLICATION";
         public const string DD_GOLIVE_TIMEOUT = "DD_GOLIVE_TIMEOUT";
-        public const string DD_REPORT = "DD_REPORT";
         public const string DD_MISS01P003_001 = "DD_MISS01P003_001"; 
         public const string DD_SECS01P001_001 = "DD_SECS01P001_001";
-        public const string DD_MSTS03P002_001 = "DD_MSTS03P002_001"; 
+        public const string DD_MSTS03P002_001 = "DD_MSTS03P002_001";
     }
 }
