@@ -484,6 +484,15 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Report Type.
+        /// </summary>
+        public static string REPORT_TYPR {
+            get {
+                return ResourceManager.GetString("REPORT_TYPR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Resolution Target.
         /// </summary>
         public static string RESOLUTION_TARGET {
