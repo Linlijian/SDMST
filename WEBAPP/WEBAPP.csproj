@@ -845,6 +845,7 @@
     <None Include="Properties\PublishProfiles\A.pubxml" />
     <None Include="Properties\PublishProfiles\March.pubxml" />
     <None Include="Properties\PublishProfiles\Meiio.pubxml" />
+    <None Include="Properties\PublishProfiles\TEXH.pubxml" />
     <None Include="Reports\DataSet\DemoReport.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>DemoReport1.Designer.cs</LastGenOutput>
