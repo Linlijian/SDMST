@@ -130,10 +130,10 @@
     <value>Fixed Done</value>
   </data>
   <data name="Index1" xml:space="preserve">
-    <value>Step 1</value>
+    <value>Accept and Reject Issue</value>
   </data>
   <data name="Index2" xml:space="preserve">
-    <value>Step 2</value>
+    <value>All Accept Issue</value>
   </data>
   <data name="ISE_DATE_OPENING" xml:space="preserve">
     <value>Issue Date</value>

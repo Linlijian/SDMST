@@ -97,7 +97,7 @@ namespace Translation.MIS {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Step 1.
+        ///   Looks up a localized string similar to Accept and Reject Issue.
         /// </summary>
         public static string Index1 {
             get {
@@ -106,7 +106,7 @@ namespace Translation.MIS {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Step 2.
+        ///   Looks up a localized string similar to All Accept Issue.
         /// </summary>
         public static string Index2 {
             get {
