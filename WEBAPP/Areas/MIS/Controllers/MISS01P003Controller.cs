@@ -52,25 +52,70 @@ namespace WEBAPP.Areas.MIS.Controllers
         #endregion
 
         #region Action 
-        public ActionResult Index()
+        public ActionResult Index(string ACTIVE_STEP = "1")
         {
-            SetDefaulButton(StandardButtonMode.Index);
-            RemoveStandardButton("DeleteSearch");
-            RemoveStandardButton("Add");
-            if (TempSearch.IsDefaultSearch && !Request.GetRequest("page").IsNullOrEmpty())
-            {
-                localModel = TempSearch.CloneObject();
-            }
-            
-            SetDefaultData(StandardActionName.Index);
+            string ACTIVE_WIZARD_MAX = "2";
+            var view = string.Empty;
+            var da = new MISS01P003DA();
 
-            return View(StandardActionName.Index, localModel);
+            if (ACTIVE_STEP == "1")
+            {
+                view = "Index1";
+                SetDefaulButton(StandardButtonMode.Index);
+                RemoveStandardButton("DeleteSearch");
+                RemoveStandardButton("Add");
+                if (TempSearch.IsDefaultSearch && !Request.GetRequest("page").IsNullOrEmpty())
+                {
+                    localModel = TempSearch.CloneObject();
+                }
+
+                SetDefaultData(StandardActionName.Index);
+            }
+            else if (ACTIVE_STEP == "2")
+            {
+                view = "Index2";
+                SetDefaulButton(StandardButtonMode.Index);
+                RemoveStandardButton("DeleteSearch");
+                RemoveStandardButton("Add");
+                if (TempSearch.IsDefaultSearch && !Request.GetRequest("page").IsNullOrEmpty())
+                {
+                    localModel = TempSearch.CloneObject();
+                }
+
+                SetDefaultData(StandardActionName.Index);
+            }
+            SetHeaderWizard(new WizardHelper.WizardHeaderConfig(
+                ACTIVE_STEP,
+                ACTIVE_WIZARD_MAX,
+                new WizardHelper.WizardHeader("", Url.Action("Index", new { ACTIVE_STEP = "1" }), iconCssClass: FaIcons.FaPencil, textStep: Translation.MIS.MISS01P003.Index1),
+                new WizardHelper.WizardHeader("", Url.Action("Index", new { ACTIVE_STEP = "2" }), iconCssClass: FaIcons.FaSearch, textStep: Translation.MIS.MISS01P003.Index2)));
+            
+            return View(view, localModel);
         }
-        public ActionResult Search(MISS01P003Model model)
+        public ActionResult SearchStep2(MISS01P003Model model)
         {
             var da = new MISS01P003DA();
             SetStandardErrorLog(da.DTO);
             da.DTO.Execute.ExecuteType = MISS01P003ExecuteType.GetAll;
+
+            if (Request.GetRequest("page").IsNullOrEmpty())
+            {
+                model.IsDefaultSearch = true;
+                TempSearch = model;
+            }
+
+            da.DTO.Model = TempSearch;
+            da.DTO.Model.COM_CODE = model.APP_CODE;
+            da.DTO.Model.STATUS = model.STATUS;
+            da.DTO.Model.CRET_BY = SessionHelper.SYS_USER_ID;
+            da.SelectNoEF(da.DTO);
+            return JsonAllowGet(da.DTO.Models, da.DTO.Result);
+        }
+        public ActionResult SearchStep1(MISS01P003Model model)
+        {
+            var da = new MISS01P003DA();
+            SetStandardErrorLog(da.DTO);
+            da.DTO.Execute.ExecuteType = MISS01P003ExecuteType.GetAll2;
 
             if (Request.GetRequest("page").IsNullOrEmpty())
             {

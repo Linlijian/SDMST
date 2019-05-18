@@ -6,8 +6,8 @@
 @model MISS01P003Model
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_LayoutMaster.cshtml";
+    ViewBag.Title = Translation.MIS.MISS01P003.STEP_1;
+    Layout = "~/Views/Shared/_LayoutChildPageWizard.cshtml";
 }
 
 @using (var form = Html.Bootstrap().Form().SetId("form1").SetHorizontal().Begin())
@@ -45,7 +45,7 @@
     @Html.GridScript("Search",
         new GridConfig
         {
-            GetConfig = new DefaultConfig(Url.Action("Search")),
+            GetConfig = new DefaultConfig(Url.Action("SearchStep1")),
             DefaultBinding = true,
             ScrollX = false,
             WidthType = ColumnsWidthType.Percentage
