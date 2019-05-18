@@ -25,6 +25,7 @@ namespace DataAccess.MIS
             switch (dto.Execute.ExecuteType)
             {
                 case MISS01P003ExecuteType.GetAll: return GetAll(dto);
+                case MISS01P003ExecuteType.GetAll2: return GetAll2(dto);
             }
             return dto;
         }
@@ -51,7 +52,6 @@ namespace DataAccess.MIS
 		                        AND t.ISE_NO = tt.no
 	                        WHERE t.USER_ID = @USER_ID
 	                        ) t ON t.COM_CODE = tt.COM_CODE
-                        --WHERE t.RESPONSE_BY = @USER_ID
                         ";
 
 
@@ -63,11 +63,71 @@ namespace DataAccess.MIS
                 strSQL += " AND t.COM_CODE = @APP_CODE";
                 parameters.AddParameter("APP_CODE", dto.Model.APP_CODE);
             }
+
             if (!dto.Model.STATUS.IsNullOrEmpty())
             {
                 strSQL += " AND t.ASSIGN_STATUS = @STATUS";
                 parameters.AddParameter("STATUS", dto.Model.STATUS);
             }
+            else if (dto.Model.STATUS.IsNullOrEmpty())
+            {
+                strSQL += " AND t.ASSIGN_STATUS != 'W'";
+            }
+
+            var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
+
+            if (result.Success(dto))
+            {
+                dto.Models = result.OutputDataSet.Tables[0].ToList<MISS01P003Model>();
+            }
+
+            return dto;
+        }
+        private MISS01P003DTO GetAll2(MISS01P003DTO dto)
+        {
+            string strSQL = string.Empty;
+            strSQL = @"	SELECT t.COM_CODE
+	                        ,t.ISE_NO
+	                        ,t.RESPONSE_BY
+	                        ,t.ISE_DATE_OPENING
+	                        ,t.ASSIGN_STATUS
+	                        ,tt.COM_NAME_E
+                            ,t.ISE_KEY
+                        FROM VSMS_COMPANY tt
+                        INNER JOIN (
+	                        SELECT t.COM_CODE
+		                        ,t.ISE_NO
+		                        ,tt.RESPONSE_BY
+		                        ,t.ISE_DATE_OPENING
+		                        ,t.ASSIGN_STATUS
+                                ,t.ISE_KEY
+	                        FROM VSMS_ISSTATOPSS t
+	                        INNER JOIN VSMS_ISSUE tt ON t.COM_CODE = tt.COM_CODE
+		                        AND t.ISE_NO = tt.no
+	                        WHERE t.USER_ID = @USER_ID
+	                        ) t ON t.COM_CODE = tt.COM_CODE
+                            AND t.ASSIGN_STATUS = 'W'
+                        ";
+
+
+            var parameters = CreateParameter();
+            parameters.AddParameter("USER_ID", dto.Model.CRET_BY);
+
+            if (!dto.Model.APP_CODE.IsNullOrEmpty())
+            {
+                strSQL += " AND t.COM_CODE = @APP_CODE";
+                parameters.AddParameter("APP_CODE", dto.Model.APP_CODE);
+            }
+
+            //if (!dto.Model.STATUS.IsNullOrEmpty())
+            //{
+            //    strSQL += " AND t.ASSIGN_STATUS = @STATUS";
+            //    parameters.AddParameter("STATUS", dto.Model.STATUS);
+            //}
+            //else if (dto.Model.STATUS.IsNullOrEmpty())
+            //{
+            //    strSQL += " AND t.ASSIGN_STATUS != 'W'";
+            //}
 
             var result = _DBMangerNoEF.ExecuteDataSet(strSQL, parameters, commandType: CommandType.Text);
 

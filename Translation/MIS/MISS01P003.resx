@@ -129,6 +129,12 @@
   <data name="CONFIRM_FIXED" xml:space="preserve">
     <value>Fixed Done</value>
   </data>
+  <data name="Index1" xml:space="preserve">
+    <value>Accept and Reject Issue</value>
+  </data>
+  <data name="Index2" xml:space="preserve">
+    <value>All Accept Issue</value>
+  </data>
   <data name="ISE_DATE_OPENING" xml:space="preserve">
     <value>Issue Date</value>
   </data>
@@ -140,5 +146,11 @@
   </data>
   <data name="STATUS" xml:space="preserve">
     <value>Status</value>
+  </data>
+  <data name="STEP_1" xml:space="preserve">
+    <value>Step 1</value>
+  </data>
+  <data name="STEP_2" xml:space="preserve">
+    <value>Step 2</value>
   </data>
 </root>

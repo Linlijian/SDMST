@@ -97,6 +97,24 @@ namespace Translation.MIS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accept and Reject Issue.
+        /// </summary>
+        public static string Index1 {
+            get {
+                return ResourceManager.GetString("Index1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All Accept Issue.
+        /// </summary>
+        public static string Index2 {
+            get {
+                return ResourceManager.GetString("Index2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Issue Date.
         /// </summary>
         public static string ISE_DATE_OPENING {
@@ -129,6 +147,24 @@ namespace Translation.MIS {
         public static string STATUS {
             get {
                 return ResourceManager.GetString("STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Step 1.
+        /// </summary>
+        public static string STEP_1 {
+            get {
+                return ResourceManager.GetString("STEP_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Step 2.
+        /// </summary>
+        public static string STEP_2 {
+            get {
+                return ResourceManager.GetString("STEP_2", resourceCulture);
             }
         }
     }
