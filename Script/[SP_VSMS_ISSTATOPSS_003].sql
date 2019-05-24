@@ -1,12 +1,12 @@
-﻿--WARNING! ERRORS ENCOUNTERED DURING SQL PARSING!
+--WARNING! ERRORS ENCOUNTERED DURING SQL PARSING!
 USE [SDDB]
 GO
 
-/****** Object:  StoredProcedure [bond].[SP_VSMS_ISSTATOPSS_003]    Script Date: 5/11/2019 8:54:28 PM ******/
+/****** Object:  StoredProcedure [bond].[SP_VSMS_ISSTATOPSS_003]    Script Date: 5/19/2019 1:12:33 PM ******/
 DROP PROCEDURE
 
 IF EXISTS [bond].[SP_VSMS_ISSTATOPSS_003]
-	/****** Object:  StoredProcedure [bond].[SP_VSMS_ISSTATOPSS_003]    Script Date: 5/11/2019 8:54:28 PM ******/
+	/****** Object:  StoredProcedure [bond].[SP_VSMS_ISSTATOPSS_003]    Script Date: 5/19/2019 1:12:33 PM ******/
 	SET ANSI_NULLS ON
 GO
 
@@ -174,21 +174,33 @@ BEGIN
 	END
 	ELSE IF @FALG = 'D'
 	BEGIN
-		BEGIN TRY
-			UPDATE VSMS_ISSTATOPSS
-			SET ASSIGN_STATUS = 'T' --testing
-				,ISE_DATE_TESTING = GETDATE()
-				,MNT_BY = @CRET_BY
-				,MNT_DATE = GETDATE()
-			WHERE ISE_KEY = @ISE_KEY
-				AND COM_CODE = @COM_CODE
+		IF ISNULL((
+					SELECT SOLUTION
+					FROM VSMS_ISSUE
+					WHERE COM_CODE = @COM_CODE
+						AND NO = @NO
+					), '') <> ''
+		BEGIN
+			BEGIN TRY
+				UPDATE VSMS_ISSTATOPSS
+				SET ASSIGN_STATUS = 'T' --testing
+					,ISE_DATE_TESTING = GETDATE()
+					,MNT_BY = @CRET_BY
+					,MNT_DATE = GETDATE()
+				WHERE ISE_KEY = @ISE_KEY
+					AND COM_CODE = @COM_CODE
 
-			SET @error_code = 0
-		END TRY
+				SET @error_code = 0
+			END TRY
 
-		BEGIN CATCH
-			SET @error_code = ERROR_MESSAGE()
-		END CATCH
+			BEGIN CATCH
+				SET @error_code = ERROR_MESSAGE()
+			END CATCH
+		END
+		ELSE
+		BEGIN
+			SET @error_code = 'Fix Done InComplete, Please add Solution for Fix'
+		END
 	END
 	ELSE IF @FALG = 'T'
 	BEGIN
